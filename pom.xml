@@ -1,0 +1,122 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.1.RELEASE</version>
+		<relativePath/>
+	</parent>
+	<groupId>com.indracompany</groupId>
+	<artifactId>treinamento</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<java.version>11</java.version>
+		<version.release.plugin>2.5.3</version.release.plugin>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<useReleaseProfile>true</useReleaseProfile>
+	</properties>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>${version.release.plugin}</version>
+				<configuration>
+					<arguments>${arguments}</arguments>
+					<pushChanges>true</pushChanges>
+					<localCheckout>true</localCheckout>
+					<tagNameFormat>@{project.version}</tagNameFormat>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<systemPropertyVariables>
+						<maven.wagon.http.ssl.insecure>true</maven.wagon.http.ssl.insecure>
+						<maven.wagon.http.ssl.allowall>true</maven.wagon.http.ssl.allowall>
+						<maven.wagon.http.ssl.ignore.validity.dates>true</maven.wagon.http.ssl.ignore.validity.dates>
+						<org.slf4j.simpleLogger.showDateTime>true</org.slf4j.simpleLogger.showDateTime>
+						<org.slf4j.simpleLogger.dateTimeFormat>yyyy-MM-dd'T'HH:mm:ss.SSS</org.slf4j.simpleLogger.dateTimeFormat>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
+		    <plugin>
+		            <groupId>org.codehaus.mojo</groupId>
+		            <artifactId>build-helper-maven-plugin</artifactId>
+		            <executions>
+		                <execution>
+		                    <id>timestamp-property</id>
+		                    <goals>
+		                        <goal>timestamp-property</goal>
+		                    </goals>
+		                    <configuration>
+		                        <name>timestamp</name>
+		                        <pattern>yyMMdd.HHmm</pattern>
+		                        <locale>pt_BR</locale>
+		                        <timeZone>America/Sao_Paulo</timeZone>
+		                    </configuration>
+		                </execution>
+		            </executions>
+		      </plugin>			
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>3.4.0.905</version>
+				</plugin>
+
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-dependency-plugin
+										</artifactId>
+										<versionRange>
+											[2.6,)
+										</versionRange>
+										<goals>
+											<goal>copy</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+
+	<modules>
+		<module>model</module>
+		<module>controller</module>
+	</modules>
+
+</project>

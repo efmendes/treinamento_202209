@@ -1,0 +1,52 @@
+server:
+  servlet:
+    contextPath: /treinamento
+  messages:
+    encoding: UTF-8
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8080
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    format-sql: false
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        properties:
+            hibernate:
+                generate_statistics: true
+                temp:
+                    use_jdbc_metadata_defaults: false        
+    application:
+        name: treinamento
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: GMT-03:00
+        serialization:
+            WRITE_DATES_AS_TIMESTAMPS: false      
+primary:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://31.220.109.68:3306/treinamentoindra?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false
+    username: treinamentoindra
+    password: treinamentoindra
+hibernate: 
+  generate_statistics: true
+
+logging:
+    file:
+      name: /var/log/treinamento/indra-treinamento.log
+      max-history: 2
+      max-size: 10MB
+    level:
+        root: ERROR
+        org.springframework: ERROR   
+        com.indracompany: INFO
+    pattern:
+        console: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
+        file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'

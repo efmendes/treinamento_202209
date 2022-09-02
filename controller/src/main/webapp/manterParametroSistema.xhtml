@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template.xhtml">
+
+		<h1>
+			<h:outputText value="Parametro Sistema" />
+		</h1>
+
+	<ui:define name="content">
+		<div>
+			<h:form id="form">
+				<div>
+					<p:commandLink id="criarCommandLink" 
+							action="#{parametroSistema.carregarIncluir()}" oncomplete="PF('formDialog').show()"
+							value="Novo"  update="form" />
+				</div>
+				<div>
+					<div>
+						<p:dataTable id="dataTableResult" rows="10" paginator="true" lazy="true"
+							paginatorPosition="bottom" paginatorAlwaysVisible="true"
+							emptyMessage="Sem registros" var="item"
+							value="#{parametroSistema.list}">
+							<p:column headerText="Código">
+								<h:outputText value="#{item.id}" />
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{item.nomeParametro}" />
+							</p:column>
+							<p:column headerText="Valor">
+								<h:outputText value="#{item.valorParametro}" />
+							</p:column>
+							<p:column headerText="Ações">
+								<p:commandLink id="editar" title="Editar"  value="Editar"
+									action="#{parametroSistema.carregarAlterar(item)}"
+									oncomplete="PF('formDialog').show()" update="form">
+									
+								</p:commandLink>
+								<p:spacer width="10px"/>
+								<p:commandLink id="excluir" title="Excluir" value="Excluir" update="form"
+									action="#{parametroSistema.remover(item.id)}">
+									
+								</p:commandLink>
+							</p:column>
+						</p:dataTable>
+					</div>
+				</div>
+				<p:dialog header="Parametro Sistema" widgetVar="formDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			    	<p:outputPanel id="painelFormulario">
+			    		<div>
+							<div>
+					    		<p:outputLabel for="codigo" value="Código" />
+					    		<p:inputText id="codigo" value="#{parametroSistema.entity.id}" />
+				    		</div>
+				    		<div>
+				    			<p:outputLabel for="descricao" value="Nome" />
+				    			<p:inputText id="descricao" value="#{parametroSistema.entity.nomeParametro}"/>
+				    		</div>
+				    		<div>
+				    			<p:outputLabel for="ordem" value="Valor" />
+        						<p:inputText id="ordem" value="#{parametroSistema.entity.valorParametro}"/>
+				    		</div>
+				    	</div>
+			    	</p:outputPanel>
+			    	<p:outputPanel >
+			    		<p:commandButton 
+			    			action="#{parametroSistema.salvar()}" update="form"
+			    			oncomplete="PF('formDialog').hide()" value="Salvar" />
+			        	<p:commandButton onclick="PF('formDialog').hide();" value="Sair" />
+			        </p:outputPanel>
+			    </p:dialog>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
