@@ -5,41 +5,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.validator.constraints.br.CPF;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Table(name = "clientes")
+@Table(name="conta")
 @Data
-@Setter
 @Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
-public class Cliente extends GenericEntity<Long>{
-	
+public class Conta {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(length = 50)
-	private String nome;
-	
-	@CPF
-	@Column(length = 11)
-	private String cpf;
-	
-	@Email
-	private String email;
-	
-	private boolean ativo;
-	
-	private String observacoes;
+	@Column(length = 5)
+	private String agencia;
 
+	@Column(length = 8)
+	private String numeroConta;
 	
+	@ManyToOne
+	@JoinColumn(name = "fk_cliente_id")
+	private Cliente cliente;
 }

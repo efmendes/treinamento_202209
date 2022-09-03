@@ -34,6 +34,8 @@ public enum ExceptionValidacoes implements AplicacaoExceptionValidacoes {
   // Mensagens Alterta
   ALERTA_NENHUM_REGISTRO_ENCONTRADO("msg.app.alerta.nenhum.registro.encontrado", null, AplicacaoExceptionValidacoes.SEVERIDADE_ALERTA),;
 
+
+
   @Getter
   @Setter
   private String codigoMsg;
