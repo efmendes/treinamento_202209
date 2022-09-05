@@ -29,16 +29,18 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 
 	}
 
+	/**
+	 * @author Pedro Lucas Método de pesquisa cliente pelo nome;
+	 * @param nome - nome do usuário a ser encontrado
+	 * @return retorna objeto da classe Cliente;
+	 */
 	public Cliente buscarClientePorNome(String nome) {
-		
-		Cliente cliNome = clienteRepository.findByNome(nome);
-		
+
+		Cliente cliNome = clienteRepository.findByNomeIgnoreCase(nome);
+
 		if (cliNome.getNome() == null) {
 			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, nome);
-			
 		}
-		
 		return cliNome;
-
 	}
 }
