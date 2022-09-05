@@ -28,5 +28,21 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		return cli;
 		
 	}
+	
+public Cliente buscarClientePorNome(String nome) {
+	
+		if(nome.isEmpty()) {
+			throw new AplicacaoException(ExceptionValidacoes.ERRO_CAMPO_OBRIGATORIO, nome);
+		}
+			
+		Cliente cli = clienteRepository.findByNome(nome);
+		
+		if (cli == null) {
+			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, nome);
+		}
+		
+		return cli;
+		
+	}
 	  
 }
