@@ -10,7 +10,14 @@ public class BuscaClienteDTO implements Serializable{
 	private static final long serialVersionUID = 7210034607149165450L;
 	
 	
-	String nome;
-	String cpf;
+	private String nome;
+	private String cpf;
+	
+	public BuscaClienteDTO(String nome, String cpf) {
+		super();
+		this.nome = nome;
+		this.cpf = cpf;
+		
+	}
 	
 }

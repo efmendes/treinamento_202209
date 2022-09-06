@@ -180,5 +180,6 @@ public abstract class GenericCrudRest<T extends GenericEntity<I>, I, S extends G
   public S getService() 
   {
 	  return (S) this.service;
+  
   }
 }
