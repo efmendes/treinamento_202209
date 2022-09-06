@@ -32,7 +32,7 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 
 	public Cliente buscarClientePorNome(String nome)  {
 		String[] numeros = {"0","1","2","3","4","5","6","7","8","9"};
-		
+		// Uma melhor forma seria tratar através de REGEX no front-end, tratarei nos sábados de angular
 		for(String str : numeros) {
 			if(nome.contains(str)){
 				throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO,nome);
