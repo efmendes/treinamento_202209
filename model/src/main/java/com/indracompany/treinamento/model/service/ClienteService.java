@@ -28,7 +28,6 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		if(cliente == null) {
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_INVALIDO, cpf);
 		}
-		
 		return cliente;
 	}
 	
