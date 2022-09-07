@@ -8,6 +8,7 @@ import com.indracompany.treinamento.exception.ExceptionValidacoes;
 import com.indracompany.treinamento.model.entity.Cliente;
 import com.indracompany.treinamento.model.repository.ClienteRepository;
 import com.indracompany.treinamento.util.CpfUtil;
+import com.indracompany.treinamento.util.NomeUtil;
 
 @Service
 public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRepository>{
@@ -27,6 +28,18 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		}
 		return cli;
 		
+	}
+	
+	public Cliente buscarClientePorNome(String nome) {
+		boolean nomeValido = NomeUtil.validaNome(nome);
+		if (!nomeValido) {
+			throw new AplicacaoException(ExceptionValidacoes.ERRO_NOME_INVALIDO, nome);
+		}
+		Cliente cli = clienteRepository.findByNome(nome);
+		if (cli == null) {
+			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, nome);
+		}
+		return cli;
 	}
 	  
 }
