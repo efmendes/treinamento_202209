@@ -1,5 +1,6 @@
 package com.indracompany.treinamento.model.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,26 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		}
 		return cli;
 		
+	}
+
+	public Cliente findByName(String name){
+		Boolean hasNumber = false;
+
+		for(String str : name.split("")){
+			if(StringUtils.isNumeric(str)){
+				hasNumber = true;
+			}
+		}
+
+		if(hasNumber){
+			throw new AplicacaoException(ExceptionValidacoes.ERRO_VALIDACAO, name);
+		}
+
+		Cliente cliente = clienteRepository.findByNome(name);
+		if (cliente == null) {
+			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, name);
+		}
+		return cliente;
 	}
 	  
 }
