@@ -21,10 +21,13 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		if (!cpfValido) {
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_INVALIDO, cpf);
 		}
+		
 		Cliente cli = clienteRepository.findByCpf(cpf);
+		
 		if (cli == null) {
 			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, cpf);
 		}
+		
 		return cli;
 		
 	}
