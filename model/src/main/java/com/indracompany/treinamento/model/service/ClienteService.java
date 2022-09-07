@@ -10,23 +10,23 @@ import com.indracompany.treinamento.model.repository.ClienteRepository;
 import com.indracompany.treinamento.util.CpfUtil;
 
 @Service
-public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRepository>{
+public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRepository> {
 
-	@Autowired
-	private ClienteRepository clienteRepository;
-	
-	public Cliente buscarClientePorCpf(String cpf) {
-		
-		boolean cpfValido = CpfUtil.validaCPF(cpf);
-		if (!cpfValido) {
-			throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_INVALIDO, cpf);
-		}
-		Cliente cli = clienteRepository.findByCpf(cpf);
-		if (cli == null) {
-			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, cpf);
-		}
-		return cli;
-		
-	}
-	  
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    public Cliente buscarClientePorCpf(String cpf) {
+
+        boolean cpfValido = CpfUtil.validaCPF(cpf);
+        if (!cpfValido) {
+            throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_INVALIDO, cpf);
+        }
+        Cliente cli = clienteRepository.findByCpf(cpf);
+        if (cli == null) {
+            throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, cpf);
+        }
+        return cli;
+
+    }
+
 }
