@@ -42,6 +42,7 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		}
 		
 		return cliente;
+
 	}
 	  
 }
