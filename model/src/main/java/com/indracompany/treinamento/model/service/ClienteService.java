@@ -29,7 +29,7 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		return cli;
 	}
 
-	public Cliente buscarPorClientePorNome(String nome) {
+	public Cliente buscarClientePorNome(String nome) {
 
 		boolean nomeValido = NomeUtil.validaNome(nome);
 		if (!nomeValido) {
