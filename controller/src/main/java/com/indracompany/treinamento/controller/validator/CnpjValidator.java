@@ -1,6 +1,7 @@
 package com.indracompany.treinamento.controller.validator;
 
 import javax.faces.application.FacesMessage;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
