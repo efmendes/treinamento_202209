@@ -28,5 +28,20 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		return cli;
 		
 	}
+	public List<ClienteDTO> buscarClientesPorNome(String nome){
+		List<Cliente> clientes = repository.findByNomeStartingWith(nome);
+
+		if (clientes == null || clientes.isEmpty()) {
+			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO);
+		}
+
+		List<ClienteDTO> retorno = new ArrayList<ClienteDTO>();
+		for (Cliente c: clientes) {
+			ClienteDTO dto = new ClienteDTO();
+			BeanUtils.copyProperties(c, dto);
+			retorno.add(dto);
+		}
+		return retorno;
+	}
 	  
 }
