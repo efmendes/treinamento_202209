@@ -14,13 +14,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+@SuppressWarnings("ALL")
 @Entity
 @Table(name="conta")
 @Data
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
-public class Conta {
+@EqualsAndHashCode(callSuper = false)
+class Conta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
