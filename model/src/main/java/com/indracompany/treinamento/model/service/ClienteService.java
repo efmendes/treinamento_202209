@@ -34,7 +34,7 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 	
 	public Cliente buscaClientePorNome(String nome) {
 		
-		Cliente client = clientRepository.findByNome(nome);
+		Cliente client = clientRepository.findByNomeIgnoreCase(nome);
 		if(client == null) {
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_OBJETO_NAO_ENCONTRADO, nome);
 		}
