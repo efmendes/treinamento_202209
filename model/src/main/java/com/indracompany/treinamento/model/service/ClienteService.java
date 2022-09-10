@@ -23,7 +23,6 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 	
 	public ClienteDTO buscarClientePorCpf(String cpf) {
 		
-		
 		boolean cpfValido = CpfUtil.validaCPF(cpf);
 		if (!cpfValido) {
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_INVALIDO, cpf);
