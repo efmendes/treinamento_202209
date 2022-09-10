@@ -8,4 +8,7 @@ public interface ClienteRepository extends GenericCrudRepository<Cliente, Long>{
 
     public Cliente findByNome(String nome);
 
+    
 }
+   
+    
