@@ -32,7 +32,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @PropertySource(value = "classpath:application.yml")
 @ComponentScan(basePackages = {"io.swagger", "io.swagger.api", "io.swagger.configuration", "com.indracompany.treinamento"})
 @ServletComponentScan
-public class AppConfig { 
+public class AppConfig {
 
   public static void main(final String[] args) {
     SpringApplication.run(AppConfig.class, args);

@@ -1,6 +1,8 @@
 package com.indracompany.treinamento.model.service;
 
-import com.indracompany.treinamento.util.NomeUtil;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,18 +32,13 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 
     }
 
-    public Cliente buscarClientePorNome(String nome) {
-
-        boolean nomeValido = NomeUtil.validaNome(nome);
-
-        if (!nomeValido) {
-            throw new AplicacaoException(ExceptionValidacoes.ERRO_NOME_INVALIDO, nome);
-        }
-
-        Cliente cli = clienteRepository.findByNome(nome);
-        if (cli == null) {
-            throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, nome);
-        }
+    public List<Cliente> buscarClientePorNome(String nome) {
+    	if (StringUtils.isBlank(nome)
+    		  || StringUtils.isAlphanumeric(nome)
+    		  || StringUtils.isNumeric(nome)) {
+    		  throw new AplicacaoException(ExceptionValidacoes.ERRO_NOME_INVALIDO,nome);
+      }
+        List<Cliente> cli = clienteRepository.findByNomeSqlNative(nome);
         return cli;
     }
 
