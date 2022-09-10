@@ -1,10 +1,16 @@
 package com.indracompany.treinamento.model.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.indracompany.treinamento.exception.AplicacaoException;
 import com.indracompany.treinamento.exception.ExceptionValidacoes;
+import com.indracompany.treinamento.model.dto.ClienteDTO;
 import com.indracompany.treinamento.model.entity.Cliente;
 import com.indracompany.treinamento.model.repository.ClienteRepository;
 import com.indracompany.treinamento.util.CpfUtil;
@@ -15,7 +21,7 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
-	public Cliente buscarClientePorCpf(String cpf) {
+	public ClienteDTO buscarClientePorCpf(String cpf) {
 		
 		boolean cpfValido = CpfUtil.validaCPF(cpf);
 		if (!cpfValido) {
@@ -28,23 +34,35 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, cpf);
 		}
 		
-		return cli;
+		ClienteDTO dto = new ClienteDTO();
+		BeanUtils.copyProperties(cli, dto);
+		dto.setCpfMacarado(cli.getCpf().substring(0, 3)+"***");
+		
+		return dto;
 		
 	}
 	
-public Cliente buscarClientePorNome(String nome) {
+public List<ClienteDTO> buscarClientePorNome(String nome) {
 	
-		if(nome.isEmpty()) {
-			throw new AplicacaoException(ExceptionValidacoes.ERRO_CAMPO_OBRIGATORIO, nome);
+		if(nome.isEmpty() || StringUtils.isNumeric(nome) ) {
+			throw new AplicacaoException(ExceptionValidacoes.ERRO_NOME_INVALIDO, nome);
 		}
 			
-		Cliente cli = clienteRepository.findByNome(nome);
+		List<Cliente> listCli = clienteRepository.findByNomeContainingIgnoreCaseAndAtivoTrue(nome);
 		
-		if (cli == null) {
+		if (listCli.isEmpty()) {
 			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, nome);
 		}
-		
-		return cli;
+//		
+		List<ClienteDTO> listDTO =new ArrayList<>();
+		for(Cliente c : listCli) {
+			ClienteDTO dto = new ClienteDTO();
+			BeanUtils.copyProperties(c, dto);
+			dto.setCpfMacarado(c.getCpf().substring(0, 3)+"***");
+			listDTO.add(dto);
+		}
+//		
+		return listDTO;
 		
 	}
 	  
