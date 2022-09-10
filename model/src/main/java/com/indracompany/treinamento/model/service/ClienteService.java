@@ -1,5 +1,7 @@
 package com.indracompany.treinamento.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,10 +33,9 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		return cliente;
 	}
 	
-	
-	public Cliente buscaClientePorNome(String nome) {
+	public List<Cliente> buscaClientePorNome(String nome) {
 		
-		Cliente cliente = clientRepository.findByNome(nome);
+		List<Cliente> cliente = clientRepository.findByNomeIgnoreCaseContainingAndAtivoTrue(nome);
 		
 		if(cliente == null) {
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_OBJETO_NAO_ENCONTRADO, nome);
@@ -42,6 +43,6 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		
 		return cliente;
 
-	}
+	} 
 	  
 }
