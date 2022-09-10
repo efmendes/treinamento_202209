@@ -39,18 +39,6 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		
 	}
 
-	@Autowired
-	private ClienteRepository clientRepository;
-	
-	public Cliente buscarClientePorNome(String nome) {
-		
-		Cliente cli = clientRepository.findByNome(nome);
-		if (cli == null) {
-			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, nome);
-		}
-		return cli;
-		
-	}
 	  
 	public List<ClienteDTO> buscarClientePorNome(String nome) {
 		if (StringUtils.isBlank(nome) 
