@@ -53,7 +53,6 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 			dto.setCpfMascarado(c.getCpf().substring(0, 3)+"***");
 			listaRetornoDto.add(dto);
 		}
-		
 		return listaRetornoDto;
 	}
 }
