@@ -23,4 +23,6 @@ public interface ClienteRepository extends GenericCrudRepository<Cliente, Long>{
 	public List<Cliente> findByNomeSqlNative(@Param("nome")String nome);
 	
 
+	public Cliente findByNome(String nome);
+		
 }
