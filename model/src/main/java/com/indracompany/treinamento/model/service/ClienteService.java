@@ -22,7 +22,7 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 	private ClienteRepository clienteRepository;
 	
 	public ClienteDTO buscarClientePorCpf(String cpf) {
-		
+
 		boolean cpfValido = CpfUtil.validaCPF(cpf);
 		if (!cpfValido) {
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_INVALIDO, cpf);
@@ -42,28 +42,22 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		
 	}
 	
-public List<ClienteDTO> buscarClientePorNome(String nome) {
-	
-		if(nome.isEmpty() || StringUtils.isNumeric(nome) ) {
+
+	  
+	public List<ClienteDTO> buscarClientePorNome(String nome) {
+		if (StringUtils.isBlank(nome) 
+				|| StringUtils.isNumeric(nome)) {
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_NOME_INVALIDO, nome);
 		}
-			
-		List<Cliente> listCli = clienteRepository.findByNomeContainingIgnoreCaseAndAtivoTrue(nome);
-		
-		if (listCli.isEmpty()) {
-			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, nome);
-		}
-//		
-		List<ClienteDTO> listDTO =new ArrayList<>();
-		for(Cliente c : listCli) {
+		List<Cliente> listaCliente = clienteRepository.findByNomeContainingIgnoreCaseAndAtivoTrue(nome);
+		List<ClienteDTO> listaRetornoDto = new ArrayList<>();
+		for (Cliente c : listaCliente) {
 			ClienteDTO dto = new ClienteDTO();
 			BeanUtils.copyProperties(c, dto);
-			dto.setCpfMacarado(c.getCpf().substring(0, 3)+"***");
-			listDTO.add(dto);
+			dto.setCpfMascarado(c.getCpf().substring(0, 3)+"***");
+			listaRetornoDto.add(dto);
 		}
-//		
-		return listDTO;
 		
+		return listaRetornoDto;
 	}
-	  
 }
