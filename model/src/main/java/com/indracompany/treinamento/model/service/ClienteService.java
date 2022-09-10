@@ -10,6 +10,8 @@ import com.indracompany.treinamento.model.entity.Cliente;
 import com.indracompany.treinamento.model.repository.ClienteRepository;
 import com.indracompany.treinamento.util.CpfUtil;
 
+import java.util.Optional;
+
 @Service
 public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRepository>{
 
@@ -31,22 +33,16 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 	}
 
 	public Cliente findByName(String name){
-		Boolean hasNumber = false;
-
-		for(String str : name.split("")){
-			if(StringUtils.isNumeric(str)){
-				hasNumber = true;
-			}
-		}
-
-		if(hasNumber){
+		if(StringUtils.isNumeric(name)
+				|| StringUtils.isBlank(name)
+				|| StringUtils.isAlphanumeric(name)){
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_VALIDACAO, name);
+
 		}
 
-		Cliente cliente = clienteRepository.findByNome(name);
-		if (cliente == null) {
-			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, name);
-		}
+		Cliente cliente = clienteRepository.findByNome(name)
+				.orElseThrow(() -> new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, name));
+
 		return cliente;
 	}
 	  

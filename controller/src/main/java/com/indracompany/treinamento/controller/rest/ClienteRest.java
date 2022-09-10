@@ -28,7 +28,7 @@ public class ClienteRest extends GenericCrudRest<Cliente, Long, ClienteService>{
 
 	@GetMapping(value = "/buscarPorNome/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Cliente> findByNome(@PathVariable String nome){
-		return ResponseEntity.ok().body(clienteService.findByName(nome));
+		return ResponseEntity.status(HttpStatus.FOUND).body(clienteService.findByName(nome));
 	}
 	
 
