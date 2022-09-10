@@ -59,12 +59,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
+			<!--scope>runtime</scope-->
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
+			<!--scope>runtime</scope-->
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -149,7 +149,7 @@
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 			<version>7.0</version>
-			<scope>provided</scope>
+			<!--scope>provided</scope-->
 		</dependency>
 
 		<dependency>

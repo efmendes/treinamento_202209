@@ -25,7 +25,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
+			<!--scope>provided</scope-->
 		</dependency>
 		
 		
@@ -51,21 +51,21 @@
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>el-impl</artifactId>
 			<version>2.2</version>
-			<scope>provided</scope>
+			<!--scope>provided</scope-->
 		</dependency>
 
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
-			<scope>provided</scope>
+			<!--scope>provided</scope-->
 		</dependency>
 
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.faces</artifactId>
 			<version>2.2.20</version>
-			<scope>provided</scope>
+			<!--scope>provided</scope-->
 		</dependency>
 
 		<dependency>
@@ -77,7 +77,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<!--scope>test</scope-->
 		</dependency>
 
 		<dependency>

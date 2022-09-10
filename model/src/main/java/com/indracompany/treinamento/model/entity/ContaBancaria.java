@@ -13,20 +13,23 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "contas")
+@Table(name = "contas_bancarias")
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Conta extends GenericEntity<Long>{
+public class ContaBancaria extends GenericEntity<Long>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(length = 5)
+	@Column(length = 4)
 	private String agencia;
 	
-	@Column(length = 8)
-	private String numeroConta;
+	@Column(length = 6)
+	private String numero;
+	
+	@Column
+	private double saldo;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_cliente_id")
