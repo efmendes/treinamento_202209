@@ -21,6 +21,7 @@ public class ClienteRest extends GenericCrudRest<Cliente, Long, ClienteService>{
 	private ClienteService clienteService;
 	
 	@GetMapping(value = "/buscarPorCpf/{cpf}", produces = MediaType.APPLICATION_JSON_VALUE)
+<<<<<<< Updated upstream
 	public @ResponseBody ResponseEntity <Cliente> buscaClientePorCpf(@PathVariable String cpf) {
 		Cliente client = clienteService.buscaClientePorCpf(cpf);
 		return new ResponseEntity<>(client, HttpStatus.OK);
@@ -32,4 +33,21 @@ public class ClienteRest extends GenericCrudRest<Cliente, Long, ClienteService>{
 		Cliente client = clienteService.buscaClientePorNome(nome);
 		return new ResponseEntity<>(client, HttpStatus.OK);
 	}
+=======
+	public @ResponseBody ResponseEntity<ClienteDTO> buscarClientePorCpf(@PathVariable String cpf) {
+		ClienteDTO cli = clienteService.buscarClientePorCpf(cpf);
+		return new ResponseEntity<>(cli, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/buscarPorNome/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<List<ClienteDTO>> buscarClientePorNomes(@PathVariable String nome){
+		List<ClienteDTO> lista = clienteService.buscarClientePorNome(nome);
+		if (lista == null || lista.isEmpty()) {
+			return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(lista, HttpStatus.OK);
+	}
+	
+
+>>>>>>> Stashed changes
 }
