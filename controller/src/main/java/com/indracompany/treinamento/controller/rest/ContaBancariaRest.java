@@ -37,26 +37,28 @@ public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, Cont
 		return new ResponseEntity<>(lista, HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/deposito/", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Void> depositar(@RequestBody DepositoDTO dto){
-		contaBancariaService.depositar(dto);
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	
-	}
-	@PutMapping(value = "/saque/", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Void> sacar(@RequestBody SaqueDTO dto){
-		contaBancariaService.sacar(dto);
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
 	@GetMapping(value = "/consultarSaldo/{agencia}/{numeroConta}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Double> consultarSaldo (@PathVariable String agencia, String numeroConta){
+	public @ResponseBody ResponseEntity<Double> consultarSaldo (@PathVariable String agencia, @PathVariable String numeroConta){
 		ContaBancaria conta = contaBancariaService.carregarConta(agencia, numeroConta);
-		
 		return new ResponseEntity<>(conta.getSaldo(), HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/transferencia/", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Void> transferir(@RequestBody TransferenciaBancariaDTO dto){
+	@PutMapping(value = "/deposito", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Void> depositar(@RequestBody DepositoDTO dto){
+		contaBancariaService.depositar(dto);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	
+	@PutMapping(value = "/sacar", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Void> sacar (@RequestBody SaqueDTO dto){
+		contaBancariaService.sacar(dto);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	
+	@PutMapping(value = "/transferencia", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Void> transferir (@RequestBody TransferenciaBancariaDTO dto){
 		contaBancariaService.transferir(dto);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

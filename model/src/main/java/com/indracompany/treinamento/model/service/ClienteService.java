@@ -1,18 +1,16 @@
 package com.indracompany.treinamento.model.service;
 
-<<<<<<< Updated upstream
-=======
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
->>>>>>> Stashed changes
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.indracompany.treinamento.exception.AplicacaoException;
 import com.indracompany.treinamento.exception.ExceptionValidacoes;
+import com.indracompany.treinamento.model.dto.ClienteDTO;
 import com.indracompany.treinamento.model.entity.Cliente;
 import com.indracompany.treinamento.model.repository.ClienteRepository;
 import com.indracompany.treinamento.util.CpfUtil;
@@ -21,46 +19,14 @@ import com.indracompany.treinamento.util.CpfUtil;
 public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRepository>{
 
 	@Autowired
-<<<<<<< Updated upstream
-	private ClienteRepository clientRepository;
-	
-	public Cliente buscaClientePorCpf(String cpf) {
-=======
 	private ClienteRepository clienteRepository;
 	
 	public ClienteDTO buscarClientePorCpf(String cpf) {
 		
->>>>>>> Stashed changes
-		
 		boolean cpfValido = CpfUtil.validaCPF(cpf);
-		
-		if(!cpfValido) {
+		if (!cpfValido) {
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_INVALIDO, cpf);
 		}
-<<<<<<< Updated upstream
-		
-		Cliente client = clientRepository.findByCpf(cpf);
-		
-		if(client == null) {
-			throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_INVALIDO, cpf);
-		}
-		
-		return client;
-	}
-	
-	public Cliente buscaClientePorNome(String nome) {
-		
-		Cliente client = clientRepository.findByNomeIgnoreCase(nome);
-		if(client == null) {
-			throw new AplicacaoException(ExceptionValidacoes.ERRO_OBJETO_NAO_ENCONTRADO, nome);
-		}
-		
-		return client;
-		
-	}
-	  
-}
-=======
 		Cliente cli = clienteRepository.findByCpf(cpf);
 		if (cli == null) {
 			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, cpf);
@@ -90,4 +56,3 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		return listaRetornoDto;
 	}
 }
->>>>>>> Stashed changes

@@ -25,7 +25,7 @@ public class ContaBancaria extends GenericEntity<Long>{
 	@Column(length = 4)
 	private String agencia;
 	
-	@Column(length = 6, name = "numero")
+	@Column(length = 6)
 	private String numero;
 	
 	@Column

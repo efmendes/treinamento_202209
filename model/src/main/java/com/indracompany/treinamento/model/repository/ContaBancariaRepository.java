@@ -9,4 +9,5 @@ public interface ContaBancariaRepository extends GenericCrudRepository<ContaBanc
 	public List<ContaBancaria> findByClienteCpf(String cpf);
 	
 	public ContaBancaria findByAgenciaAndNumero(String agencia, String numero);
+
 }

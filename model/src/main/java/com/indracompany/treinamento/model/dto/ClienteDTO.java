@@ -5,17 +5,12 @@ import lombok.Data;
 
 @Data
 public class ClienteDTO {
-<<<<<<< Updated upstream
-
-	private Long id;
-=======
-	
-	private String nome;
->>>>>>> Stashed changes
 	
 	private String nome;
 	
-	private String cpf;
+	private String observacoes;
+	
+	private String cpfMascarado;
 	
 
 }
