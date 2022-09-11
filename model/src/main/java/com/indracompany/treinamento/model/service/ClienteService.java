@@ -1,14 +1,10 @@
 package com.indracompany.treinamento.model.service;
 
-<<<<<<< HEAD
-import com.indracompany.treinamento.util.NomeUtil;
-=======
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
->>>>>>> 31181f2c4ae94baa9e132d8412d864a2cea389e6
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +21,7 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
-	public ClienteDTO buscarClientePorCpf(String cpf) {
+	public Cliente buscarClientePorCpf(String cpf) {
 		
 		boolean cpfValido = CpfUtil.validaCPF(cpf);
 		if (!cpfValido) {
@@ -35,28 +31,7 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		if (cli == null) {
 			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, cpf);
 		}
-<<<<<<< HEAD
 		return cli;
-	}
-
-	public Cliente buscarClientePorNome(String nome) {
-
-		boolean nomeValido = NomeUtil.validaNome(nome);
-		if (!nomeValido) {
-			throw new AplicacaoException(ExceptionValidacoes.ERRO_NOME_INVALIDO, nome);
-		}
-		Cliente cliente = clienteRepository.findByNome(nome);
-		if (cliente == null) {
-			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, nome);
-		}
-		return cliente;
-=======
-		
-		ClienteDTO dto = new ClienteDTO();
-		BeanUtils.copyProperties(cli, dto);
-		dto.setCpfMascarado(cli.getCpf().substring(0, 3)+"***");
-		return dto;
-		
 	}
 	  
 	public List<ClienteDTO> buscarClientePorNome(String nome) {
@@ -74,6 +49,5 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		}
 		
 		return listaRetornoDto;
->>>>>>> 31181f2c4ae94baa9e132d8412d864a2cea389e6
 	}
 }
