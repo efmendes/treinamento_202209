@@ -5,16 +5,9 @@ import lombok.Data;
 @Data
 public class ClienteDTO {
 
-	private Long id;
-
 	private String nome;
 
-	private String cpf;
+	private String observacoes;
 
-	public ClienteDTO(Long id, String nome, String cpf) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-	}
+	private String cpfMascarado;
 }
