@@ -1,8 +1,10 @@
 package com.indracompany.treinamento.model.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.indracompany.treinamento.model.entity.ExtratoBancario;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +20,13 @@ import com.indracompany.treinamento.model.entity.ContaBancaria;
 import com.indracompany.treinamento.model.repository.ContaBancariaRepository;
 import com.indracompany.treinamento.util.CpfUtil;
 
+
+
 @Service
 public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long, ContaBancariaRepository>{
 	
 	@Autowired
-	private ClienteService clienteService;
+	private ExtratoBancarioService extratoBancarioService;
 	
 	@Autowired
 	private ContaBancariaRepository contaBancariaRepository;
@@ -56,6 +60,16 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		ContaBancaria contaBancaria = this.carregarConta(dto.getAgencia(), dto.getNumeroConta());
 		contaBancaria.setSaldo(contaBancaria.getSaldo() + dto.getValor());
 		super.salvar(contaBancaria);
+		//gerando uma operação no extrato
+		ExtratoBancario extrato = new ExtratoBancario();
+		LocalDate dataAtual = LocalDate.now();
+		extrato.setConta(contaBancaria);
+		extrato.setTipoDeOperacao("deposito");
+		extrato.setValor(dto.getValor());
+		extrato.setData(dataAtual);
+		extrato.setObservacao(null);
+		extratoBancarioService.salvar(extrato);
+
 	}
 	
 	public void sacar(SaqueDTO dto) {
@@ -65,6 +79,14 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		}
 		contaBancaria.setSaldo(contaBancaria.getSaldo() - dto.getValor());
 		super.salvar(contaBancaria);
+		ExtratoBancario extrato = new ExtratoBancario();
+		LocalDate dataAtual = LocalDate.now();
+		extrato.setConta(contaBancaria);
+		extrato.setData(dataAtual);
+		extrato.setTipoDeOperacao("saque");
+		extrato.setValor(dto.getValor());
+		extrato.setObservacao(null);
+		extratoBancarioService.salvar(extrato);
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
@@ -83,6 +105,7 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		depositoDto.setValor(transferenciaDto.getValor());
 		
 		this.depositar(depositoDto);
+
 		
 	}
 	
@@ -94,5 +117,9 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		}
 		
 		return conta;
+	}
+
+	private void operacaoExtrato(ContaClienteDTO conta, double valor){
+
 	}
 }
