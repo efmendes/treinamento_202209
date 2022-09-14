@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
@@ -29,4 +30,26 @@ public class ExtratoRest extends GenericCrudRest<ExtratoBancario, Long, ExtratoB
         return  new ResponseEntity<>(extratos,HttpStatus.OK);
 
     }
+
+    @GetMapping(value = "/buscarExtratos/{numero}/{agencia}/{data}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody   ResponseEntity<List<ExtratoBancario>> buscarExtratoBancario(@PathVariable String numero, @PathVariable String agencia, @PathVariable String data){
+        List<ExtratoBancario> extratos = extratoBancarioService.pesquisarExtratoPorData(numero, agencia, data);
+        if(extratos.isEmpty()){
+            return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+        }
+        return  new ResponseEntity<>(extratos,HttpStatus.OK);
+
+    }
+
+    @GetMapping(value = "/buscarExtratos/{numero}/{agencia}/{dataInicio}/{dataFim}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody   ResponseEntity<List<ExtratoBancario>> buscarExtratoBancario(@PathVariable String numero, @PathVariable String agencia, @PathVariable String dataInicio, @PathVariable String dataFim){
+        List<ExtratoBancario> extratos = extratoBancarioService.pesquisarExtratoPorIntervaloDeData(numero, agencia, dataInicio, dataFim);
+        if(extratos.isEmpty()){
+            return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+        }
+        return  new ResponseEntity<>(extratos,HttpStatus.OK);
+
+    }
+
+
 }
