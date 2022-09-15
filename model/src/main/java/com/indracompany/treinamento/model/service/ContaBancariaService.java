@@ -1,6 +1,7 @@
 package com.indracompany.treinamento.model.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -15,7 +16,9 @@ import com.indracompany.treinamento.model.dto.DepositoDTO;
 import com.indracompany.treinamento.model.dto.SaqueDTO;
 import com.indracompany.treinamento.model.dto.TransferenciaBancariaDTO;
 import com.indracompany.treinamento.model.entity.ContaBancaria;
+import com.indracompany.treinamento.model.entity.Operacao;
 import com.indracompany.treinamento.model.repository.ContaBancariaRepository;
+import com.indracompany.treinamento.model.repository.OperacaoRepository;
 import com.indracompany.treinamento.util.CpfUtil;
 
 @Service
@@ -26,6 +29,9 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 	
 	@Autowired
 	private ContaBancariaRepository contaBancariaRepository;
+	
+	@Autowired
+	private OperacaoRepository operacaoRepository;
 	
 	public List<ContaClienteDTO> listarContasDoCliente(String cpf){
 		
@@ -55,6 +61,22 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 	public void depositar(DepositoDTO dto) {
 		ContaBancaria contaBancaria = this.carregarConta(dto.getAgencia(), dto.getNumeroConta());
 		contaBancaria.setSaldo(contaBancaria.getSaldo() + dto.getValor());
+		
+		Operacao op = new Operacao();
+		op.setAgencia(contaBancaria.getAgencia());
+		op.setNumero(contaBancaria.getNumero());
+		op.setDate(new Date());
+		op.setOperationType("Deposito");
+		op.setValue(dto.getValor());
+		operacaoRepository.save(op);
+		
+		super.salvar(contaBancaria);
+	}
+	
+	public void depositarPorTransferencia(DepositoDTO dto) {
+		ContaBancaria contaBancaria = this.carregarConta(dto.getAgencia(), dto.getNumeroConta());
+		contaBancaria.setSaldo(contaBancaria.getSaldo() + dto.getValor());
+		
 		super.salvar(contaBancaria);
 	}
 	
@@ -64,6 +86,25 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_SALDO_INEXISTENTE);
 		}
 		contaBancaria.setSaldo(contaBancaria.getSaldo() - dto.getValor());
+		
+		Operacao op = new Operacao();
+		op.setAgencia(contaBancaria.getAgencia());
+		op.setNumero(contaBancaria.getNumero());
+		op.setDate(new Date());
+		op.setOperationType("Saque");
+		op.setValue(dto.getValor());
+		operacaoRepository.save(op);
+		
+		super.salvar(contaBancaria);
+	}
+	
+	public void sacarPorTransferencia(SaqueDTO dto) {
+		ContaBancaria contaBancaria = this.carregarConta(dto.getAgencia(), dto.getNumeroConta());
+		if (contaBancaria.getSaldo() < dto.getValor()) {
+			throw new AplicacaoException(ExceptionValidacoes.ERRO_SALDO_INEXISTENTE);
+		}
+		contaBancaria.setSaldo(contaBancaria.getSaldo() - dto.getValor());
+		
 		super.salvar(contaBancaria);
 	}
 	
@@ -75,14 +116,33 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		saqueDto.setNumeroConta(transferenciaDto.getNumeroContaOrigem());
 		saqueDto.setValor(transferenciaDto.getValor());
 
-		this.sacar(saqueDto);
+		this.sacarPorTransferencia(saqueDto);
 		
 		DepositoDTO depositoDto = new DepositoDTO();
 		depositoDto.setAgencia(transferenciaDto.getAgenciaDestino());
 		depositoDto.setNumeroConta(transferenciaDto.getNumeroContaDestino());
 		depositoDto.setValor(transferenciaDto.getValor());
 		
-		this.depositar(depositoDto);
+		this.depositarPorTransferencia(depositoDto);	
+		
+		
+		ContaBancaria contaBancariaDeOrigem = this.carregarConta(transferenciaDto.getAgenciaOrigem(), transferenciaDto.getNumeroContaOrigem());
+		Operacao opEnviada = new Operacao();
+		opEnviada.setAgencia(contaBancariaDeOrigem.getAgencia());
+		opEnviada.setNumero(contaBancariaDeOrigem.getNumero());
+		opEnviada.setDate(new Date());
+		opEnviada.setOperationType("Transferencia enviada");
+		opEnviada.setValue(saqueDto.getValor());
+		operacaoRepository.save(opEnviada);
+		
+		ContaBancaria contaBancariaDeDestino = this.carregarConta(transferenciaDto.getAgenciaDestino(), transferenciaDto.getNumeroContaDestino());
+		Operacao opRecebida = new Operacao();
+		opRecebida.setAgencia(contaBancariaDeDestino.getAgencia());
+		opRecebida.setNumero(contaBancariaDeDestino.getNumero());
+		opRecebida.setDate(new Date());
+		opRecebida.setOperationType("Transfencia recebida");
+		opRecebida.setValue(depositoDto.getValor());
+		operacaoRepository.save(opRecebida);
 		
 	}
 	
