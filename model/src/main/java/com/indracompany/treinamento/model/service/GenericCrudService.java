@@ -132,6 +132,4 @@ public abstract class GenericCrudService<T extends GenericEntity<I>, I, R extend
       return repository;
   }
 
-
-
 }

@@ -6,60 +6,80 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.indracompany.treinamento.model.dto.ContaClienteDTO;
+import com.indracompany.treinamento.model.dto.ConsultaExtratoDTO;
 import com.indracompany.treinamento.model.dto.DepositoDTO;
+import com.indracompany.treinamento.model.dto.ExtratoBancarioDTO;
 import com.indracompany.treinamento.model.dto.SaqueDTO;
-import com.indracompany.treinamento.model.dto.TransferenciaBancariaDTO;
+import com.indracompany.treinamento.model.dto.TransferenciaBancarioDTO;
 import com.indracompany.treinamento.model.entity.ContaBancaria;
 import com.indracompany.treinamento.model.service.ContaBancariaService;
+import com.indracompany.treinamento.model.service.ExtratoBancarioService;
 
-@RestController
-@RequestMapping("rest/contas")
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
+@RestController()
+@CrossOrigin(origins = "*")
+@RequestMapping("rest/conta")
 public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, ContaBancariaService>{
 	
 	@Autowired
-	private ContaBancariaService contaBancariaService;
+	private ExtratoBancarioService extratoBancarioService;
 	
-	@GetMapping(value = "/buscarContasDoCliente/{cpf}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<List<ContaClienteDTO>> buscarContasDoCliente(@PathVariable String cpf){
-		List<ContaClienteDTO> lista = contaBancariaService.listarContasDoCliente(cpf);
-		if (lista == null || lista.isEmpty()) {
-			return new ResponseEntity<>( HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<>(lista, HttpStatus.OK);
+	@ApiOperation(value = "Consulta saldo", nickname = "consultaSaldo")
+	@RequestMapping(value = "/consultarSaldo/{agencia}/{numConta}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public @ResponseBody ResponseEntity<Double> consultarSaldo(final @PathVariable String agencia, 
+			final @PathVariable String numConta){
+		double saldo = getService().consultarSaldo(agencia, numConta);
+		return new ResponseEntity<>(saldo, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/consultarSaldo/{agencia}/{numeroConta}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Double> consultarSaldo (@PathVariable String agencia, @PathVariable String numeroConta){
-		ContaBancaria conta = contaBancariaService.carregarConta(agencia, numeroConta);
-		return new ResponseEntity<>(conta.getSaldo(), HttpStatus.OK);
+	@ApiOperation(value = "Realiza um deposito", nickname = "deposito")
+	@RequestMapping(value = "/deposito", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> depositar(final @RequestBody DepositoDTO dto){
+		getService().depositar(dto.getAgencia(), dto.getNumeroConta(), dto.getValor(), null);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/deposito", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Void> depositar(@RequestBody DepositoDTO dto){
-		contaBancariaService.depositar(dto);
-		return new ResponseEntity<Void>(HttpStatus.OK);
+	@ApiOperation(value = "Realiza um saque", nickname = "saque")
+	@RequestMapping(value = "/saque", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> sacar(final @RequestBody SaqueDTO dto){
+		getService().sacar(dto.getAgencia(), dto.getNumeroConta(), dto.getValor(), null);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "Realiza um transferencia bancaria", nickname = "transferencia")
+	@RequestMapping(value = "/transferencia", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> transferir(final @ApiParam("JSON com dados necessarios para realizar uma transferencia ") @RequestBody TransferenciaBancarioDTO dto){
+		getService().transferir(dto);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}	
+	
+	@ApiOperation(value = "Consulta contas de clientes por CPF", nickname = "consultaContaCliente")
+	@RequestMapping(value = "/consultarContasCliente/{cpf}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public @ResponseBody ResponseEntity<List<ContaBancaria>> consultarContaCliente(final @PathVariable String cpf){
+		List<ContaBancaria> contasDoCliente = getService().obterContas(cpf);
+		return new ResponseEntity<>(contasDoCliente, HttpStatus.OK);
+		
+	}
+	
+	@ApiOperation(value = "Exibe extrado por período", nickname = "extrato")
+	@RequestMapping(value = "/extratoPorPeriodo", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public @ResponseBody ResponseEntity<List<ExtratoBancarioDTO>> consultarExtratoBancario(final @RequestBody ConsultaExtratoDTO param){
+		
+		List<ExtratoBancarioDTO> extrato = extratoBancarioService.obterExtrato(param.getAgencia(), param.getNumConta(),
+				param.getDataIni(), param.getDataFim());
+		
+		return new ResponseEntity<>(extrato, HttpStatus.OK);
 	}
 	
 	
-	@PutMapping(value = "/sacar", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Void> sacar (@RequestBody SaqueDTO dto){
-		contaBancariaService.sacar(dto);
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
-	
-	
-	@PutMapping(value = "/transferencia", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Void> transferir (@RequestBody TransferenciaBancariaDTO dto){
-		contaBancariaService.transferir(dto);
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
 }

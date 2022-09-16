@@ -1,5 +1,7 @@
 package com.indracompany.treinamento.model.dto;
 
-public class GenericDTO {
+import java.io.Serializable;
+
+public class GenericDTO implements Serializable{
 
 }

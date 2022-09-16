@@ -1,13 +1,13 @@
 package com.indracompany.treinamento.model.dto;
 
-import java.io.Serializable;
-
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class TransferenciaBancariaDTO implements Serializable{
+@EqualsAndHashCode(callSuper=false)
+public class TransferenciaBancarioDTO extends GenericDTO{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4320607655918916745L;
 	
 	private String agenciaOrigem;
 	private String numeroContaOrigem;
@@ -15,4 +15,7 @@ public class TransferenciaBancariaDTO implements Serializable{
 	private String numeroContaDestino;
 	private double valor;
 	
+	
+	
+
 }

@@ -1,5 +1,7 @@
 package com.indracompany.treinamento.model.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,33 +10,34 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
-@Table(name = "jeff_contas")
+@Table(name = "jeff_extratos")
 @EqualsAndHashCode(callSuper = true)
-public class ContaBancaria extends GenericEntity<Long> {
+public class ExtratoBancario extends GenericEntity<Long>{
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column
+	private LocalDate data;
+	
 	@ManyToOne
-	@JoinColumn(name = "fk_cliente_id", nullable = false)
-	private Cliente cliente;
+	@JoinColumn(name = "fk_conta_id", nullable = false)
+	private ContaBancaria conta;
 	
-	@Column(name = "agencia", nullable = false, length = 4)
-	private String agencia;
+	@Column
+	private String descricao;
 	
-	@Column(name = "numero", nullable = false, length = 6)
-	private String numero;
+	private double valor;
 	
-	@Column(name = "saldo", nullable = false)
-	private double saldo;
-
-	
+	private char tpOperacao;
 
 }
