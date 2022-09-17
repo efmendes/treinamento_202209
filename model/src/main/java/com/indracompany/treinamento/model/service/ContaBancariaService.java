@@ -1,6 +1,8 @@
 package com.indracompany.treinamento.model.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -15,7 +17,9 @@ import com.indracompany.treinamento.model.dto.DepositoDTO;
 import com.indracompany.treinamento.model.dto.SaqueDTO;
 import com.indracompany.treinamento.model.dto.TransferenciaBancariaDTO;
 import com.indracompany.treinamento.model.entity.ContaBancaria;
+import com.indracompany.treinamento.model.entity.Extrato;
 import com.indracompany.treinamento.model.repository.ContaBancariaRepository;
+import com.indracompany.treinamento.model.repository.ExtratoRepository;
 import com.indracompany.treinamento.util.CpfUtil;
 
 @Service
@@ -26,6 +30,11 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 	
 	@Autowired
 	private ContaBancariaRepository contaBancariaRepository;
+	
+	@Autowired
+	private ExtratoRepository extratoRepository;
+	
+	Date data = new Date();
 	
 	public List<ContaClienteDTO> listarContasDoCliente(String cpf){
 		
@@ -55,6 +64,7 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 	public void depositar(DepositoDTO dto) {
 		ContaBancaria contaBancaria = this.carregarConta(dto.getAgencia(), dto.getNumeroConta());
 		contaBancaria.setSaldo(contaBancaria.getSaldo() + dto.getValor());
+		extratoRepository.adicionarExtrato("entrada", dto.getValor(), data, contaBancaria.getId());
 		super.salvar(contaBancaria);
 	}
 	
@@ -64,17 +74,22 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_SALDO_INEXISTENTE);
 		}
 		contaBancaria.setSaldo(contaBancaria.getSaldo() - dto.getValor());
+		extratoRepository.adicionarExtrato("saida", dto.getValor(), data, contaBancaria.getId());
 		super.salvar(contaBancaria);
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
 	public void transferir(TransferenciaBancariaDTO transferenciaDto) {
 		
+		final Long idContaSaque;
+		
+		final Long idContaDeposito;
+		
 		SaqueDTO saqueDto = new SaqueDTO();
 		saqueDto.setAgencia(transferenciaDto.getAgenciaOrigem());
 		saqueDto.setNumeroConta(transferenciaDto.getNumeroContaOrigem());
 		saqueDto.setValor(transferenciaDto.getValor());
-
+				
 		this.sacar(saqueDto);
 		
 		DepositoDTO depositoDto = new DepositoDTO();

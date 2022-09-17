@@ -30,10 +30,10 @@ public enum ExceptionValidacoes implements AplicacaoExceptionValidacoes {
   ERRO_SALDO_INEXISTENTE("msg.erro.saldo.inexistente", null, AplicacaoExceptionValidacoes.SEVERIDADE_ERRO),
   ERRO_CONTA_DUPLICADA("msg.erro.conta.duplicada", null, AplicacaoExceptionValidacoes.SEVERIDADE_ERRO),
   ERRO_NOME_COM_FORMATACAO_INVALIDA("msg.app.erro.nome.com.formatacao.invalida", null, AplicacaoExceptionValidacoes.SEVERIDADE_ERRO),
-
+  ERRO_ALGUM_CAMPO_COM_FORMATACAO_INVALIDA("msg.app.erro.nome.com.formatacao.invalida", null, AplicacaoExceptionValidacoes.SEVERIDADE_ERRO),
   
 
-  // Mensagens Alterta
+  // Mensagens Alerta
   ALERTA_NENHUM_REGISTRO_ENCONTRADO("msg.app.alerta.nenhum.registro.encontrado", null, AplicacaoExceptionValidacoes.SEVERIDADE_ALERTA),;
   @Getter
   @Setter

@@ -39,7 +39,4 @@ public class Cliente extends GenericEntity<Long>{
 	
 	private String observacoes;
 
-	
-
-	
 }
