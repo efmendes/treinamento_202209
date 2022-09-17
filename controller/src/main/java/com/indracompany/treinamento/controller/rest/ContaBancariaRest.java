@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.indracompany.treinamento.model.dto.ContaClienteDTO;
 import com.indracompany.treinamento.model.dto.DepositoDTO;
+import com.indracompany.treinamento.model.dto.ExtratoDTO;
 import com.indracompany.treinamento.model.dto.SaqueDTO;
 import com.indracompany.treinamento.model.dto.TransferenciaBancariaDTO;
 import com.indracompany.treinamento.model.entity.ContaBancaria;
+import com.indracompany.treinamento.model.entity.OperacaoConta;
 import com.indracompany.treinamento.model.service.ContaBancariaService;
 
 @RestController
@@ -43,6 +46,12 @@ public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, Cont
 		return new ResponseEntity<>(conta.getSaldo(), HttpStatus.OK);
 	}
 	
+	@PostMapping(value = "/extrato", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<List<ExtratoDTO>> extrato (@RequestBody Long contaBancaria, String dataInicio, String dataFim){
+		return new ResponseEntity<>(contaBancariaService.extratoBancario(
+				contaBancaria, dataInicio, dataFim), HttpStatus.OK);
+	}
+	
 	@PutMapping(value = "/deposito", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Void> depositar(@RequestBody DepositoDTO dto){
 		contaBancariaService.depositar(dto);
@@ -62,4 +71,5 @@ public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, Cont
 		contaBancariaService.transferir(dto);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
+	
 }
