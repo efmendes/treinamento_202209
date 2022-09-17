@@ -19,6 +19,8 @@ import com.indracompany.treinamento.model.entity.ContaBancaria;
 import com.indracompany.treinamento.model.repository.ContaBancariaRepository;
 import com.indracompany.treinamento.util.CpfUtil;
 
+import lombok.Data;
+@Data
 @Service
 public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long, ContaBancariaRepository> {
 
@@ -51,6 +53,16 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		}
 
 		return listaRetornoDTO;
+	}
+	
+	public ContaBancaria carregarConta(String agencia, String numero) {
+		ContaBancaria conta = contaBancariaRepository.findByAgenciaAndNumero(agencia, numero);
+
+		if (conta == null) {
+			throw new AplicacaoException(ExceptionValidacoes.ERRO_CONTA_INVALIDA);
+		}
+
+		return conta;
 	}
 
 	public void depositar(DepositoDTO dto) {
@@ -87,13 +99,12 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 
 	}
 
-	public ContaBancaria carregarConta(String agencia, String numero) {
-		ContaBancaria conta = contaBancariaRepository.findByAgenciaAndNumero(agencia, numero);
-
+	public ContaBancaria consultaConta(String agencia, String numeroConta) {
+		ContaBancaria conta = repository.findByAgenciaAndNumero(agencia, numeroConta);
 		if (conta == null) {
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_CONTA_INVALIDA);
 		}
-
 		return conta;
 	}
+	
 }

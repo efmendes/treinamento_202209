@@ -2,6 +2,9 @@ package com.indracompany.treinamento.controller.rest;
 
 import java.util.List;
 
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -32,7 +35,7 @@ public class ClienteRest extends GenericCrudRest<Cliente, Long, ClienteService> 
 	}
 
 	@GetMapping(value = "/buscarPorNome/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<List<ClienteDTO>> buscarClientePorNomes(@PathVariable String nome) {
+	public @ResponseBody ResponseEntity<List<ClienteDTO>> buscarClientePorNome(@PathVariable String nome) {
 		List<ClienteDTO> lista = clienteService.buscarClientePorNome(nome);
 		if (lista == null || lista.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
