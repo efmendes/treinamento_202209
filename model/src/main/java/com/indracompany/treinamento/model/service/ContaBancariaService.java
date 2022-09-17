@@ -3,6 +3,8 @@ package com.indracompany.treinamento.model.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.indracompany.treinamento.model.dto.*;
+import com.indracompany.treinamento.model.repository.ExtratoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,10 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.indracompany.treinamento.exception.AplicacaoException;
 import com.indracompany.treinamento.exception.ExceptionValidacoes;
-import com.indracompany.treinamento.model.dto.ContaClienteDTO;
-import com.indracompany.treinamento.model.dto.DepositoDTO;
-import com.indracompany.treinamento.model.dto.SaqueDTO;
-import com.indracompany.treinamento.model.dto.TransferenciaBancariaDTO;
 import com.indracompany.treinamento.model.entity.ContaBancaria;
 import com.indracompany.treinamento.model.repository.ContaBancariaRepository;
 import com.indracompany.treinamento.util.CpfUtil;
@@ -26,6 +24,12 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 	
 	@Autowired
 	private ContaBancariaRepository contaBancariaRepository;
+
+	@Autowired
+	private ExtratoRepository extratoRepository;
+
+	@Autowired
+	private ExtratoService extratoService;
 	
 	public List<ContaClienteDTO> listarContasDoCliente(String cpf){
 		
@@ -52,21 +56,31 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		return listaRetornoDTO;
 	}
 	
-	public void depositar(DepositoDTO dto) {
+	public void depositar(DepositoDTO dto, boolean transferencia) {
 		ContaBancaria contaBancaria = this.carregarConta(dto.getAgencia(), dto.getNumeroConta());
 		contaBancaria.setSaldo(contaBancaria.getSaldo() + dto.getValor());
+
+		if(!transferencia) {
+			extratoService.gerarExtrato(dto.getAgencia(), dto.getNumeroConta(), "Deposito", dto.getValor());
+		}
+
 		super.salvar(contaBancaria);
 	}
 	
-	public void sacar(SaqueDTO dto) {
+	public void sacar(SaqueDTO dto, boolean transferencia) {
 		ContaBancaria contaBancaria = this.carregarConta(dto.getAgencia(), dto.getNumeroConta());
 		if (contaBancaria.getSaldo() < dto.getValor()) {
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_SALDO_INEXISTENTE);
 		}
 		contaBancaria.setSaldo(contaBancaria.getSaldo() - dto.getValor());
+
+		if(!transferencia) {
+			extratoService.gerarExtrato(dto.getAgencia(), dto.getNumeroConta(), "Saque", dto.getValor());
+		}
+
 		super.salvar(contaBancaria);
 	}
-	
+
 	@Transactional(rollbackFor = Exception.class)
 	public void transferir(TransferenciaBancariaDTO transferenciaDto) {
 		
@@ -75,14 +89,22 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		saqueDto.setNumeroConta(transferenciaDto.getNumeroContaOrigem());
 		saqueDto.setValor(transferenciaDto.getValor());
 
-		this.sacar(saqueDto);
-		
+		this.sacar(saqueDto, true);
+		extratoService.gerarExtrato(transferenciaDto.getAgenciaOrigem(),
+					      transferenciaDto.getNumeroContaOrigem(),
+				          "Transf-Enviada",
+				          transferenciaDto.getValor());
+
 		DepositoDTO depositoDto = new DepositoDTO();
 		depositoDto.setAgencia(transferenciaDto.getAgenciaDestino());
 		depositoDto.setNumeroConta(transferenciaDto.getNumeroContaDestino());
 		depositoDto.setValor(transferenciaDto.getValor());
 		
-		this.depositar(depositoDto);
+		this.depositar(depositoDto, true);
+		extratoService.gerarExtrato(transferenciaDto.getAgenciaDestino(),
+						  transferenciaDto.getNumeroContaDestino(),
+						 "Transf-Recebida",
+						  transferenciaDto.getValor());
 		
 	}
 	
