@@ -16,6 +16,8 @@ import com.indracompany.treinamento.model.dto.ClienteDTO;
 import com.indracompany.treinamento.model.entity.Cliente;
 import com.indracompany.treinamento.model.service.ClienteService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("rest/clientes")
 public class ClienteRest extends GenericCrudRest<Cliente, Long, ClienteService>{
@@ -29,6 +31,7 @@ public class ClienteRest extends GenericCrudRest<Cliente, Long, ClienteService>{
 		return new ResponseEntity<>(cli, HttpStatus.OK);
 	}
 	
+<<<<<<< HEAD
 	@GetMapping(value = "/buscarPorNome/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<List<ClienteDTO>> buscarClientePorNomes(@PathVariable String nome){
 		List<ClienteDTO> lista = clienteService.buscarClientePorNome(nome);
@@ -38,5 +41,13 @@ public class ClienteRest extends GenericCrudRest<Cliente, Long, ClienteService>{
 		return new ResponseEntity<>(lista, HttpStatus.OK);
 	}
 	
+=======
+	@ApiOperation(value = "buscar por nomes", nickname = "buscarClientePorNome", notes = "")
+	@GetMapping(value = "/buscarPorNome/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Cliente> buscarClientePorNome(@PathVariable String nome) {
+		Cliente cli2 = clienteService.buscarClientePorNome(nome);
+		return new ResponseEntity<>(cli2, HttpStatus.OK);
+	}
+>>>>>>> ae70fd9eb121de8d8a5a60927c6634cf0f41d7ec
 
 }
