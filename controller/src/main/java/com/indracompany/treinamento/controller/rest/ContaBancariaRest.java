@@ -21,7 +21,7 @@ import com.indracompany.treinamento.model.dto.TransferenciaBancariaDTO;
 import com.indracompany.treinamento.model.entity.ContaBancaria;
 import com.indracompany.treinamento.model.service.ContaBancariaService;
 
-@RestController
+@RestController 
 @RequestMapping("rest/contas")
 public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, ContaBancariaService>{
 	
