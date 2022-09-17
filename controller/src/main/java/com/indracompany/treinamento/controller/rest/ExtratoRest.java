@@ -24,7 +24,6 @@ public class ExtratoRest extends GenericCrudRest<Extrato, Long, ExtratoService>{
     public ResponseEntity<List<ExtratoDTO>> findAllByCpf(@PathVariable String cpf){
 
         List<ExtratoDTO> extratoList = extratoService.findAllByCpf(cpf);
-
         if(extratoList.isEmpty()){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
@@ -36,14 +35,25 @@ public class ExtratoRest extends GenericCrudRest<Extrato, Long, ExtratoService>{
     public ResponseEntity<List<ExtratoDTO>> findAllByDate(@PathVariable String cpf,
                                                           @PathVariable String date){
 
-        return ResponseEntity.ok().body(extratoService.findByData(cpf, date));
+        List<ExtratoDTO> extratoList = extratoService.findByData(cpf, date);
+        if(extratoList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+
+        return ResponseEntity.ok().body(extratoList);
     }
 
     @GetMapping("/{cpf}/{dateIni}/{dateFim}")
     public ResponseEntity<List<ExtratoDTO>> findAllByIntervalo(@PathVariable String cpf,
                                                                @PathVariable String dateIni,
                                                                @PathVariable String dateFim){
-        return ResponseEntity.ok().body(extratoService.findByIntervalo(cpf, dateIni, dateFim));
+
+        List<ExtratoDTO> extratoList = extratoService.findByIntervalo(cpf, dateIni, dateFim);
+        if(extratoList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+
+        return ResponseEntity.ok().body(extratoList);
     }
 
 }
