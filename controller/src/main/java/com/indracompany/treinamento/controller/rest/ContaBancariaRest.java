@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.indracompany.treinamento.model.dto.ConsultaExtratoDTO;
 import com.indracompany.treinamento.model.dto.ContaClienteDTO;
 import com.indracompany.treinamento.model.dto.DepositoDTO;
+import com.indracompany.treinamento.model.dto.ExtratoBancDTO;
 import com.indracompany.treinamento.model.dto.SaqueDTO;
 import com.indracompany.treinamento.model.dto.TransferenciaBancariaDTO;
 import com.indracompany.treinamento.model.entity.ContaBancaria;
 import com.indracompany.treinamento.model.service.ContaBancariaService;
+import com.indracompany.treinamento.model.service.ExtratoBancService;
 
 @RestController
 @RequestMapping("rest/contas")
@@ -35,6 +38,16 @@ public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, Cont
 			return new ResponseEntity<>( HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<>(lista, HttpStatus.OK);
+	}
+	
+	@Autowired
+	private ExtratoBancService extratoBancService;
+	
+	@GetMapping(value = "/extrato", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<List<ExtratoBancDTO>> consultarExtratoBancario(@PathVariable ConsultaExtratoDTO param){
+
+		List<ExtratoBancDTO> extrato = extratoBancService.pegaExtrato(param.getAgencia(), param.getNumeroConta(), param.getDataInicio(), param.getDataFim());
+		return new ResponseEntity<>(extrato, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/consultarSaldo/{agencia}/{numeroConta}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -62,4 +75,5 @@ public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, Cont
 		contaBancariaService.transferir(dto);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
+	
 }

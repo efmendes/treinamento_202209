@@ -10,5 +10,6 @@ public class DepositoDTO implements Serializable{
 	private String agencia;
 	private String numeroConta;
 	private double valor;
+	private String descricao;
 	
 }

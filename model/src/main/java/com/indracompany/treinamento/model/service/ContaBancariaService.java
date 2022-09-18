@@ -1,5 +1,6 @@
 package com.indracompany.treinamento.model.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private ExtratoBancService extratoBancService;
 	
 	@Autowired
 	private ContaBancariaRepository contaBancariaRepository;
@@ -56,6 +60,9 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		ContaBancaria contaBancaria = this.carregarConta(dto.getAgencia(), dto.getNumeroConta());
 		contaBancaria.setSaldo(contaBancaria.getSaldo() + dto.getValor());
 		super.salvar(contaBancaria);
+		
+		extratoBancService.registraExtrato(contaBancaria, dto.getDescricao() == null ? "DEPOSITO" : dto.getDescricao(), dto.getValor(), "DEPOSITO",
+				LocalDate.now());
 	}
 	
 	public void sacar(SaqueDTO dto) {
@@ -65,6 +72,9 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		}
 		contaBancaria.setSaldo(contaBancaria.getSaldo() - dto.getValor());
 		super.salvar(contaBancaria);
+		
+		extratoBancService.registraExtrato(contaBancaria, dto.getDescricao() == null ? "SAQUE" : dto.getDescricao(), dto.getValor(), "SAQUE",
+				LocalDate.now());
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
@@ -74,6 +84,8 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		saqueDto.setAgencia(transferenciaDto.getAgenciaOrigem());
 		saqueDto.setNumeroConta(transferenciaDto.getNumeroContaOrigem());
 		saqueDto.setValor(transferenciaDto.getValor());
+		
+		String descricaoSaque = "TRANSFERIDO PARA AGENCIA: "+transferenciaDto.getAgenciaDestino() +" CONTA: "+transferenciaDto.getNumeroContaDestino();
 
 		this.sacar(saqueDto);
 		
@@ -81,6 +93,8 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		depositoDto.setAgencia(transferenciaDto.getAgenciaDestino());
 		depositoDto.setNumeroConta(transferenciaDto.getNumeroContaDestino());
 		depositoDto.setValor(transferenciaDto.getValor());
+		
+		String descricaoDeposito = "TRANSFERIDO DE AG: "+transferenciaDto.getAgenciaOrigem() +" CONTA: "+transferenciaDto.getNumeroContaOrigem();;
 		
 		this.depositar(depositoDto);
 		

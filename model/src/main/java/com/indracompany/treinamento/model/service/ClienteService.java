@@ -38,7 +38,7 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		return dto;
 		
 	}
-	
+	  
 	public List<ClienteDTO> buscarClientePorNome(String nome) {
 		if (StringUtils.isBlank(nome) 
 				|| StringUtils.isNumeric(nome)) {
