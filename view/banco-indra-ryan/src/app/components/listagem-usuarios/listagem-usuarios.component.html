@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col ">
+      <table class="table table-dark table-hover">
+        <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">First</th>
+          <th scope="col">CPF</th>
+          <th scope="col">e-mail</th>
+          <th scope="col">Observações</th>
+          <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let cliente of clientes">
+          <th scope="row">{{cliente.id}}</th>
+          <td>{{cliente.nome}}</td>
+          <td>{{cliente.cpf}}</td>
+          <td>{{cliente.email}}</td>
+          <td>{{cliente.observacoes}}</td>
+          <td><app-button text="Fazer Operação" classColor="btn-success"></app-button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col ">
+      <table class="table table-dark table-hover">
+        <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nome do User</th>
+          <th scope="col">Agência</th>
+          <th scope="col">Nº da conta</th>
+          <th scope="col">Saldo</th>
+          <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let contas of contas">
+          <th scope="row">{{contas.id}}</th>
+          <td>{{contas.cliente?.nome}}</td>
+          <td>{{contas.agencia}}</td>
+          <td>{{contas.numero}}</td>
+          <td>{{contas.saldo}}</td>
+          <td><app-button text="excluir" classColor="btn-danger"></app-button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
