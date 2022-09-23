@@ -1,5 +1,9 @@
 package com.indracompany.treinamento.model.service;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 820948f (Extratos Bancarios - Treinamento Indra)
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.indracompany.treinamento.exception.AplicacaoException;
 import com.indracompany.treinamento.exception.ExceptionValidacoes;
 import com.indracompany.treinamento.model.dto.ClienteDTO;
@@ -19,6 +22,10 @@ import com.indracompany.treinamento.util.CpfUtil;
 public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRepository>{
 
 	@Autowired
+<<<<<<< HEAD
+=======
+
+>>>>>>> 820948f (Extratos Bancarios - Treinamento Indra)
 	private ClienteRepository clienteRepository;
 	
 	public ClienteDTO buscarClientePorCpf(String cpf) {
@@ -29,7 +36,7 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		}
 		Cliente cli = clienteRepository.findByCpf(cpf);
 		if (cli == null) {
-			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, cpf);
+			throw new AplicacaoException(ExceptionValidacoes.ERRO_NENHUM_REGISTRO_ENCONTRADO, cpf);
 		}
 		
 		ClienteDTO dto = new ClienteDTO();
@@ -56,3 +63,7 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		return listaRetornoDto;
 	}
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 820948f (Extratos Bancarios - Treinamento Indra)

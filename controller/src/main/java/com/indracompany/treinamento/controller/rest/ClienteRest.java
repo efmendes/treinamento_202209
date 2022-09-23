@@ -24,9 +24,17 @@ public class ClienteRest extends GenericCrudRest<Cliente, Long, ClienteService>{
 	private ClienteService clienteService;
 	
 	@GetMapping(value = "/buscarPorCpf/{cpf}", produces = MediaType.APPLICATION_JSON_VALUE)
+<<<<<<< HEAD
 	public @ResponseBody ResponseEntity<ClienteDTO> buscarClientePorCpf(@PathVariable String cpf) {
 		ClienteDTO cli = clienteService.buscarClientePorCpf(cpf);
 		return new ResponseEntity<>(cli, HttpStatus.OK);
+=======
+
+	public @ResponseBody ResponseEntity<ClienteDTO> buscarClientePorCpf(@PathVariable String cpf) {
+		ClienteDTO cli = clienteService.buscarClientePorCpf(cpf);
+		return new ResponseEntity<>(cli, HttpStatus.OK);
+
+>>>>>>> 820948f (Extratos Bancarios - Treinamento Indra)
 	}
 	
 	@GetMapping(value = "/buscarPorNome/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)

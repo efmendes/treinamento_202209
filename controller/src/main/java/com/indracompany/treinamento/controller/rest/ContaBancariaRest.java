@@ -37,7 +37,7 @@ public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, Cont
 		return new ResponseEntity<>(lista, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/consultarSaldo/{agencia}/{numeroConta}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/consultarSaldo/{agencia}/{numero}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Double> consultarSaldo (@PathVariable String agencia, @PathVariable String numeroConta){
 		ContaBancaria conta = contaBancariaService.carregarConta(agencia, numeroConta);
 		return new ResponseEntity<>(conta.getSaldo(), HttpStatus.OK);

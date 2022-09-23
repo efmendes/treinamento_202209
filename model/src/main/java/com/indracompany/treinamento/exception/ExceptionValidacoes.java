@@ -6,12 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- *
- * @author efmendes
- *
- */
-
 @AllArgsConstructor
 public enum ExceptionValidacoes implements AplicacaoExceptionValidacoes {
 
@@ -29,16 +23,17 @@ public enum ExceptionValidacoes implements AplicacaoExceptionValidacoes {
   ERRO_CONTA_INVALIDA("msg.erro.conta.invalida", null, AplicacaoExceptionValidacoes.SEVERIDADE_ERRO),
   ERRO_SALDO_INEXISTENTE("msg.erro.saldo.inexistente", null, AplicacaoExceptionValidacoes.SEVERIDADE_ERRO),
   ERRO_CONTA_DUPLICADA("msg.erro.conta.duplicada", null, AplicacaoExceptionValidacoes.SEVERIDADE_ERRO),
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
   
 >>>>>>> Stashed changes
+=======
+  ERRO_NENHUM_REGISTRO_ENCONTRADO("msg.erro.nenhum.registro.encontrado", null, AplicacaoExceptionValidacoes.SEVERIDADE_ALERTA),
+  ERRO_DATA_INVALIDA("msg.erro.data.invalida", null, AplicacaoExceptionValidacoes.SEVERIDADE_ALERTA),
+  ERRO_INTERVALO_DATA_INVALIDA("msg.erro.intervalo.data.invalida", null, AplicacaoExceptionValidacoes.SEVERIDADE_ALERTA);
+>>>>>>> 820948f (Extratos Bancarios - Treinamento Indra)
   
-  
-
-  // Mensagens Alterta
-  ALERTA_NENHUM_REGISTRO_ENCONTRADO("msg.app.alerta.nenhum.registro.encontrado", null, AplicacaoExceptionValidacoes.SEVERIDADE_ALERTA),;
-
   @Getter
   @Setter
   private String codigoMsg;

@@ -37,7 +37,7 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		List<ContaBancaria> contasBancarias = contaBancariaRepository.findByClienteCpf(cpf);
 		
 		if (contasBancarias== null || contasBancarias.isEmpty()) {
-			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO);
+			throw new AplicacaoException(ExceptionValidacoes.ERRO_NENHUM_REGISTRO_ENCONTRADO);
 		}
 		
 		List<ContaClienteDTO> listaRetornoDTO = new ArrayList<>();

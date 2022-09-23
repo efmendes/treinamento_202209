@@ -12,6 +12,10 @@ public interface ClienteRepository extends GenericCrudRepository<Cliente, Long>{
 	
 	public Cliente findByCpf(String cpf);
 	
+<<<<<<< HEAD
+=======
+
+>>>>>>> 820948f (Extratos Bancarios - Treinamento Indra)
 	public List<Cliente> findByNomeContainingIgnoreCaseAndAtivoTrue(String nome);
 	
 	@Query("select c from Cliente c where upper(c.nome) like upper(:name) and ativo=true ")
@@ -21,6 +25,10 @@ public interface ClienteRepository extends GenericCrudRepository<Cliente, Long>{
 	@Query(value = "select * from clientes " + 
 			"where (upper(nome) like upper(:nome) ) and ativo=1",nativeQuery = true)
 	public List<Cliente> findByNomeSqlNative(@Param("nome")String nome);
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 820948f (Extratos Bancarios - Treinamento Indra)
 
 }
