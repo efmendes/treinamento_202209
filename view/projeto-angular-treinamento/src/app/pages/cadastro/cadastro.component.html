@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-header" [align]="'center'">
+    Login
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" class="form">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="username" placeholder="Username" formControlName="username">
+        <label for="floatingInput">Username</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="pasword" placeholder="Password" formControlName="password">
+        <label for="floatingPassword">Password</label>
+      </div>
+    </form>
+
+    <div class="button-form" [align]="'center'">
+      <button type="button" class="btn btn-primary"
+    (click)="onCadastro()">Cadastrar</button>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Minsait</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="" routerLinkActive="active">Início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/clientes" routerLinkActive="active">Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contas</a>
+        </li>
+        <div *ngIf="!isPresent(); else userLoggedIn">
+          <li class="nav-item" routerLink="/login" routerLinkActive="active">
+            <a class="btn btn-sm btn-primary mb-3">Login</a>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>
+<ng-template #userLoggedIn>
+  Bem vindo(a) {{user}}
+</ng-template>

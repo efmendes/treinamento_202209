@@ -1,0 +1,16 @@
+.card{
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form-floating{
+  margin: 2px;
+
+}
+.form-control{
+  width: 600px;
+
+}
+.button-form{
+  margin: 20px;
+}

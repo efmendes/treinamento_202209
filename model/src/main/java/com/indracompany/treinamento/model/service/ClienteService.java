@@ -54,5 +54,19 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 
 		return listaRetornoDto;
 	}
+
+	public ClienteDTO adicionarCliente(Cliente cliente){
+		boolean cpf = CpfUtil.validaCPF(cliente.getCpf());
+		if(!cpf){
+			throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_INVALIDO, cliente.getCpf());
+		}
+
+		clienteRepository.save(cliente);
+		ClienteDTO clienteDTO = new ClienteDTO();
+		clienteDTO.setNome(cliente.getNome());
+		clienteDTO.setObservacoes(cliente.getObservacoes());
+		clienteDTO.setCpfMascarado(cliente.getCpf());
+		return clienteDTO;
+	}
 	  
 }

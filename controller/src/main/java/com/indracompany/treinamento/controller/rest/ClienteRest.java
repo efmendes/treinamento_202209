@@ -5,11 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.indracompany.treinamento.model.entity.Cliente;
 import com.indracompany.treinamento.model.service.ClienteService;
@@ -36,6 +32,12 @@ public class ClienteRest extends GenericCrudRest<Cliente, Long, ClienteService>{
 			return new ResponseEntity<>( HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<>(lista, HttpStatus.OK);
+	}
+
+	@PostMapping
+	public ResponseEntity<ClienteDTO> adicionarCliente(@RequestBody Cliente cliente){
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.adicionarCliente(cliente));
 	}
 	
 

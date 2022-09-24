@@ -1,0 +1,20 @@
+.button-form{
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+
+}
+.form-floating{
+  min-width: 100%;
+  margin: 2px;
+}
+
+.modal-header{
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+
+}
