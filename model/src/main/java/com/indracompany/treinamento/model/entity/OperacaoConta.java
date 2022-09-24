@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.indracompany.treinamento.model.entity.enums.TipoTransacao;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -26,9 +28,8 @@ public class OperacaoConta extends GenericEntity<Long>{
 	
 	private LocalDateTime dataHora;
 	
-	//'D' para Depósito, e 'S' para Saque, 'T' para Transferência
-	@Column(length = 1)
-	private char tpOperacao;
+	@Column
+	private TipoTransacao tpOperacao;
 	
 	private double valor;
 	

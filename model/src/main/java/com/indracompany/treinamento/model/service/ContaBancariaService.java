@@ -63,7 +63,7 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		ContaBancaria contaBancaria = this.carregarConta(dto.getAgencia(), dto.getNumeroConta());
 		contaBancaria.setSaldo(contaBancaria.getSaldo() + dto.getValor());
 		super.salvar(contaBancaria);
-		operacaoContaService.salvarOperacao(contaBancaria, dto.getValor(), "D");
+		operacaoContaService.salvarOperacao(contaBancaria, dto.getValor(), 1);
 	}
 	
 	public void sacar(SaqueDTO dto) {
@@ -73,7 +73,7 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		}
 		contaBancaria.setSaldo(contaBancaria.getSaldo() - dto.getValor());
 		super.salvar(contaBancaria);
-		operacaoContaService.salvarOperacao(contaBancaria, dto.getValor(), "S");
+		operacaoContaService.salvarOperacao(contaBancaria, dto.getValor(), 2);
 
 	}
 	
