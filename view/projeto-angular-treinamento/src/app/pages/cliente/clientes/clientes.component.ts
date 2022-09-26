@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ICliente } from 'src/app/interfaces/cliente';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { Location } from '@angular/common';
@@ -7,7 +7,8 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
-  styleUrls: ['./clientes.component.css']
+  styleUrls: ['./clientes.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ClientesComponent implements OnInit {
   clientes: ICliente[] = [];
@@ -30,13 +31,5 @@ export class ClientesComponent implements OnInit {
     this.clienteService.removerCliente(id).subscribe();
   }
 
-  cadastro: boolean = false;
-
-  onCadastro(){
-    this.cadastro = !this.cadastro;
-  }
-  closed(isClosed: boolean){
-    this.cadastro = isClosed;
-  }
 
 }

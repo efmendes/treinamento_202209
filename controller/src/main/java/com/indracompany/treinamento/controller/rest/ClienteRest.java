@@ -39,6 +39,11 @@ public class ClienteRest extends GenericCrudRest<Cliente, Long, ClienteService>{
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.adicionarCliente(cliente));
 	}
-	
+
+	@DeleteMapping("/del/{id}")
+	public ResponseEntity deletar(@PathVariable Long id){
+		clienteService.deletarCLiente(id);
+		return ResponseEntity.ok().build();
+	}
 
 }

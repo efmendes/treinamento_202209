@@ -3,7 +3,7 @@
     Login
   </div>
   <div class="card-body">
-    <form [formGroup]="form" class="form">
+    <form [formGroup]="form" class="form" (ngSubmit)="onLogin()">
       <div class="form-floating">
         <input type="text" class="form-control" id="username" placeholder="Username" formControlName="username">
         <label for="floatingInput">Username</label>
@@ -12,12 +12,12 @@
         <input type="password" class="form-control" id="pasword" placeholder="Password" formControlName="password">
         <label for="floatingPassword">Password</label>
       </div>
+      <div class="button-form" [align]="'center'">
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Login</button>
+      <p>
+        <a routerLink="cadastrar">Não tem login? Cadastre-se!</a>
+      </p>
+      </div>
     </form>
-
-    <div class="button-form" [align]="'center'">
-      <button type="button" class="btn btn-primary"
-    (click)="onCadastro()">Cadastrar</button>
-    </div>
   </div>
 </div>
-

@@ -1,6 +1,7 @@
-import { NonNullableFormBuilder } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -10,22 +11,22 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: NonNullableFormBuilder,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private location: Location) { }
 
   ngOnInit(): void {
   }
 
   form = this.formBuilder.group({
-    username: [''],
-    password: ['']
+    username: ['', Validators.required],
+    password: ['', Validators.required]
   });
   user = this.form.value.username;
   pass = this.form.value.password;
   onLogin(){
-    this.loginService.authenticate(this.form.value).subscribe(
-      ()=> this.loginService.setData(this.user, this.pass)
-      );
-
+    this.loginService.authenticate(this.form.value).subscribe();
+    this.loginService.setData(this.form.value);
+    this.location.back();
   }
 
 }

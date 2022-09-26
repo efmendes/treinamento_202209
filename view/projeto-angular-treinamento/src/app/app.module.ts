@@ -1,17 +1,19 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ClientesComponent } from './pages/clientes/clientes.component';
-import { HomeComponent } from './pages/home/home.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
-import { FormClientComponent } from './components/form-client/form-client.component';
-import { LoginComponent } from './pages/login/login.component';
-import { CadastroComponent } from './pages/cadastro/cadastro.component';
-import { FormUpdateClientComponent } from './components/form-update-client/form-update-client.component';
+import { ClientesComponent } from './pages/cliente/clientes/clientes.component';
+import { FormClientComponent } from './pages/cliente/form-client/form-client.component';
+import { ContasComponent } from './pages/conta/contas/contas.component';
+import { HomeComponent } from './pages/home/home.component';
+import { CadastroComponent } from './pages/login/cadastro/cadastro.component';
+import { LoginComponent } from './pages/login/logins/login.component';
+import { FormContaComponent } from './pages/conta/form-conta/form-conta.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { FormUpdateClientComponent } from './components/form-update-client/form-
     FormClientComponent,
     LoginComponent,
     CadastroComponent,
-    FormUpdateClientComponent
+    ContasComponent,
+    FormContaComponent
   ],
   imports: [
     BrowserModule,

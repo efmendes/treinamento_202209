@@ -10,31 +10,36 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  endpoint = '/login/';
+  endpoint = 'login';
   api = environment.api;
 
-  username: string | undefined = '';
-  password: string | undefined= '';
-  authorizationData = 'Basic ' + btoa(this.username + ':' + this.password);
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': this.authorizationData
-    })
+  public username: string | undefined = '';
+  public password: string | undefined= '';
+  public authorizationData = '';
+  public httpOptions = {
+    headers: new HttpHeaders()
   };
 
-  setData(user: string | undefined, pass: string | undefined){
+  setData(login: Partial<Login>){
 
-    this.username = user;
-    this.password = pass;
+    this.username = login.username;
+    this.password = login.password;
+
+    this.authorizationData = 'Basic ' + btoa(this.username + ':' + this.password);
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': this.authorizationData
+      })
+    };
 
   }
 
   authenticate(login: Partial<Login>){
-    return this.http.post<Login>(`${this.api}${this.endpoint}authenticate`, login);
+    return this.http.post<Login>(`${this.api}/${this.endpoint}/authenticate`, login);
   }
 
   cadastro(login: Partial<Login>){
-    return this.http.post<Login>(`${this.api}${this.endpoint}`, login);
+    return this.http.post<Login>(`${this.api}/${this.endpoint}`, login);
   }
 }

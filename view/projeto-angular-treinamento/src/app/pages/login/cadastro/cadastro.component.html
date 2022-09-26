@@ -1,9 +1,9 @@
 <div class="card">
   <div class="card-header" [align]="'center'">
-    Login
+    Cadastrar
   </div>
   <div class="card-body">
-    <form [formGroup]="form" class="form">
+    <form [formGroup]="form" class="form" (ngSubmit)="onCadastro()">
       <div class="form-floating">
         <input type="text" class="form-control" id="username" placeholder="Username" formControlName="username">
         <label for="floatingInput">Username</label>
@@ -12,14 +12,9 @@
         <input type="password" class="form-control" id="pasword" placeholder="Password" formControlName="password">
         <label for="floatingPassword">Password</label>
       </div>
+      <div class="button-form" [align]="'center'">
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+      </div>
     </form>
-
-    <div class="button-form" [align]="'center'">
-      <button type="button" class="btn btn-primary"
-    (click)="onLogin()">Login</button>
-    <p>
-      <a routerLink="/cadastro">Não tem login? Cadastre-se!</a>
-    </p>
-    </div>
   </div>
 </div>
