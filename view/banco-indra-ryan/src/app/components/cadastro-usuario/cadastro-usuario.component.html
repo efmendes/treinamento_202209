@@ -1,5 +1,5 @@
 <div class="card" style="width: 22rem; display: flex; flex-direction: row; justify-content: center; padding: 10px; margin: 2rem 28rem">
-  <form [formGroup]="formCadastro" (ngSubmit)="cadastrarCliente()">
+  <form [formGroup]="formGroup" (ngSubmit)="cadastrarCliente()">
     <div class="mb-3">
       <label for="Inputnome" class="form-label">Nome</label>
       <input type="text" class="form-control" id="Inputnome" formControlName="nome">
@@ -20,8 +20,8 @@
     </div>
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Observações</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="observacoes" rows="3"></textarea>
     </div>
-    <button type="submit"   class="btn btn-primary" style="margin: 5px 0 5px 0">Submit</button>
+    <button type="submit"   class="btn btn-primary" [disabled]="formGroup.invalid" style="margin: 5px 0 5px 0">Submit</button>
   </form>
 </div>

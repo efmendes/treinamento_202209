@@ -1,18 +1,18 @@
 package com.indracompany.treinamento.model.entity;
 
 
-import com.indracompany.treinamento.model.dto.ContaClienteDTO;
+
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name="extratos_ryan")
 @Data
 public class ExtratoBancario extends GenericEntity<Long>{
-
+    private static final long serialVersionUID = 2955934673205574114L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;

@@ -56,4 +56,5 @@ public class AppConfig {
   public PersistenceAnnotationBeanPostProcessor persistenceAnnotationBean() {
     return new PersistenceAnnotationBeanPostProcessor();
   }
+
 }

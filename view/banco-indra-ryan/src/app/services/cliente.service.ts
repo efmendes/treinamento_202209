@@ -4,14 +4,18 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ICliente} from "../interfaces/cliente";
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
   private api: string = `${environment.url}/clientes/`;
-  constructor(private httpCLiente: HttpClient) { }
+  constructor(private httpCliente: HttpClient) { }
 
   BuscarTodosClientes():Observable<ICliente[]>{
-    return this.httpCLiente.get<ICliente[]>(this.api);
+    return this.httpCliente.get<ICliente[]>(this.api);
+  }
+  CadastrarUmCLiente(cliente: ICliente): Observable<ICliente>{
+    return this.httpCliente.post<ICliente>(this.api,cliente)
   }
 }

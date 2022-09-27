@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.indracompany.treinamento.model.dto.*;
 import com.indracompany.treinamento.model.entity.ExtratoBancario;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.indracompany.treinamento.exception.AplicacaoException;
 import com.indracompany.treinamento.exception.ExceptionValidacoes;
-import com.indracompany.treinamento.model.dto.ContaClienteDTO;
-import com.indracompany.treinamento.model.dto.DepositoDTO;
-import com.indracompany.treinamento.model.dto.SaqueDTO;
-import com.indracompany.treinamento.model.dto.TransferenciaBancariaDTO;
 import com.indracompany.treinamento.model.entity.ContaBancaria;
 import com.indracompany.treinamento.model.repository.ContaBancariaRepository;
 import com.indracompany.treinamento.util.CpfUtil;
@@ -103,9 +100,7 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		depositoDto.setAgencia(transferenciaDto.getAgenciaDestino());
 		depositoDto.setNumeroConta(transferenciaDto.getNumeroContaDestino());
 		depositoDto.setValor(transferenciaDto.getValor());
-		
 		this.depositar(depositoDto);
-
 		
 	}
 	

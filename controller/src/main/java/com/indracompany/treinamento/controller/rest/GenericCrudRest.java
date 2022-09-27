@@ -173,7 +173,7 @@ public abstract class GenericCrudRest<T extends GenericEntity<I>, I, S extends G
           .debug("Chamada do controller: " + this.getClass().getName() + ".salvar( " + entity.getClass().getName() + " ) realizada com sucesso.");
     }
 
-    return new ResponseEntity<>(newEntity, HttpStatus.OK);
+    return new ResponseEntity<>(newEntity,HttpStatus.OK);
   }
 
 
