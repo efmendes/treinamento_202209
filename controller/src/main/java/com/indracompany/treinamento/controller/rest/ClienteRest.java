@@ -1,6 +1,6 @@
 package com.indracompany.treinamento.controller.rest;
 
-import java.util.List;
+import java.util.List; 
 
 
 import org.springframework.beans.factory.annotation.Autowired; 

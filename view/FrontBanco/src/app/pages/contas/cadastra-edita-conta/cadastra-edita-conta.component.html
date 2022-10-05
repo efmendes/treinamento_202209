@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="display-6">
+        <i class="fas fa-stream"></i>
+        {{ formConta.get('id')?.value ? 'Edição': 'Cadastro' }} de Conta
+      </h1>
+      <hr />
+      <form [formGroup]="formConta" (ngSubmit)="enviar()">
+          <div class="row">
+              <div class="col">
+                  <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInput1"
+                        placeholder="111111"
+                        formControlName="agencia"
+                        
+                        >
+                      <label for="floatingInput">Agência</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInput0"
+                        placeholder="11122233344"
+                        formControlName="numero"
+                        
+                        >
+                      <label for="floatingInput">Número da conta</label>
+                    </div>
+              </div>
+              <div class="col">
+                  <div class="form-floating mb-3">
+                      <input
+                        type="saldo"
+                        class="form-control"
+                        id="floatingInput2"
+                        placeholder="Saldo"
+                        formControlName="saldo">
+                      <label for="floatingInput">Saldo</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <textarea
+                        class="form-control"
+                        placeholder="ID do cliente"
+                        id="floatingTextarea"
+                        formControlName="idCliente"></textarea>
+                      <label for="floatingTextarea">ID do cliente</label>
+                    </div>
+              </div>
+          </div>
+      
+        <a
+          style="margin-right: 15px; float: right; margin-right: 3px;"
+          routerLink="/contas"
+          class="btn btn-dark">Voltar</a>
+        <button
+          [disabled]="!formConta.valid"
+          type="submit"
+          class="btn btn-dark"
+          style="float:right; margin-right: 3px;">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>

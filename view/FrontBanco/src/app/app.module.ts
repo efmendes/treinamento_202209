@@ -6,21 +6,40 @@ import { AppComponent } from './app.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
+import { ContasComponent } from './pages/contas/contas.component';
+import { CadastraEditaClienteComponent } from './pages/clientes/cadastra-edita-cliente/cadastra-edita-cliente.component';
+import { CadastraEditaContaComponent } from './pages/contas/cadastra-edita-conta/cadastra-edita-conta.component';
+import { CaixaEletronicoComponent } from './pages/caixa/caixa-eletronico/caixa-eletronico.component';
+import { FormOperacaoComponent } from './pages/caixa/form-operacao/form-operacao.component';
+import { ExtratoComponent } from './pages/extrato/extrato.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClientesComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    ContasComponent,
+    CadastraEditaClienteComponent,
+    CadastraEditaContaComponent,
+    CaixaEletronicoComponent,
+    FormOperacaoComponent,
+    ExtratoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

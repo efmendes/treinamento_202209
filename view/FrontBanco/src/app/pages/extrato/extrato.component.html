@@ -1,0 +1,96 @@
+<div class="mat-dialog-content">
+    <div>
+      <h1>
+        <i class="fas fa-file-invoice-dollar fa-lg"></i>
+        Busca de extrato: {{ nome }}
+      </h1>
+    </div>
+    <form [formGroup]="formExtrato" (ngSubmit)="buscarExtrato()">
+      <div class="row">
+        <div class="col">
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control mt-3"
+              id="floatingInput1"
+              placeholder="001"
+              formControlName="agencia"
+              value="{{ agencia }}"
+            />
+            <label for="floatingInput">Agência</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating">
+            <input
+              style="max-width: 300px"
+              type="text"
+              class="form-control mt-3"
+              id="floatingInput0"
+              placeholder="111111"
+              formControlName="numeroConta"
+              value="{{ numeroConta }}"
+            />
+            <label for="floatingInput">Número da conta</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-floating">
+            <input
+              style="max-width: 300px"
+              type="date"
+              class="form-control mt-3"
+              id="floatingInput5"
+              placeholder="111111"
+              formControlName="dataInicio"
+            />
+            <label for="floatingInput">Data Início</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating">
+            <input
+              style="max-width: 300px"
+              type="date"
+              class="form-control mt-3"
+              id="floatingInput6"
+              placeholder="111111"
+              formControlName="dataFim"
+            />
+            <label for="floatingInput">Data Final</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col">
+          <button type="submit" class="btn btn-primary mt-3">
+            Buscar Extrato
+          </button>
+        </div>
+      </div>
+    </form>
+    <table *ngIf="showTable" class="table table-hover mt-3">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">Data e Hora</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Valor</th>
+          <th scope="col">Observação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let op of operacoes"
+        >
+          <td>{{ op.dataHora }}</td>
+          <td>{{ op.tpOperacao }}</td>
+          <td>{{ op.valor | currency: "BRL" }}</td>
+          <td>{{ op.observacao }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

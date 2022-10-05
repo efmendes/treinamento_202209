@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <h1 class="display-6">
+          <i class="fas fa-money-check-alt"></i>
+          Caixa Eletrônico
+        </h1>
+        <hr />
+        <div style="padding-bottom: 50px;" class="row justify-content-md-center">
+          <div class="col-md-auto">
+            <input
+              type="radio"
+              class="btn-check"
+              name="options"
+              id="option1"
+              autocomplete="off"
+              [(ngModel)]="operacao"
+              [value]="deposito"
+              (click)="alterarOperacao(true)"
+            />
+            <label class="btn btn-dark btn-lg btn-block" for="option1"
+              >Depósito</label
+            >
+          </div>
+          <div class="col-md-auto">
+            <input
+              type="radio"
+              class="btn-check"
+              name="options"
+              id="option2"
+              autocomplete="off"
+              [(ngModel)]="operacao"
+              [value]="saque"
+              (click)="alterarOperacao(true)"
+            />
+            <label class="btn btn-dark btn-lg" for="option2">Saque</label>
+          </div>
+          <div class="col-md-auto">
+            <input
+              type="radio"
+              class="btn-check"
+              name="options"
+              id="option3"
+              autocomplete="off"
+              [(ngModel)]="operacao"
+              [value]="transferencia"
+              (click)="alterarOperacao(false)"
+            />
+            <label class="btn btn-dark btn-lg" for="option3">Transferência</label>
+          </div>
+        </div>
+        <app-form-operacao [tipo]="operacao" [trocaOperacao]="trocaOperacao"></app-form-operacao>
+      </div>
+    </div>
+  </div>
+  Footer
+  

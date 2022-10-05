@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -50,6 +51,12 @@ public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, Cont
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
+	@DeleteMapping(value = "/deletar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Void> sacar (@PathVariable Long id){
+		contaBancariaService.deleteContaById(id);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
 	
 	@PutMapping(value = "/sacar", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Void> sacar (@RequestBody SaqueDTO dto){
@@ -64,7 +71,7 @@ public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, Cont
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/extratoData/{inicio}/{fim}/{agencia}/{numeroConta}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/extrato-data/{inicio}/{fim}/{agencia}/{numeroConta}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<List<ExtratoContaDTO>> extratoContaPorData(@PathVariable String inicio, @PathVariable String fim, @PathVariable String agencia, @PathVariable String numeroConta) {
 
 		List<ExtratoContaDTO> extratos = contaBancariaService.getExtratoPorDataHora(agencia, numeroConta, inicio, fim);

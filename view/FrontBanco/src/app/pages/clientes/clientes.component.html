@@ -3,7 +3,7 @@
     <h2 class="pb-2 border-bottom">Clientes</h2>
   </div>
   <div class="col-12">
-    <a class="btn btn-sm btn-dark mb-3">Cadastrar</a>
+    <a class="btn btn-sm btn-dark mb-3" routerLink="cadastrar" routerLinkActive="active">Cadastrar</a>
     <table class="table table-striped table-sm">
       <thead>
         <tr>
@@ -11,6 +11,7 @@
           <th scope="col">Nome</th>
           <th scope="col">E-mail</th>
           <th scope="col">Observações</th>
+          <th scope="col">Ativo</th>
           <th scope="col">Ações</th>
         </tr>
       </thead>
@@ -20,6 +21,7 @@
           <td>{{ cliente.nome }}</td>
           <td>{{ cliente.email }}</td>
           <td>{{ cliente.observacoes }}</td>
+          <td>{{ cliente.ativo }}</td>
           <td>
             <div class="dropdown">
               <button
@@ -31,8 +33,8 @@
                 Ações
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Editar</a></li>
-                <li><a class="dropdown-item" href="#">Excluir</a></li>
+                <li><a class="dropdown-item" href="#" routerLink="editar/{{cliente.id}}">Editar</a></li>
+                <li><a class="dropdown-item" (click)="excluir(cliente.id)" style="cursor: pointer;">Excluir</a></li>
               </ul>
             </div>
           </td>

@@ -60,6 +60,10 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		return listaRetornoDTO;
 	}
 	
+	public void deleteContaById(Long id) {
+		contaBancariaRepository.deleteById(id);
+	}
+	
 	public void depositar(DepositoDTO dto) {
 		ContaBancaria contaBancaria = this.carregarConta(dto.getAgencia(), dto.getNumeroConta());
 		contaBancaria.setSaldo(contaBancaria.getSaldo() + dto.getValor());
