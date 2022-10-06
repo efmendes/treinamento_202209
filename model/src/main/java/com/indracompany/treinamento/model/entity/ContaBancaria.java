@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import java.util.List;
 
 @Entity
-@Table(name = "contas_bancarias")
+@Table(name = "contas_bancarias_lucasHBDutra")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ContaBancaria extends GenericEntity<Long>{

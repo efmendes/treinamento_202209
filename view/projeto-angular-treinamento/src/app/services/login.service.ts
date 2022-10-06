@@ -1,3 +1,4 @@
+import { LocalStorageService } from './local-storage.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -8,7 +9,10 @@ import { Login } from '../interfaces/login';
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private localStorage: LocalStorageService
+    ) { }
 
   endpoint = 'login';
   api = environment.api;
@@ -22,10 +26,16 @@ export class LoginService {
 
   setData(login: Partial<Login>){
 
-    this.username = login.username;
-    this.password = login.password;
+    if(!this.localStorage.get('username')){
+      this.localStorage.set('username', String(login.username));
+      this.localStorage.set('password', String(login.password));
+      this.localStorage.set('cpf', String(login.cliente?.cpf));
+    }
 
-    this.authorizationData = 'Basic ' + btoa(this.username + ':' + this.password);
+    this.username = this.localStorage.get('username');
+    this.password = this.localStorage.get('password');
+
+    this.authorizationData = 'Basic ' + btoa(this.localStorage.get('username') + ':' + this.localStorage.get('password'));
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -41,5 +51,9 @@ export class LoginService {
 
   cadastro(login: Partial<Login>){
     return this.http.post<Login>(`${this.api}/${this.endpoint}`, login);
+  }
+
+  logOut(){
+    this.localStorage.clear();
   }
 }

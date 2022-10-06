@@ -19,8 +19,8 @@ public class ClientLoginRest extends GenericCrudRest<ClienteLogin, Long, ClientL
     private final ClientLoginService loginService;
 
     @PostMapping
-    public ResponseEntity<String> addClient(@RequestBody ClienteLogin clienteLogin){
-        String answer =  loginService.createCLient(clienteLogin);
+    public ResponseEntity<ClienteLogin> addClient(@RequestBody ClienteLogin clienteLogin){
+        ClienteLogin answer =  loginService.createCLient(clienteLogin);
         if(answer == null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

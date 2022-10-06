@@ -1,44 +1,30 @@
-<form [formGroup]="contaForm" (ngSubmit)="cadastrar()" class="form">
-  <div class="container text-center">
-    <div class="row">
-      <div class="modal-header">
-        <h4 class="modal-title">{{idConta ? 'Editar': 'Cadastrar'}} Cliente</h4>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <div class="form-floating">
-          <input type="text" class="form-control" id="nome" placeholder="Nome" formControlName="nome">
-          <label for="floatingInput">Nome</label>
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-floating">
-          <input type="text" class="form-control" id="cpf" placeholder="CPF" formControlName="cpf">
-          <label for="floatingPassword">CPF</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <div class="form-floating">
-          <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email">
-          <label for="floatingPassword">Email</label>
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-floating">
-          <input type="are" class="form-control" id="observacoes" placeholder="Observações" formControlName="observacoes">
-          <label for="floatingPassword">Observações</label>
-        </div>
-      </div>
-
-    </div>
+<div class="card">
+  <div class="card-header" [align]="'center'">
+    Editar Conta
   </div>
-  <div [align]="'center'">
-    <button type="submit" class="btn btn-primary" [disabled]="!contaForm.valid">Submit</button>
-    <button type="button" class="btn btn-danger" (click)="onBack()">Voltar</button>
+  <div class="card-body">
+    <form [formGroup]="contaForm" (ngSubmit)="cadastrar()" class="form">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="agencia" placeholder="agencia" formControlName="agencia">
+              <label for="floatingInput">Agência</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="numero" placeholder="numero" formControlName="numero">
+              <label for="floatingPassword">Numero</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div [align]="'center'">
+        <button type="submit" class="btn btn-primary" [disabled]="!contaForm.valid">Submit</button>
+        <button type="button" class="btn btn-danger" (click)="onBack()">Voltar</button>
+      </div>
+    </form>
   </div>
-</form>
+</div>

@@ -31,6 +31,9 @@ public class ClienteLogin extends GenericEntity<Long> implements UserDetails, Se
     @NotBlank
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cliente cliente;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

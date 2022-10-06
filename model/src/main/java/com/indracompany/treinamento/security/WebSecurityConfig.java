@@ -23,6 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()//concatenando as configurações
                 .authorizeRequests()
                 .antMatchers("/rest/login/**").permitAll() //Permitindo acesso ao endpoint de login
+                .antMatchers("/rest/clientes/**").permitAll()
                 .antMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().authenticated()
                 .and()

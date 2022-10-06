@@ -1,3 +1,7 @@
+import { ActivatedRoute, Router } from '@angular/router';
+import { ICliente } from 'src/app/interfaces/cliente';
+import { Login } from 'src/app/interfaces/login';
+import { ClientesService } from 'src/app/services/clientes.service';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
@@ -12,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: NonNullableFormBuilder,
     private loginService: LoginService,
+    private router: Router,
     private location: Location) { }
 
   ngOnInit(): void {
@@ -21,12 +26,13 @@ export class LoginComponent implements OnInit {
     username: ['', Validators.required],
     password: ['', Validators.required]
   });
-  user = this.form.value.username;
-  pass = this.form.value.password;
+
   onLogin(){
-    this.loginService.authenticate(this.form.value).subscribe();
-    this.loginService.setData(this.form.value);
-    this.location.back();
+    const login = this.form.value as Login;
+    this.loginService.authenticate(login).subscribe((login: Login) => {
+      this.loginService.setData(login);
+    });
+    this.router.navigate(['/']);
   }
 
 }

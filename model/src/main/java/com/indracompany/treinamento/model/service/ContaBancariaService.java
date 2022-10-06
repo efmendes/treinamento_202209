@@ -1,16 +1,19 @@
 package com.indracompany.treinamento.model.service;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import com.indracompany.treinamento.model.entity.Cliente;
 import com.indracompany.treinamento.model.entity.Extrato;
+import com.indracompany.treinamento.model.repository.ClienteRepository;
 import com.indracompany.treinamento.model.repository.ExtratoRepositoy;
 import com.indracompany.treinamento.util.ExtratoDescription;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,12 +33,63 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 
 
     private final ExtratoRepositoy extratoRepository;
-
     private final ContaBancariaRepository contaBancariaRepository;
+    private final ClienteRepository clienteRepository;
 
 
+    public ContaBancaria createConta(String cpf){
 
-    public List<ContaClienteDTO> listarContasDoCliente(String cpf){
+        boolean cpfValido = CpfUtil.validaCPF(cpf);
+        if (!cpfValido) {
+            throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_INVALIDO, cpf);
+        }
+
+        Cliente cliente = clienteRepository.findByCpf(cpf)
+                .orElseThrow(() -> new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, cpf));
+        List<ContaBancaria> contas = contaBancariaRepository.findAll();
+        List<String> contasNumeros = new ArrayList<>();
+
+
+        Random random = new Random();
+        String agencia = String.valueOf(random.nextInt(9999) + 1);
+        String numero = String.valueOf(random.nextInt(9999) + 1);
+        String digito = String.valueOf(random.nextInt(9) + 1);
+
+        if(agencia.length() < 4){
+            int dif = 4 - agencia.length();
+            agencia = "0".repeat(dif) + agencia;
+        }
+        if(numero.length() < 4){
+            int dif = 4 - numero.length();
+            numero = "0".repeat(dif) + numero;
+        }
+
+        for(ContaBancaria conta : contas){
+            contasNumeros.add(conta.getNumero());
+        }
+        while(contasNumeros.contains(numero + "-" + digito)){
+            numero = String.valueOf(random.nextInt(9999) + 1);
+            if(numero.length() < 4){
+                int dif = 4 - numero.length();
+                numero = "0".repeat(dif) + numero;
+            }
+        }
+
+        ContaBancaria contaBancaria = new ContaBancaria();
+        contaBancaria.setAgencia(agencia);
+        contaBancaria.setNumero(numero + "-" + digito);
+        contaBancaria.setCliente(cliente);
+        contaBancaria.setSaldo(0);
+        contaBancariaRepository.saveAndFlush(contaBancaria);
+
+        return contaBancaria;
+    }
+
+    public List<ContaBancaria> findAll(){
+        List<ContaBancaria> contas = contaBancariaRepository.findAll();
+        return contas;
+    }
+    public List<ContaBancaria> listarContasDoCliente(String cpf){
 
         boolean cpfValido = CpfUtil.validaCPF(cpf);
         if (!cpfValido) {
@@ -45,16 +99,9 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
         List<ContaBancaria> contasBancarias = contaBancariaRepository.findByClienteCpf(cpf)
                 .orElseThrow(() -> new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO));
 
-        List<ContaClienteDTO> listaRetornoDTO = new ArrayList<>();
 
-        for (ContaBancaria conta : contasBancarias) {
-            ContaClienteDTO dto = new ContaClienteDTO();
-            BeanUtils.copyProperties(conta, dto);
-            dto.setNomeCliente(conta.getCliente().getNome());
-            listaRetornoDTO.add(dto);
-        }
 
-        return listaRetornoDTO;
+        return contasBancarias;
     }
 
     public void depositar(DepositoDTO dto, Boolean trasnferencia) {

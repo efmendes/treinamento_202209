@@ -1,8 +1,12 @@
+import { LocalStorageService } from './../../../services/local-storage.service';
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ContasService } from 'src/app/services/contas.service';
 import { IConta } from 'src/app/interfaces/conta';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contas',
@@ -12,32 +16,40 @@ import { IConta } from 'src/app/interfaces/conta';
 export class ContasComponent implements OnInit {
 
   contas: IConta[] = [];
+  nomeCliente : boolean = false;
+  cpf: string = '';
+
+  createConta = new FormGroup({
+    cpf: new FormControl('', Validators.required)
+  });
 
   constructor(private contaService: ContasService,
     private router: Router,
     private location: Location,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private localStorage: LocalStorageService) { }
 
   ngOnInit(): void {
     this.buscarTodosContas();
   }
 
   buscarTodosContas() {
-    this.contaService.listarTodasContas().subscribe((contas: IConta[]) => {
+    this.cpf = this.localStorage.get('cpf');
+    this.contaService.listarContasPorCpf(this.cpf).subscribe((contas: IConta[]) => {
       this.contas = contas;
     });
   }
-  onExcluir(id: string) {
+  onExcluir(id: number) {
     this.contaService.removerConta(id).subscribe();
   }
 
-  cadastro: boolean = false;
-
-  onCadastro(){
-    this.cadastro = !this.cadastro;
-  }
-  closed(isClosed: boolean){
-    this.cadastro = isClosed;
+  onSave(){
+    const cpf: string = this.localStorage.get('cpf');
+    this.contaService.adcionarConta(cpf).subscribe((conta: IConta) =>
+    Swal.fire({title: 'Conta Bancária Criada',
+    text: `Conta: ${conta.numero} e Agência: ${conta.agencia}`,
+    icon: 'success'})
+    );
   }
 
 }

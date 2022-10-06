@@ -1,0 +1,45 @@
+<div class="card">
+  <div class="card-header" [align]="'center'">
+   Cadastrar Cliente
+  </div>
+  <div class="card-body">
+    <form [formGroup]="clienteForm" (ngSubmit)="cadastrar()" class="form">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="nome" placeholder="Nome" formControlName="nome">
+              <label for="floatingInput">Nome</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="cpf" placeholder="CPF" formControlName="cpf">
+              <label for="floatingPassword">CPF</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-floating">
+              <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email">
+              <label for="floatingPassword">Email</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-floating">
+              <input type="are" class="form-control" id="observacoes" placeholder="Observações" formControlName="observacoes">
+              <label for="floatingPassword">Observações</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div [align]="'center'">
+        <button type="submit" class="btn btn-primary" [disabled]="!clienteForm.valid">Submit</button>
+        <button type="button" class="btn btn-danger" (click)="onBack()">Voltar</button>
+      </div>
+    </form>
+  </div>
+</div>

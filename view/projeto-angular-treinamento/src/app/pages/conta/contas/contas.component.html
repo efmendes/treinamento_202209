@@ -3,12 +3,12 @@
     <h2 class="pb-2 border-bottom">Contas</h2>
   </div>
   <div class="col-12">
-    <a class="btn btn-sm btn-dark mb-3">Cadastrar</a>
+    <a class="btn btn-sm btn-dark mb-3" (click)="onSave()" >Cadastrar</a>
     <table class="table table-striped table-sm">
       <thead>
         <tr>
           <th scope="col">ID</th>
-          <th scope="col">Nome</th>
+          <th scope="col">Cliente</th>
           <th scope="col">Agencia</th>
           <th scope="col">Numero</th>
           <th scope="col">Saldo</th>
@@ -33,8 +33,10 @@
                 Ações
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Editar</a></li>
-                <li><a class="dropdown-item" href="#" (click)="onExcluir(conta.id)">Excluir</a></li>
+                <li><a class="dropdown-item" routerLink="/contas/editar/{{conta.id}}" >Editar</a></li>
+                <li><a class="dropdown-item" (click)="onExcluir(conta.id)">Excluir</a></li>
+                <li><a class="dropdown-item" routerLink="/contas/operacoes/{{conta.id}}">Saque/Depósito</a></li>
+                <li><a class="dropdown-item" routerLink="/contas/transferencia/{{conta.id}}">Transferência</a></li>
               </ul>
             </div>
           </td>
@@ -43,4 +45,5 @@
     </table>
   </div>
 </div>
+
 

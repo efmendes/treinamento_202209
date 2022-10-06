@@ -1,5 +1,7 @@
+import { Router } from '@angular/router';
 import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -8,21 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  user: string | undefined;
-  constructor(private loginService: LoginService) {
-  this.user = this.loginService.username;
+  user?: string;
 
+  constructor(private loginService: LoginService,
+    private router: Router,
+    private location: Location) {
   }
 
   ngOnInit(): void {
   }
 
   isPresent(){
-    if(this.user){
-      return true;
-    } else{
-      return false;
-    }
+    let userPresent = this.loginService.username;
+    this.user = userPresent;
+    return userPresent ? true: false;
+  }
+
+  logOut(){
+    this.loginService.logOut();
+    this.location.back();
+    // this.router.navigate(['#']);
+    // this.router.navigate(['/']);
   }
 
 

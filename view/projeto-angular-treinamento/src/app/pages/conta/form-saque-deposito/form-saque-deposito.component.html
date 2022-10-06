@@ -1,0 +1,48 @@
+<div class="card">
+  <div class="card-header" [align]="'center'">
+    Saque/Depósito
+  </div>
+  <div class="card-body">
+  <form [formGroup]="operacaoForm" (ngSubmit)="operacao()" class="form">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="agencia" placeholder="agencia" formControlName="agencia">
+            <label for="floatingInput">Agência</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="numero" placeholder="numero" formControlName="numeroConta">
+            <label for="floatingInput">Numero</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+
+          <div class="form-floating check">
+            <input type="text" class="form-control" id="valor" placeholder="valor" formControlName="valor">
+            <label for="floatingInput">Valor</label>
+          </div>
+        </div>
+        <div class="checkbox" class="margin-left" class="col">
+          <label class="checkbox-inline">
+            <input type="radio" name="operacao" formControlName="operacao" value="deposito"> Depósito
+          </label>
+          <label class="checkbox-inline">
+            <input type="radio" name="operacao" formControlName="operacao" value="saque"> Saque
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div [align]="'center'">
+      <button type="submit" class="btn btn-primary" [disabled]="!operacaoForm.valid">Submit</button>
+      <button type="button" class="btn btn-danger" (click)="onBack()">Voltar</button>
+    </div>
+  </form>
+  </div>
+</div>
+

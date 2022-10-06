@@ -1,4 +1,4 @@
-<div class="card">
+<!-- <div class="card">
   <div class="card-header" [align]="'center'">
     Login
   </div>
@@ -15,9 +15,52 @@
       <div class="button-form" [align]="'center'">
         <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Login</button>
       <p>
-        <a routerLink="cadastrar">Não tem login? Cadastre-se!</a>
+        <a routerLink="/login/cliente/">Não tem login? Cadastre-se!</a>
       </p>
       </div>
     </form>
   </div>
+</div> -->
+
+<div id="login">
+
+  <form class="card form" [formGroup]="form" (ngSubmit)="onLogin()">
+
+      <div class="card-header" [align]="'center'">
+
+          <h2>LOGIN</h2>
+
+      </div>
+
+      <div class="card-content">
+
+          <div class="card-content-area">
+
+              <label for="usuario">Usuário</label>
+
+              <input type="text" class="form-control" id="username" placeholder="Username" formControlName="username">
+
+          </div>
+
+          <div class="card-content-area">
+
+              <label for="password">Senha</label>
+
+              <input type="password" class="form-control" id="pasword" placeholder="Password" formControlName="password">
+
+          </div>
+
+      </div>
+
+      <div class="card-footer">
+
+          <input type="submit" value="Entrar" class="submit" [disabled]="!form.valid">
+
+          <a routerLink="/login/cliente/">Ainda não tem conta? Cadastre-se!</a>
+
+      </div>
+
+  </form>
+
 </div>
+

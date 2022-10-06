@@ -20,18 +20,22 @@ export class ClientesService {
   }
 
   adcionarCliente(cliente: Partial<ICliente>){
-    return this.http.post<ICliente>(`${this.api}/${this.endpoint}`, cliente, this.loginService.httpOptions);
+    return this.http.post<ICliente>(`${this.api}/${this.endpoint}`, cliente);
   }
 
   removerCliente(id: string){
     return this.http.delete<ICliente>(`${this.api}/${this.endpoint}/del/${id}`, this.loginService.httpOptions);
   }
 
- atualizarCLiente(cliente: ICliente){
+ atualizarCliente(cliente: ICliente){
   return this.http.put(`${this.api}/${this.endpoint}/${cliente.id}`, cliente, this.loginService.httpOptions);
   }
 
   buscarClientePorId(id: number) {
     return this.http.get<ICliente>(`${this.api}/${this.endpoint}/${id}`);
+  }
+
+  buscarClientePorCpf(cpf: string){
+    return this.http.get<ICliente>(`${this.api}/${this.endpoint}/buscarPorCpf/${cpf}`);
   }
 }

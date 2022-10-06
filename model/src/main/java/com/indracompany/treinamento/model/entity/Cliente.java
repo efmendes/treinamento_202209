@@ -1,11 +1,6 @@
 package com.indracompany.treinamento.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 import org.hibernate.validator.constraints.br.CPF;
@@ -14,7 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "clientes_lucasHBDutra")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Cliente extends GenericEntity<Long>{
@@ -36,7 +31,6 @@ public class Cliente extends GenericEntity<Long>{
 	private boolean ativo;
 	
 	private String observacoes;
-
 	
 
 	

@@ -14,3 +14,12 @@
 .button-form{
   margin: 20px;
 }
+
+.checkbox-inline{
+  display: flex;
+  justify-content: flex-start;
+}
+
+input[type='radio']{
+  margin-right: 5px;
+}

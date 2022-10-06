@@ -1,9 +1,10 @@
-import { IConta } from './../../../interfaces/conta';
-import { ContasService } from 'src/app/services/contas.service';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { IConta } from 'src/app/interfaces/conta';
+import { ClientesService } from 'src/app/services/clientes.service';
+import { ContasService } from 'src/app/services/contas.service';
 
 @Component({
   selector: 'app-form-conta',
@@ -13,53 +14,46 @@ import { ActivatedRoute } from '@angular/router';
 export class FormContaComponent implements OnInit {
 
   constructor(
-    private service: ContasService,
+    private contaService: ContasService,
     private location: Location,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) {}
 
-    idConta = 0;
+  idConta = 0;
 
-    clienteForm = new FormGroup({
-      nome: new FormControl('', Validators.required),
-      cpf: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      observacoes: new FormControl(''),
-      ativo: new FormControl(true)
+
+  contaForm = new FormGroup({
+      agencia: new FormControl('', Validators.required),
+      numero: new FormControl('', Validators.required)
     });
 
-    ngOnInit(): void {
-      this.idConta = Number(this.route.snapshot.paramMap.get('id'));
-      if (this.idConta !== 0) {
-        this.service.buscarClientePorId(this.idConta).subscribe((conta: IConta) => {
-          this.clienteForm.setValue({
-            nome: cliente.nome,
-            cpf: cliente.cpf,
-            email: cliente.email,
-            observacoes: cliente.observacoes || '',
-            ativo: cliente.ativo || false
-          });
-        }, (error) => {
-          console.error(error);
-        });
-      }
-    }
 
-    cadastrar() {
-      const conta: IConta = this.clienteForm.value as ICliente;
-      if (this.idCliente) {
-        cliente.id = String(this.idCliente);
-        this.service.atualizarCLiente(cliente).subscribe();
-        return;
-      }
+  ngOnInit(): void {
+    this.idConta = Number(this.route.snapshot.paramMap.get('id'));
 
-      cliente.ativo = true;
-      this.service.adcionarCliente(cliente).subscribe(() => {
-        alert('SUCESSO!!!!!!');
-      }, (error) => {
-        console.error(error);
+    this.contaService.buscarContaPorId(this.idConta).subscribe((conta: IConta) => {
+      this.contaForm.setValue({
+        agencia: conta.agencia,
+        numero: conta.numero
       });
-      this.onBack();
-    }
+    }, (error) => {
+      console.error(error);
+    });
+  }
+
+
+  cadastrar() {
+    const contaValue = this.contaForm.value as IConta;
+    this.contaService.buscarContaPorId(this.idConta).subscribe(
+      (conta: IConta) => {
+        contaValue.cliente = conta.cliente
+        contaValue.id = conta.id
+        contaValue.saldo = conta.saldo
+        this.contaService.atualizarConta(contaValue).subscribe();
+      }
+    )
+
+    this.onBack();
+  }
 
 
   onBack(){

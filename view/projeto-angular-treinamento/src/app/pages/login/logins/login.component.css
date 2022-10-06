@@ -1,4 +1,4 @@
-.card{
+/* .card{
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -13,4 +13,151 @@
 }
 .button-form{
   margin: 20px;
+} */
+
+body {
+
+  padding: 0;
+
+  margin: 0;
+
+  background-color: black;
+
+}
+
+#login {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  height: 100vh;
+
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+
+.card {
+
+  background-color: #C9C9C9;
+
+  padding: 40px;
+
+  border-radius: 2px;
+
+  width:290px;
+
+  border-radius: 50px;
+
+}
+
+.card-header {
+
+  padding-bottom: 50px;
+
+  opacity: 0.8;
+
+  color: black;
+  font-family: 'Bebas Neue Bold';
+
+}
+
+.card-header::after {
+
+  content: "";
+
+  width: 70px;
+
+  height: 1px;
+
+  display: block;
+
+  margin-top: -17px;
+
+  margin-left: -5px;
+
+}
+
+.card-content label {
+
+  color: black;
+
+  font-size: 15px;
+
+  opacity: 0.8;
+
+  font-family: 'Bebas Neue';
+
+}
+
+.card-content-area {
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding:10px 0;
+
+}
+
+.card-content-area input {
+
+  margin-top: 10px;
+
+  padding:0 5px;
+
+  background-color: transparent;
+
+  border:none;
+
+  border-bottom: 1px solid #e1e1e1;
+
+  outline: none;
+
+  color: #fff;
+
+}
+
+.card-footer {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+.card-footer .submit{
+
+  width: 100%;
+
+  height: 40px;
+
+  background-color: #a13854;
+
+  border:none;
+
+  color:#e1e1e1;
+
+  margin: 10px 0;
+
+  border-radius: 50px;
+
+  font-family: 'Bebas Neue';
+}
+
+.card-footer a {
+
+  text-align: center;
+
+  font-size: 12px;
+
+  opacity: 0.8;
+
+  color: black;
+
+  text-decoration: none;
+
+
 }

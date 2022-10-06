@@ -20,8 +20,8 @@ public class ClienteRest extends GenericCrudRest<Cliente, Long, ClienteService>{
 	private ClienteService clienteService;
 
 	@GetMapping(value = "/buscarPorCpf/{cpf}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<ClienteDTO> buscarClientePorCpf(@PathVariable String cpf) {
-		ClienteDTO cli = clienteService.buscarClientePorCpf(cpf);
+	public @ResponseBody ResponseEntity<Cliente> buscarClientePorCpf(@PathVariable String cpf) {
+		Cliente cli = clienteService.buscarClientePorCpf(cpf);
 		return new ResponseEntity<>(cli, HttpStatus.OK);
 	}
 
@@ -35,7 +35,7 @@ public class ClienteRest extends GenericCrudRest<Cliente, Long, ClienteService>{
 	}
 
 	@PostMapping
-	public ResponseEntity<ClienteDTO> adicionarCliente(@RequestBody Cliente cliente){
+	public ResponseEntity<Cliente> adicionarCliente(@RequestBody Cliente cliente){
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.adicionarCliente(cliente));
 	}

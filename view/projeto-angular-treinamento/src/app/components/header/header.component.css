@@ -1,3 +1,21 @@
-.margin-left{
+/* .margin-left{
   margin-left: 1460px;
 }
+.margin-left-user{
+  margin-left: 1350px;
+  width: 300px;
+
+} */
+/* ul{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}  */
+.content-justify{
+  justify-content: end!important;
+}
+.nav-item{
+  margin: 10px;
+}
+

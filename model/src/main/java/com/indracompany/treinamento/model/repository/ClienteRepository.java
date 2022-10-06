@@ -6,11 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClienteRepository extends GenericCrudRepository<Cliente, Long>{
 
 
-	public Cliente findByCpf(String cpf);
+	public Optional<Cliente> findByCpf(String cpf);
 
 	public List<Cliente> findByNomeContainingIgnoreCaseAndAtivoTrue(String nome);
 

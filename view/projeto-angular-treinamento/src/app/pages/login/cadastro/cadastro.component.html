@@ -3,7 +3,7 @@
     Cadastrar
   </div>
   <div class="card-body">
-    <form [formGroup]="form" class="form" (ngSubmit)="onCadastro()">
+    <form [formGroup]="formLogin" class="form" (ngSubmit)="onCadastro()">
       <div class="form-floating">
         <input type="text" class="form-control" id="username" placeholder="Username" formControlName="username">
         <label for="floatingInput">Username</label>
@@ -13,7 +13,7 @@
         <label for="floatingPassword">Password</label>
       </div>
       <div class="button-form" [align]="'center'">
-        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!formLogin.valid">Submit</button>
       </div>
     </form>
   </div>

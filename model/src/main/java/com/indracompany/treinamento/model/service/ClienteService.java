@@ -26,21 +26,17 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 	@Autowired
 	private ContaBancariaRepository contaRepository;
 
-	public ClienteDTO buscarClientePorCpf(String cpf) {
+	public Cliente buscarClientePorCpf(String cpf) {
 
 		boolean cpfValido = CpfUtil.validaCPF(cpf);
 		if (!cpfValido) {
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_INVALIDO, cpf);
 		}
-		Cliente cli = clienteRepository.findByCpf(cpf);
-		if (cli == null) {
-			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, cpf);
-		}
+		Cliente cli = clienteRepository.findByCpf(cpf)
+				.orElseThrow(() -> new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO, cpf));
 
-		ClienteDTO dto = new ClienteDTO();
-		BeanUtils.copyProperties(cli, dto);
-		dto.setCpfMascarado(cli.getCpf().substring(0, 3)+"***");
-		return dto;
+
+		return cli;
 
 	}
 
@@ -61,18 +57,15 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		return listaRetornoDto;
 	}
 
-	public ClienteDTO adicionarCliente(Cliente cliente){
+	public Cliente adicionarCliente(Cliente cliente){
 		boolean cpf = CpfUtil.validaCPF(cliente.getCpf());
 		if(!cpf){
 			throw new AplicacaoException(ExceptionValidacoes.ERRO_CPF_INVALIDO, cliente.getCpf());
 		}
 
 		clienteRepository.save(cliente);
-		ClienteDTO clienteDTO = new ClienteDTO();
-		clienteDTO.setNome(cliente.getNome());
-		clienteDTO.setObservacoes(cliente.getObservacoes());
-		clienteDTO.setCpfMascarado(cliente.getCpf());
-		return clienteDTO;
+
+		return cliente;
 	}
 
 	public void deletarCLiente(Long id){

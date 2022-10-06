@@ -3,16 +3,12 @@ package com.indracompany.treinamento.controller.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.indracompany.treinamento.model.dto.ContaClienteDTO;
 import com.indracompany.treinamento.model.dto.DepositoDTO;
@@ -28,9 +24,15 @@ public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, Cont
     @Autowired
     private ContaBancariaService contaBancariaService;
 
-    @GetMapping(value = "/buscarContasDoCliente/{cpf}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<List<ContaClienteDTO>> buscarContasDoCliente(@PathVariable String cpf){
-        List<ContaClienteDTO> lista = contaBancariaService.listarContasDoCliente(cpf);
+    @GetMapping("/all")
+    public ResponseEntity<List<ContaBancaria>> findAll(){
+
+        return ResponseEntity.ok().body(contaBancariaService.findAll());
+    }
+
+    @GetMapping(value = "/buscarContas/{cpf}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<List<ContaBancaria>> buscarContasDoCliente(@PathVariable String cpf){
+        List<ContaBancaria> lista = contaBancariaService.listarContasDoCliente(cpf);
         if (lista == null || lista.isEmpty()) {
             return new ResponseEntity<>( HttpStatus.NO_CONTENT);
         }
@@ -61,5 +63,11 @@ public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, Cont
     public @ResponseBody ResponseEntity<Void> transferir (@RequestBody TransferenciaBancariaDTO dto){
         contaBancariaService.transferir(dto);
         return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<ContaBancaria> create(@RequestBody String cpf){
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(contaBancariaService.createConta(cpf));
     }
 }
