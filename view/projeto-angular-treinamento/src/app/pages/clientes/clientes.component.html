@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="header-wrapper">
+    <h2 class="styled-header">
+      <img src="../../../assets/icons/users.svg" />Clientes
+    </h2>
+    <a class="btn styledAnchor" routerLink="/clientes/cadastro"
+      ><img src="../../../assets/icons/plus.svg" />Cadastrar novo cliente</a
+    >
+  </div>
+  <div class="col-12">
+    <div class="table-wrapper">
+      <table
+        *ngIf="clientes?.length; else elseBlock"
+        class="table table-striped"
+      >
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Observações</th>
+            <th scope="col">Status</th>
+            <th scope="col" style="width: 90px">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientes">
+            <td>{{ cliente.id }}</td>
+            <td>{{ cliente.nome ? cliente.nome : "sem nome" }}</td>
+            <td>{{ cliente.email }}</td>
+            <td>{{ cliente.observacoes }}</td>
+            <td>{{ cliente.ativo ? "Ativo" : "Desativado" }}</td>
+            <td>
+              <div class="dropdown">
+                <button
+                  class="btn btn-sm table-action dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Ações
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      routerLink="/clientes/edicao/{{ cliente.id }}"
+                      >Editar</a
+                    >
+                  </li>
+                  <li>
+                    <button
+                      class="dropdown-item"
+                      (click)="removerCliente(cliente.id || -1)"
+                    >
+                      Excluir
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #elseBlock
+        ><div *ngIf="!clientes?.length && !listingError">
+          <app-loading></app-loading>
+        </div>
+      </ng-template>
+    </div>
+    <h5 *ngIf="listingError" class="pb-2">
+      Não é possível listar os clientes no momento.
+    </h5>
+  </div>
+</div>

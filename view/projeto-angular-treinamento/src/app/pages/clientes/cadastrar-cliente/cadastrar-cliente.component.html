@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-12">
+    <h2 class="pb-2 border-bottom">
+      {{ idCliente ? "Editar" : "Cadastrar" }} cliente
+    </h2>
+  </div>
+</div>
+<form [formGroup]="newUser" (ngSubmit)="onSubmit()">
+  <div class="row mb-3">
+    <div class="col">
+      <label for="textInput" class="form-label">Nome</label>
+      <input
+        type="text"
+        class="form-control"
+        id="textInput"
+        placeholder="Digite o seu nome aqui"
+        formControlName="nome"
+      />
+    </div>
+    <div class="col">
+      <label for="textInput" class="form-label">E-mail</label>
+      <input
+        class="form-control"
+        id="textInput"
+        placeholder="Digite o seu e-mail aqui"
+        formControlName="email"
+      />
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <label for="textInput" class="form-label">CPF</label>
+      <input
+        type="text"
+        class="form-control"
+        id="textInput"
+        placeholder="Digite o seu cpf"
+        formControlName="cpf"
+      />
+    </div>
+    <div class="col">
+      <label for="textInput" class="form-label">Observações</label>
+      <textarea
+        class="form-control"
+        id="textInput"
+        placeholder="Digite suas observações aqui"
+        formControlName="observacoes"
+      ></textarea>
+    </div>
+  </div>
+  <div *ngIf="!!idCliente" class="form-check form-switch mb-4">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      role="switch"
+      id="flexSwitchCheckDefault"
+      formControlName="ativo"
+    />
+    <label class="form-check-label" for="flexSwitchCheckDefault"
+      >Cliente ativo</label
+    >
+  </div>
+  <app-button variation="primary-b" type="submit" [disabled]="!newUser.valid">{{
+    idCliente ? "Salvar" : "Cadastrar"
+  }}</app-button>
+</form>

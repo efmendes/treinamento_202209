@@ -1,0 +1,7 @@
+textarea {
+  resize: none;
+}
+
+#flexSwitchCheckDefault:not(:checked) {
+  background-color: white;
+}
