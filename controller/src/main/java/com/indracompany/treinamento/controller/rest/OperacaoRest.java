@@ -38,8 +38,10 @@ public class OperacaoRest extends GenericCrudRest<Operacao, Long, OperacaoServic
 	public @ResponseBody ResponseEntity<List<Operacao>> extratoPorIntervaloData(@PathVariable String agencia, @PathVariable String numero,
 									@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date dataInicial,
 									@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date dataFinal){
-		
-		if(dataInicial.equals(dataFinal) || dataInicial.compareTo(dataFinal) > 0) {
+		dataFinal.setHours(23);
+		dataFinal.setMinutes(59);
+		dataFinal.setSeconds(59);
+		if(dataInicial.compareTo(dataFinal) > 0) {
 			return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
 		}
 		

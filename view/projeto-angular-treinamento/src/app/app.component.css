@@ -1,0 +1,83 @@
+::-webkit-scrollbar {
+  width: 8px;
+  background: white;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 10px;
+}
+
+.form-check-input:focus {
+  background-color: #004e89;
+  outline: none;
+  box-shadow: rgba(26, 101, 158, 0.3) 0px 0px 0px 3px;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: rgba(26, 101, 158, 0.3) 0px 0px 0px 3px;
+}
+
+.form-check-input:checked {
+  background-color: #004e89;
+  border-color: #004e89;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: rgba(82, 134, 164, 0.1);
+}
+
+.table-wrapper {
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  background-color: white;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+table {
+  background-color: white;
+  margin-bottom: 0;
+}
+
+tbody .table-action {
+  background-color: #ff6b35;
+  color: white;
+  font-weight: bold;
+}
+
+td {
+  max-height: 40px;
+  padding-top: 8px;
+}
+
+h2 {
+  color: #004e89;
+}
+
+.styledAnchor {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  align-items: center;
+
+  padding: 4px 8px;
+  gap: 4px;
+  background-color: #ff6b35;
+
+  border: none;
+  color: white;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.styledAnchor:hover {
+  background-color: #fd7c49;
+  color: white;
+}
+
+body {
+  background-color: red !important;
+}

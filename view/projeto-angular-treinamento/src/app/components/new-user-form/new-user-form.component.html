@@ -1,0 +1,13 @@
+<div class="mb-3">
+  <form [formGroup]="newUser" (ngSubmit)="onSubmit()">
+    <label for="textInput" class="form-label">Nome</label>
+    <input
+      type="text"
+      class="form-control"
+      id="textInput"
+      placeholder="Digite o seu nome aqui"
+      formControlName="name"
+    />
+    <button type="submit">Cadastrar</button>
+  </form>
+</div>

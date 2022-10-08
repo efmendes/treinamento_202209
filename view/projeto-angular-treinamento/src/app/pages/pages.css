@@ -1,0 +1,21 @@
+.header-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+  margin: 0 12px 24px 12px;
+  padding: 0 0 4px 0;
+  flex-shrink: inherit;
+}
+
+.styled-header {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-item:active {
+  background-color: grey;
+}
