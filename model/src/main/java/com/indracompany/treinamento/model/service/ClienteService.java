@@ -34,7 +34,6 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 		
 		ClienteDTO dto = new ClienteDTO();
 		BeanUtils.copyProperties(cli, dto);
-		dto.setCpfMascarado(cli.getCpf().substring(0, 3)+"***");
 		return dto;
 		
 	}

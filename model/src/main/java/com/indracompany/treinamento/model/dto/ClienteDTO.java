@@ -10,7 +10,12 @@ public class ClienteDTO {
 	
 	private String observacoes;
 	
-	private String cpfMascarado;
+	private String cpf;
 	
+	private String CpfMascarado;
+	
+	private String email;
+	
+	private Number id;
 
 }

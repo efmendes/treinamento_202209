@@ -1,5 +1,8 @@
 package com.indracompany.treinamento.model.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +15,13 @@ import com.indracompany.treinamento.exception.AplicacaoException;
 import com.indracompany.treinamento.exception.ExceptionValidacoes;
 import com.indracompany.treinamento.model.dto.ContaClienteDTO;
 import com.indracompany.treinamento.model.dto.DepositoDTO;
+import com.indracompany.treinamento.model.dto.ExtratoDTO;
 import com.indracompany.treinamento.model.dto.SaqueDTO;
 import com.indracompany.treinamento.model.dto.TransferenciaBancariaDTO;
 import com.indracompany.treinamento.model.entity.ContaBancaria;
+import com.indracompany.treinamento.model.entity.OperacaoConta;
 import com.indracompany.treinamento.model.repository.ContaBancariaRepository;
+import com.indracompany.treinamento.model.repository.OperacaoContaRepository;
 import com.indracompany.treinamento.util.CpfUtil;
 
 @Service
@@ -26,6 +32,9 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 	
 	@Autowired
 	private ContaBancariaRepository contaBancariaRepository;
+	
+	@Autowired
+	private OperacaoContaService operacaoContaService;
 	
 	public List<ContaClienteDTO> listarContasDoCliente(String cpf){
 		
@@ -56,6 +65,7 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		ContaBancaria contaBancaria = this.carregarConta(dto.getAgencia(), dto.getNumeroConta());
 		contaBancaria.setSaldo(contaBancaria.getSaldo() + dto.getValor());
 		super.salvar(contaBancaria);
+		operacaoContaService.salvarOperacao(contaBancaria, dto.getValor(), 2);
 	}
 	
 	public void sacar(SaqueDTO dto) {
@@ -65,6 +75,7 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		}
 		contaBancaria.setSaldo(contaBancaria.getSaldo() - dto.getValor());
 		super.salvar(contaBancaria);
+		operacaoContaService.salvarOperacao(contaBancaria, dto.getValor(), 3);
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
@@ -84,6 +95,7 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		
 		this.depositar(depositoDto);
 		
+		
 	}
 	
 	public ContaBancaria carregarConta(String agencia, String numero) {
@@ -94,5 +106,30 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
 		}
 		
 		return conta;
+	}
+	
+	public List<ExtratoDTO> extratoBancario(Long contaBancaria, String dataInicio, String dataFim ) {
+		ContaBancaria conta = buscar(contaBancaria);
+		validarExtrato(conta, dataInicio, dataFim);
+		DateTimeFormatter parser = DateTimeFormatter.ofPattern("dd-MM-uuuu");
+		LocalDateTime pFim = LocalDate.parse(dataFim, parser).atTime(23, 59, 59);
+		LocalDateTime pInicio = LocalDate.parse(dataInicio, parser).atStartOfDay();
+		return operacaoContaService.listarOperacaoContaPorData(conta, pInicio, pFim);
+	}
+	
+	private Boolean validarExtrato(ContaBancaria contaBancaria, String dataInicio, String dataFim){
+		if(contaBancaria == null) {
+			throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO);
+		}
+		if(dataInicio.isEmpty() || dataFim.isEmpty()) {
+			throw new AplicacaoException(ExceptionValidacoes.ERRO_CAMPO_OBRIGATORIO);
+		}
+		return true;
+	}
+	
+	public Boolean validaContaBancaria(ContaBancaria cb) {
+		if(cb == null && (!cb.getAgencia().isEmpty() && !cb.getNumero().isEmpty())) {
+			return true;
+		}return false;
 	}
 }

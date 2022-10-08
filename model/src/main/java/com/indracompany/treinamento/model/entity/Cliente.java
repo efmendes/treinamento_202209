@@ -38,8 +38,4 @@ public class Cliente extends GenericEntity<Long>{
 	private boolean ativo;
 	
 	private String observacoes;
-
-	
-
-	
 }
