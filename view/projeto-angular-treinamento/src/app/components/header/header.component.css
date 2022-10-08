@@ -1,0 +1,13 @@
+a {
+  color: white;
+}
+
+a:hover {
+  color: #b7daee;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: white;
+  border-bottom: 2px solid #ff6b35;
+}
