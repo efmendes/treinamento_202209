@@ -1,0 +1,112 @@
+<div class="row">
+  <div class="col-12">
+    <h2 class="pb-2 border-bottom">Transferir</h2>
+  </div>
+</div>
+<form [formGroup]="newTransferencia" (ngSubmit)="onSubmit()">
+  <div class="row g-2">
+    <div class="col">
+      <label class="form-label">Transferir de</label>
+      <div class="mb-3 clients-list">
+        <table
+          *ngIf="contas.length; else elseBlock"
+          class="table table-striped table-sm"
+        >
+          <thead>
+            <tr>
+              <th scope="col" style="width: 30px"></th>
+              <th scope="col">Agência</th>
+              <th scope="col">Número</th>
+              <th scope="col">Nome</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let conta of contas">
+              <td>
+                <div class="input-div">
+                  <input
+                    [disabled]="
+                      conta.agencia === newTransferencia.value.agenciaDestino &&
+                      conta.numero === newTransferencia.value.numeroContaDestino
+                    "
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    id="flexRadioDefault{{ conta.numero }}"
+                    (change)="handleContaOrigem(conta.agencia, conta.numero)"
+                  />
+                </div>
+              </td>
+              <td>{{ conta.agencia }}</td>
+              <td>{{ conta.numero }}</td>
+              <td>{{ conta.cliente?.nome || "Conta não associada" }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #elseBlock><app-loading></app-loading> </ng-template>
+      </div>
+    </div>
+    <div class="col">
+      <label class="form-label">Para</label>
+      <div class="mb-3 clients-list">
+        <table
+          *ngIf="contas.length; else elseBlock"
+          class="table table-striped table-sm"
+        >
+          <thead>
+            <tr>
+              <th scope="col" style="width: 30px"></th>
+              <th scope="col">Agência</th>
+              <th scope="col">Número</th>
+              <th scope="col">Nome</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let conta of contas">
+              <td>
+                <div class="input-div">
+                  <input
+                    [disabled]="
+                      !newTransferencia.value.agenciaOrigem ||
+                      (newTransferencia.value.agenciaOrigem === conta.agencia &&
+                        newTransferencia.value.numeroContaOrigem ===
+                          conta.numero)
+                    "
+                    class="form-check-input"
+                    type="radio"
+                    name="agenciaDestinoRadio"
+                    id="agenciaDestinoRadio{{ conta.numero }}"
+                    (change)="handleContaDestino(conta.agencia, conta.numero)"
+                  />
+                </div>
+              </td>
+              <td>{{ conta.agencia }}</td>
+              <td>{{ conta.numero }}</td>
+              <td>{{ conta.cliente?.nome || "Conta não associada" }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #elseBlock><app-loading></app-loading> </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <label for="textInput" class="form-label">Valor</label>
+      <input
+        type="text"
+        class="form-control"
+        id="textInput"
+        placeholder="Digite o valor"
+        formControlName="valor"
+      />
+    </div>
+  </div>
+  <app-button
+    type="submit"
+    variation="primary-b"
+    (btnClick)="(onSubmit)"
+    [disabled]="!newTransferencia.valid"
+    >Realizar transferência
+  </app-button>
+</form>
