@@ -1,0 +1,171 @@
+<!-- <div class="modal fade" id="creationModal" tabindex="-1" aria-labelledby="Client creation modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="client-creation-modal">{{this.isModalForEditing ? "Editar Conta" : "Cadastrar Conta"}}</h5>
+        <button id="btn-close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="accountForm" (submit)="onSubmit()">
+          <div class="mb-3">
+            <label for="account-agency" class="col-form-label">Agencia:</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="account-agency"
+              placeholder="Digite a agencia da conta..."
+              formControlName="agencia"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="account-number" class="col-form-label">Numero:</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="account-number"
+              placeholder="Digite o numero da conta..."
+              formControlName="numero"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="account-balance" class="col-form-label">Saldo:</label>
+            <input
+                type="number"
+                placeholder="Digite o saldo da conta.."
+                class="form-control"
+                id="account-balance"
+                formControlName="saldo"
+            >
+          </div>
+          <div class="mb-3" formGroupName="cliente">
+            <label for="account-client" class="col-form-label">Cpf do cliente:</label>
+            <input
+                type="tel"
+                maxLength="11"
+                minlength="11"
+                placeholder="Digite o cpf do cliente..."
+                class="form-control"
+                id="account-client"
+                (blur)="getClientForCreationOrEdition($event.target)"
+                formControlName="cpf"
+            >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!(accountForm.valid && isClientFetched)">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="pb-2 border-bottom">Contas</h2>
+    </div>
+    <div class="col-12">
+       <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="form-floating w-25">
+        <select
+        class="form-select"
+        id="orderSelect"
+        aria-label="Ordenar por"
+        (change)="orderAccountsByField($event.target)"
+        >
+          <option value="id" selected>ID</option>
+          <option value="agencia">Agencia</option>
+          <option value="numero">Numero</option>
+          <option value="saldo">Saldo</option>
+        </select>
+        <label for="floatingSelect">Ordenar por:</label>
+      </div>
+      <button
+        id="btn-open"
+        type="button"
+        class="btn btn-primary btn-sm btn-dark"
+        data-bs-toggle="modal"
+        data-bs-target="#creationModal"
+        (click)="resetForm()"
+      >
+        Cadastrar
+      </button>
+    </div>
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Agencia</th>
+                    <th scope="col">Numero</th>
+                    <th scope="col">Proprietario</th>
+                    <th scope="col">Saldo</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let account of accounts">
+                    <td>{{ account.id }}</td>
+                    <td>{{ account.agencia }}</td>
+                    <td>{{ account.numero }}</td>
+                    <td>{{ account.cliente.nome }}</td>
+                    <td>{{ account.saldo }}</td>
+                    <td>
+                    <div class="dropdown">
+                        <button
+                            class="btn btn-sm btn-outline-dark dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            Ações
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <button
+                                    class="dropdown-item"
+                                    type="button"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#creationModal"
+                                    (click)="getAccountById(account.id!)"
+                                >
+                                    Editar
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    class="dropdown-item"
+                                    type="button"
+                                    (click)="handleAccountDeletion(account.id!)"
+                                >
+                                    Excluir
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> -->
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+  <app-transaction-modal
+    [is_open]="is_modal_open"
+    [type]="modal_type"
+    [is_client_fetched]="is_client_fetched"
+    [account_data]="actual_account_data"
+    (onModalClose)="resetForm()"
+    (onModalSubmit)="handleSubmitModal()"
+    (checkClientCpf)="getClientByCpf()"
+    (checkAccount)="checkIfAccountAndNumberExists()"
+  ></app-transaction-modal>
+  <button #submit_button type="submit" class="hidden-button-submit"></button>
+</form>
+<div>
+  <app-table
+    [accounts]="accounts"
+    (accountDeletion)="handleDeleteModalOpen($event)"
+    (getAccountById)="getAccountById($event)"
+    (makeATransaction)=handleTransactionModalOpen($event)
+  ></app-table>
+</div>

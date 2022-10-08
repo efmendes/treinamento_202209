@@ -1,0 +1,54 @@
+.table-container {
+    margin-top: 4rem;
+}
+
+.table-container table {
+    width: 100%;
+    border-spacing: 0 0.5rem;
+}
+
+.table-container table th {
+    color: var(--text-body);
+    font-weight: 400;
+    padding: 1rem 2rem;
+    text-align: left;
+    line-height: 1.5rem;
+}
+
+.table-container table td {
+    padding: 1rem 2rem;
+    border: 0;
+    background: var(--shape);
+    color: var(--text-title);
+    /* border-radius: 0.25rem; */
+}
+
+.table-container table td.lighter-color {
+    color: var(--text-title);
+}
+
+.table-container table td.deposit {
+    color: var(--green);
+}
+
+.table-container table td.withdraw {
+    color: var(--red);
+}
+
+.table-container table .action-button {
+    background: transparent;
+    border: 0px;
+    padding: .5rem;
+    transition: all 0.2s;
+    color: var(--text-body);
+    filter: brightness(0.6);
+}
+
+.table-container table .action-button:hover {
+    filter: brightness(0.2);
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+}

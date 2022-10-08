@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="content">
+        <a routerLink="/" routerLinkActive="active">
+          <img src="../../../assets/images/logo.svg" alt="dt money" />
+        </a>
+        <button type="button" (click)="create()" *ngIf="(page.includes('accounts') || page.includes('clients') || page.includes('extract'))"><!--onClick={onOpenNewTransactionModal}-->
+           {{page.includes('accounts') ? "Create Account" : page.includes('clients') ? "Register Client" : "Search Extract"}}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,157 @@
+<!-- <div class="modal fade" id="creationModal" tabindex="-1" aria-labelledby="Client creation modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="client-creation-modal">{{isModalForEditing ? "Editar Cliente" : "Cadastrar Cliente" }}</h5>
+        <button id="btn-close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Nome:</label>
+            <input type="text" class="form-control" id="recipient-name"  formControlName="nome" placeholder="Digite o nome do cliente...">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Email:</label>
+            <input type="email" class="form-control" id="recipient-name"  formControlName="email" placeholder="Digite o email do cliente...">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">CPF:</label>
+            <input
+            type="tel"
+            maxLength="11"
+            placeholder="Digite o CPF do cliente..."
+            class="form-control"
+            id="recipient-name"
+            formControlName="cpf"
+            >
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Observação:</label>
+            <textarea class="form-control" id="message-text"  formControlName="observacoes" placeholder="Digite informações adicionais..."></textarea>
+          </div>
+          <div class="form-floating mb-3" *ngIf="isModalForEditing">
+            <select
+              class="form-select"
+              id="isUserActive"
+              aria-label="Usuario ativo"
+              formControlName="ativo"
+            >
+              <option [ngValue]="true" selected>Sim</option>
+              <option [ngValue]="false">Não</option>
+            </select>
+            <label for="isUserActive" class="fw-semibold">Ativo:</label>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!clientForm.valid">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <h2 class="pb-2 border-bottom">Clientes</h2>
+  </div>
+  <div class="col-12">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="form-floating w-25">
+        <select
+        class="form-select"
+        id="orderSelect"
+        aria-label="Ordenar por"
+        (change)="orderClientsByField($event.target)"
+        >
+          <option value="id" selected>ID</option>
+          <option value="nome">Nome</option>
+          <option value="email">Email</option>
+        </select>
+        <label for="floatingSelect">Ordenar por:</label>
+      </div>
+      <button
+        id="btn-open"
+        type="button"
+        class="btn btn-primary btn-sm btn-dark"
+        data-bs-toggle="modal"
+        data-bs-target="#creationModal"
+        (click)="resetForm()"
+      >
+        Cadastrar
+      </button>
+    </div>
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Observações</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients">
+          <td>{{ client.id }}</td>
+          <td>{{ client.nome }}</td>
+          <td>{{ client.email }}</td>
+          <td>{{ client.observacoes }}</td>
+          <td>
+            <div class="dropdown">
+              <button
+                class="btn btn-sm btn-outline-dark dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Ações
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <button
+                  class="dropdown-item"
+                  (click)="getClientById(client.id!)"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#creationModal"
+                  >
+                  Editar
+                  </button>
+                </li>
+                <li>
+                  <button
+                    class="dropdown-item"
+                    (click)="handleClientDeletion(client.id!)"
+                    type="button"
+                  >
+                    Excluir
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+  <app-transaction-modal
+    [is_open]="is_modal_open"
+    [type]="modal_type"
+    [client_name]="clientName"
+    (onModalClose)="resetForm()"
+    (onModalSubmit)="handleSubmitModal()"
+  ></app-transaction-modal>
+  <button #submit_button type="submit" class="hidden-button-submit"></button>
+</form>
+<div>
+  <app-table
+    [clients]="clients"
+    (clientDeletion)="handleDeleteModalOpen($event)"
+    (getClientById)="handleUpdateModalOpen($event)"
+    (accountCreation)="handleCreateAccountByClientModalOpen($event)"
+  ></app-table>
+</div>

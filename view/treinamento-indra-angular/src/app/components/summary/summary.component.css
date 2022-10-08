@@ -1,0 +1,45 @@
+.summary-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: -10rem;
+}
+
+.summary-container div {
+    background-color: var(--shape);
+    padding: 1.5rem 2rem;
+    border-radius: 0.25rem; 
+    transition: all 0.2s;
+} 
+
+.summary-container a:hover div{
+    filter: brightness(0.9)
+}
+
+.summary-container div p,
+.summary-container div strong {
+    color: var(--text-title);
+}
+
+.summary-container div header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.summary-container div strong {
+    display: block;
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 3rem;
+}
+
+.summary-container .highlight-background {
+    background: var(--green);
+}
+
+.summary-container .highlight-background p,
+.summary-container .highlight-background strong {
+    color: var(--shape);
+}

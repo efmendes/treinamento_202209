@@ -1,0 +1,33 @@
+<form [formGroup]="searchExtractForm" (ngSubmit)="onSubmit()">
+  <app-transaction-modal
+    [is_open]="is_modal_open"
+    (onModalClose)="resetForm()"
+    (onModalSubmit)="handleSubmitModal()"
+  ></app-transaction-modal>
+  <button #submit_button type="submit" class="hidden-button-submit"></button>
+</form>
+<!-- <div>
+  <div>
+    <div>
+      <label for="orderSelect">Ordenar por:</label>
+      <input type="text" id="">
+    </div>
+    <button type="button"></button>
+  </div>
+  <div>
+    <label for="orderSelect">Ordenar por:</label>
+    <select
+      id="orderSelect"
+      aria-label="Order by"
+    >
+      <option value="recent" selected>Most recent</option>
+      <option value="old">Most old</option>
+      <option value="value">Price</option>
+    </select>
+  </div>
+</div> -->
+<div>
+  <app-table
+    [extract]="extrato"
+  ></app-table>
+</div>

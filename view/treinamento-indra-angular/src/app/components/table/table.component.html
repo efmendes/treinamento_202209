@@ -1,0 +1,118 @@
+<div class="table-container">
+    <table>
+        <thead>
+          <ng-container *ngIf="page.includes('clients')">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Obs.</th>
+                <th scope="col">Actions</th>
+            </tr>
+          </ng-container>
+            <ng-container  *ngIf="page.includes('accounts')">
+              <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Agency</th>
+                  <th scope="col">Number</th>
+                  <th scope="col">Balance</th>
+                  <th scope="col">Owner name</th>
+                  <th scope="col">Actions</th>
+              </tr>
+            </ng-container>
+            <ng-container *ngIf="page.includes('extract')">
+              <tr>
+                  <th>Operation Type</th>
+                  <th>Date</th>
+                  <th>Value</th>
+              </tr>
+            </ng-container>
+        </thead>
+        <tbody>
+            <!-- {transactions.map(transaction => (
+                <tr key={transaction.id}>
+                    <td>{transaction.title}</td>
+                    <td className={transaction.type}>
+                        {transaction.type === 'withdraw' && '-'}
+                        {new Intl.NumberFormat('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        }).format(transaction.amount)}
+                    </td>
+                    <td>{transaction.category}</td>
+                    <td>{new Intl.DateTimeFormat('pt-BR').format(new Date(transaction.createdAt))}</td>
+                </tr>
+            ))} -->
+            <ng-container *ngIf="page.includes('clients')">
+                <tr *ngFor="let client of clients">
+                    <td>{{ client.id }}</td>
+                    <td>{{ client.nome }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.observacoes }}</td>
+                    <td class="icons">
+                        <button
+                            class="action-button"
+                            title="Update client"
+                            (click)="handleGetClientById(client.id!)"
+                        >
+                            <fa-icon [icon]="pencilIcon" style="font-size: 17px"></fa-icon>
+                        </button>
+                        <button
+                            class="action-button"
+                            title="Delete client"
+                            (click)="handleDeleteClient(client.id!)"
+                        >
+                            <fa-icon [icon]="trashIcon" style="font-size: 17px"></fa-icon>
+                        </button>
+                        <button
+                            class="action-button"
+                            title="Create account"
+                            (click)="handleCreateAccount(client)"
+                        >
+                            <fa-icon [icon]="plusIcon" style="font-size: 17px"></fa-icon>
+                        </button>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-container *ngIf="page.includes('accounts')">
+                <tr *ngFor="let account of accounts">
+                    <td>{{ account.id }}</td>
+                    <td>{{ account.agencia }}</td>
+                    <td>{{ account.numero }}</td>
+                    <td>{{ account.saldo }}</td>
+                    <td>{{ account.cliente ? account.cliente.nome : "'This account does not have an Client.'" }}</td>
+                    <td class="icons">
+                        <button
+                            class="action-button"
+                            title="Make a Transaction"
+                            (click)="handleMakeATransaction(account.id!)"
+                        >
+                            <fa-icon [icon]="transactionIcon" style="font-size: 17px"></fa-icon>
+                        </button>
+                        <button
+                            class="action-button"
+                            title="Update Account"
+                            (click)="handleGetAccountById(account.id!)"
+                        >
+                            <fa-icon [icon]="pencilIcon" style="font-size: 17px"></fa-icon>
+                        </button>
+                        <button
+                            class="action-button"
+                            title="Delete Account"
+                            (click)="handleDeleteAccount(account.id!)"
+                        >
+                            <fa-icon [icon]="trashIcon" style="font-size: 17px"></fa-icon>
+                        </button>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-container *ngIf="page.includes('extract')">
+                <tr *ngFor="let transaction of extract">
+                    <td [ngStyle]="{'color': (transaction.tipoOperacao === 'Deposito') ? 'green' : (transaction.tipoOperacao === 'Saque') ? 'red' : (transaction.tipoOperacao === 'Transferencia') ? 'purple' : ''}">{{ transaction.tipoOperacao }}</td>
+                    <td>{{ transaction.dataOperacao }}</td>
+                    <td>{{ transaction.valor }}</td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

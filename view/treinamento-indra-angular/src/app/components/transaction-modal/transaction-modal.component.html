@@ -1,0 +1,368 @@
+<div
+    class="modal-overlay"
+    *ngIf="is_open===true"
+    #modal_overlay
+    [formGroup]="form"
+>
+    <div
+        class="modal modal-content"
+        #modal
+    >
+        <button
+            type="button"
+            class="modal-close"
+            (click)="handleCloseModal()"
+        >
+            <svg role="img" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="x" class="svg-inline--fa fa-x" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"></path></svg>
+        </button>
+
+        <div class="modal-container" *ngIf="page.includes('clients') && type==='delete'">
+            <h2>{{ "Delete client " + client_name + " ?"}}</h2>
+            <div class="transaction-type-container-2">
+                <button
+                    type="button"
+                    class="radiobox"
+                    (click)="handleCloseModal()"
+                >
+                    <fa-icon [icon]="closeIcon" style="font-size: 20px; color: #33CC95"></fa-icon>
+                    <span>Cancel</span>
+                </button>
+                <button
+                    type="submit"
+                    class="radiobox"
+                >
+                    <fa-icon [icon]="trashIcon" style="font-size: 20px; color: #E52E4D"></fa-icon>
+                    <span>Delete</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="modal-container" *ngIf="page.includes('account') && type==='delete'">
+            <h2>Delete account {{!(account_data.number && account_data.agency) ? "?" : ""}}</h2>
+            <h2>{{ (account_data.number && account_data.agency) ? " Acc. Num.: " + account_data.number + " Acc. Agency: " + account_data.agency + " ?" : ""}}</h2>
+
+            <div class="transaction-type-container-2">
+                <button
+                    type="button"
+                    class="radiobox"
+                    (click)="handleCloseModal()"
+                >
+                    <fa-icon [icon]="closeIcon" style="font-size: 20px; color: #33CC95"></fa-icon>
+                    <span>Cancel</span>
+                </button>
+                <button
+                    type="submit"
+                    class="radiobox"
+                >
+                    <fa-icon [icon]="trashIcon" style="font-size: 20px; color: #E52E4D"></fa-icon>
+                    <span>Delete</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="modal-container" *ngIf="page.includes('accounts') && (type==='create' || type==='update')">
+            <h2>{{ type==='update' ? "Update Account" : "Create Account"}}</h2>
+            <h2>{{ (account_data.number && account_data.agency) ? " Acc. Num.: " + account_data.number + " Acc. Agency: " + account_data.agency + " ?" : ""}}</h2>
+
+            <label for="agency">Acc. Agency:</label>
+            <input
+                id="agency"
+                type="text"
+                placeholder="Agency"
+                formControlName="agencia"
+                maxLength="4"
+            />
+
+            <label for="number">Acc. Number:</label>
+            <input
+                id="number"
+                type="text"
+                placeholder="Number"
+                formControlName="numero"
+                maxLength="6"
+            />
+
+            <div class="margin-16" formGroupName="cliente">
+              <label for="client_cpf">Owner CPF:</label>
+              <input
+                  id="client_cpf"
+                  type="tel"
+                  placeholder="CPF"
+                  formControlName="cpf"
+                  maxLength="11"
+                  (blur)="handleCheckClientCpf()"
+              />
+            </div>
+
+            <label for="value">{{ type==='create' ? 'Initial ' : '' }}Value:</label>
+            <input
+                id="value"
+                placeholder="Value"
+                type="number"
+                formControlName="saldo"
+            />
+
+            <button
+                type="button"
+                class="submit-button"
+                (click)="handleModalSubmit()"
+                [disabled]="!(form.valid && is_client_fetched)"
+            >
+                Submit
+            </button>
+        </div>
+
+        <div class="modal-container" *ngIf="page.includes('clients') && (type==='create' || type==='update')">
+            <h2>{{ type==='update' ? "Update client " + client_name : "Register client"}}</h2>
+
+            <label for="client_name">Name:</label>
+            <input
+                id="client_name"
+                type="text"
+                placeholder="Name"
+                formControlName="nome"
+            />
+
+            <label for="client_email">Email:</label>
+            <input
+                id="client_email"
+                type="email"
+                placeholder="E-mail"
+                formControlName="email"
+            />
+
+            <label for="client_cpf">CPF:</label>
+            <input
+                id="client_cpf"
+                type="tel"
+                placeholder="CPF"
+                formControlName="cpf"
+                maxLength="11"
+            />
+
+            <label for="client_observations">Observations:</label>
+            <textarea
+                id="client_observations"
+                placeholder="Observations"
+                formControlName="observacoes"
+            ></textarea>
+
+            <label for="client_cpf" *ngIf="type==='update'">Active:</label>
+            <select
+                id="client_active"
+                *ngIf="type==='update'"
+                aria-label="Usuario ativo"
+                formControlName="ativo"
+            >
+              <option [ngValue]="true" selected>Yes</option>
+              <option [ngValue]="false">No</option>
+            </select>
+
+            <button
+                type="button"
+                class="submit-button"
+                (click)="handleModalSubmit()"
+                [disabled]="!form.valid"
+            >
+                Submit
+            </button>
+        </div>
+
+        <div class="modal-container" *ngIf="page.includes('clients') && type==='account'">
+            <h2>Create Account {{client_name ? "for " + client_name : ""}}</h2>
+
+            <label for="account_number">Acc. Agency:</label>
+            <input
+                id="account_number"
+                type="text"
+                placeholder="Number"
+                formControlName="nome"
+                maxLength="4"
+            />
+
+            <label for="account_agency">Acc. number:</label>
+            <input
+                id="account_agency"
+                type="tel"
+                placeholder="Agency"
+                formControlName="cpf"
+                maxLength="6"
+            />
+
+            <label for="client_observations">Initial Value:</label>
+            <textarea
+                id="client_observations"
+                placeholder="Initial value"
+                formControlName="observacoes"
+            ></textarea>
+
+            <button
+                type="button"
+                class="submit-button"
+                (click)="handleModalSubmit()"
+                [disabled]="!form.valid"
+            >
+                Submit
+            </button>
+        </div>
+
+
+        <div class="modal-container" *ngIf="page.includes('extract')">
+            <h2>Search Extract</h2>
+
+            <label for="agency">Acc. Agency:</label>
+            <input
+              id="agency"
+              type="text"
+              placeholder="Agency"
+              formControlName="agency"
+            />
+
+            <label for="number">Acc. Number:</label>
+            <input
+              id="number"
+              type="text"
+              placeholder="Acc. Number"
+              formControlName="account"
+            />
+
+            <label for="startDate">Start Date:</label>
+            <input
+              id="startDate"
+              type="date"
+              placeholder="Start Date"
+              formControlName="startDate"
+            />
+
+            <label for="startDate">End Date:</label>
+            <input
+              id="endDate"
+              type="date"
+              placeholder="End Date"
+              formControlName="endDate"
+            />
+
+            <button
+                type="button"
+                class="submit-button"
+                (click)="handleModalSubmit()"
+            >
+                Submit
+            </button>
+        </div>
+        <div class="modal-container" *ngIf="page.includes('accounts') && type==='transaction'">
+            <h2>Register transaction</h2>
+
+            <label for="agency">{{ form.value['cliente']!['nome']==='transference' ? 'From ' : ''}}Acc. Agency: </label>
+            <input
+              id="agency"
+              type="text"
+              placeholder="Acc. Agency"
+              formControlName="agencia"
+              (blur)="handleCheckIfAccountExists()"
+            />
+
+            <label for="numero">{{ form.value['cliente']!['nome']==='transference' ? 'From ' : ''}}Acc. Number: </label>
+            <input
+              id="numero"
+              type="test"
+              placeholder="Acc. Number"
+              formControlName="numero"
+              (blur)="handleCheckIfAccountExists()"
+            />
+
+
+            <div formGroupName="cliente">
+              <div class="transaction-type-container">
+                <label for="income">
+                <div class="radiobox" [ngClass]="{'background-green': form.value['cliente']!['nome']==='income'}">
+                  <input
+                    type="radio"
+                    name="nome"
+                    id="income"
+                    formControlName="nome"
+                    value="income"
+                  />
+
+                    <svg role="img" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-down" class="svg-inline--fa fa-arrow-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#33CC95" d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path></svg>
+                    <span>Income</span>
+                  </div>
+                </label>
+
+
+                <label for="outcome">
+                <div class="radiobox" [ngClass]="{'background-red': form.value['cliente']!['nome']==='outcome'}">
+                  <input
+                    id="outcome"
+                    type="radio"
+                    name="nome"
+                    value="outcome"
+                    formControlName="nome"
+                  />
+                    <svg role="img" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up" class="svg-inline--fa fa-arrow-up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#E52E4D" d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path></svg>
+                    <span>Outcome</span>
+                  </div>
+                </label>
+
+
+
+                <label for="transference">
+                <div class="radiobox" [ngClass]="{'background-purple': form.value['cliente']!['nome']==='transference'}">
+                  <input
+                    type="radio"
+                    id="transference"
+                    value="transference"
+                    name="nome"
+                    formControlName="nome"
+                  />
+                    <svg role="img" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-down-up-across-line" class="svg-inline--fa fa-arrow-down-up-across-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="#6933ff" d="M137.4 502.6c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 402.7V288H544c17.7 0 32-14.3 32-32s-14.3-32-32-32H448V109.3l41.4 41.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L384 109.3V224H192 128 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96V402.7L86.6 361.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96zM128 192h64V64c0-17.7-14.3-32-32-32s-32 14.3-32 32V192zM448 320H384V448c0 17.7 14.3 32 32 32s32-14.3 32-32V320z"></path>
+                    </svg>
+                    <span>Transference</span>
+                  </div>
+                </label>
+
+                <div *ngIf="form.value['cliente']!['nome']==='transference'" style="grid-column: span 3">
+                  <label for="agency2">To Acc. Agency: </label>
+                  <input
+                    id="agency2"
+                    type="text"
+                    placeholder="Acc. Agency"
+                    formControlName="email"
+                    (blur)="handleCheckIfAccountExists()"
+                  />
+
+                  <label for="numero2">To Acc. Number: </label>
+                  <input
+                    id="numero2"
+                    type="test"
+                    placeholder="Acc. Number"
+                    formControlName="cpf"
+                    (blur)="handleCheckIfAccountExists()"
+                  />
+                </div>
+            </div>
+
+
+
+            </div>
+            <label for="saldo">Value:</label>
+            <input
+              id="saldo"
+              type="number"
+              placeholder="Value"
+              formControlName="saldo"
+            />
+
+            <button
+                type="button"
+                class="submit-button"
+                (click)="handleModalSubmit()"
+            >
+                Submit
+            </button>
+        </div>
+
+    </div>
+</div>

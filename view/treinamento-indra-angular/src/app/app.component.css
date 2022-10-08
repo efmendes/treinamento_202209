@@ -1,0 +1,22 @@
+.dashboard-container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 2.5rem 1rem;
+}
+
+.scroll {
+  opacity: 0.3;
+  background-color: var(--blue-light);
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 5px;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.scroll:hover {
+  opacity: 1;
+}

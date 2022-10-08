@@ -1,0 +1,36 @@
+<div class="summary-container">
+    <a routerLink="/clients" routerLinkActive="active">
+        <div [ngClass]="page.includes('clients') ? 'highlight-background' : ''">
+            <header>
+                <p>Manage</p>
+                <fa-icon [icon]="clients" [ngStyle]="{'font-size': '32px', 'color': page.includes('clients') ? '#ffffff' : '#5429CC'}"></fa-icon>
+
+            </header>
+            <strong>
+                Clients
+            </strong>
+        </div>
+    </a>
+    <a routerLink="/accounts" routerLinkActive="active">
+        <div [ngClass]="page.includes('accounts') ? 'highlight-background' : ''">
+            <header>
+                <p>Manage</p>
+                <fa-icon [icon]="bank" [ngStyle]="{'font-size': '32px', 'color': page.includes('accounts') ? '#ffffff' : '#5429CC'}"></fa-icon>
+            </header>
+            <strong>
+                Accounts
+            </strong>
+        </div>
+    </a>
+    <a routerLink="/extract" routerLinkActive="active">
+        <div [ngClass]="page.includes('extract') ? 'highlight-background' : ''">
+            <header>
+                <p>View</p>
+                <fa-icon [icon]="dollar" [ngStyle]="{'font-size': '32px', 'color': page.includes('extract') ? '#ffffff' : '#5429CC'}"></fa-icon>
+            </header>
+            <strong>
+                Extract
+            </strong>
+        </div>
+    </a>
+</div>

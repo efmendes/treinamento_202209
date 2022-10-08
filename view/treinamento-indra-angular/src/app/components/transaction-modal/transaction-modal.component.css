@@ -1,0 +1,136 @@
+.modal-container h2 {
+    color: var(--text-title-color);
+    font-size:1.5rem;
+    margin-bottom: 2rem;
+}
+
+.modal-container input {
+    width: 100%;
+    padding: 0 1.5rem;
+    height: 4rem;
+    border-radius: 0.25rem;
+    border: 1px solid #d7d7d7;
+    background: #e7e9ee;
+    font-weight: 400;
+}
+
+.modal-container input::placeholder,
+.modal-container textarea::placeholder{
+    color: var(--text-body);
+}
+
+.modal-container input + input,
+.modal-container input + label,
+.modal-container textarea + label {
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.modal-container textarea {
+    width: 100%;
+    padding: 1.5rem;
+    height: 6rem;
+    border-radius: 0.25rem;
+    border: 1px solid #d7d7d7;
+    background: #e7e9ee;
+    font-weight: 400;
+    resize: none;
+}
+
+.modal-container select {
+    display: block;
+    width: 33%;
+    height: 2rem;
+    border: 1px solid #d7d7d7;
+    background: #e7e9ee;
+    border-radius: 0.25rem;
+    padding-left: 1.5rem;
+}
+
+.modal-container button.submit-button {
+    width: 100%;
+    padding: 0 1.5rem;
+    height: 4rem;
+    background: var(--green);
+    color: #fff;
+    border-radius: 0.25rem;
+    border: 0;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+
+    transition: filter 0.2s;
+}
+
+.modal-container button.submit-button:hover {
+    filter: brightness(0.9)
+}
+
+.modal-container button.submit-button:disabled {
+    cursor: not-allowed;
+    filter: brightness(0.7)
+}
+
+.modal-container .margin-16 {
+  margin-block: 1.6rem;
+}
+
+.transaction-type-container {
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .5rem;
+}
+
+.transaction-type-container-2 {
+  margin: 1rem 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .5rem;
+}
+
+.transaction-type-container input[type='radio'] {
+  display: none;
+}
+
+.transaction-type-container input[type='radio'] + label {
+  margin-top: initial;
+}
+
+.radiobox {
+    height: 4rem;
+    border: 1px solid rgba(150, 150, 150, .5);
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.radiobox:hover {
+    border-color: rgba(220, 220, 220, 1)
+}
+
+.radiobox svg {
+    transform: scale(1.5);
+    transform-origin: top left;
+    margin-bottom: 5px;
+}
+
+.radiobox span {
+    display: inline-block;
+    margin-left: 1rem;
+    font-size: 1rem;
+    color: var(--text-title)
+}
+
+.background-red {
+  background-color: rgba(229, 46, 77, 0.5);
+}
+
+.background-green {
+  background-color: rgba(51, 204, 149, 0.5);
+}
+
+.background-purple {
+  background-color: rgba(105, 51, 255, 0.5);
+}

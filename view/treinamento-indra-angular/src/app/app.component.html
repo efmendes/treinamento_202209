@@ -1,0 +1,9 @@
+<app-header [page]="page" #header></app-header>
+
+<main class="dashboard-container">
+    <app-summary [page]="page"></app-summary>
+    <router-outlet></router-outlet>
+    <button title="Scroll to top" class="scroll" (click)="scrollToTop()">
+      <fa-icon [icon]="pointUpIcon" style="font-size: 17px"></fa-icon>
+    </button>
+</main>
