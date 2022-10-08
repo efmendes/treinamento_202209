@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="header-wrapper">
+    <h2 class="styled-header">
+      <img src="../../../assets/icons/money.svg" />Contas bancárias
+    </h2>
+    <a class="btn styledAnchor" routerLink="/contas/cadastro"
+      ><img src="../../../assets/icons/plus.svg" />Cadastrar nova conta</a
+    >
+  </div>
+  <div class="col-12">
+    <div class="table-wrapper">
+      <table
+        *ngIf="contas.length; else elseBlock"
+        class="table table-striped table-sm"
+      >
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Agência</th>
+            <th scope="col">Número</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Saldo</th>
+            <th scope="col" style="width: 90px">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let conta of contas">
+            <td>{{ conta.id }}</td>
+            <td>{{ conta.agencia }}</td>
+            <td>{{ conta.numero }}</td>
+            <td>
+              {{ conta.cliente ? conta.cliente.nome : "Conta não associada" }}
+            </td>
+            <td>{{ conta.saldo }}</td>
+            <td>
+              <div class="dropdown">
+                <button
+                  class="btn btn-sm table-action dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Ações
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="contas/edicao/{{ conta.id }}"
+                      >Editar</a
+                    >
+                  </li>
+                  <li>
+                    <button
+                      class="dropdown-item"
+                      (click)="removerConta(conta.id || -1)"
+                    >
+                      Excluir
+                    </button>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="contas/extrato/{{ conta.agencia }}/{{
+                        conta.numero
+                      }}"
+                    >
+                      Extrato
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #elseBlock><app-loading></app-loading> </ng-template>
+      <h5 *ngIf="listingError" class="pb-2">
+        Não é possível listar os clientes no momento.
+      </h5>
+    </div>
+  </div>
+</div>
