@@ -1,0 +1,13 @@
+.loading-wrapper {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 180px;
+  margin-bottom: 180px;
+}
+
+.loading-wrapper img {
+  width: 100px;
+}

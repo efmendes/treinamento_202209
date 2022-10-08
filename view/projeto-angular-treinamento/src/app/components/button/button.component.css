@@ -1,0 +1,15 @@
+.primary-b {
+  background-color: #004e89;
+  color: white;
+}
+
+.primary-b:hover {
+  background-color: #1a659e;
+  color: white;
+}
+
+.secondary-b {
+  background-color: white;
+  color: #004e89;
+  border-color: #004e89;
+}
