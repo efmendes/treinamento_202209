@@ -1,0 +1,205 @@
+<div class="container1">
+  <section class="cabecalhoLista">
+    <div class="nameListaTodasContas">
+      <img
+        src="../../../../assets/icons/iconsUtils/lista contas1.png"
+        width="40px"
+        height="35px"
+        class="icon"
+      />
+      <h3 class="nameConta">Contas</h3>
+    </div>
+    <div class="testando">
+      <a class="btn-primary" onclick="history.back()"
+        ><img
+          src="../../../../../assets/icons/iconsUtils/voltar2.png"
+          width="40px"
+          height="35px"
+      /></a>
+    </div>
+  </section>
+  <section class="container2">
+    <div class="infoCliente">
+      <div class="input-group mb-3">
+        <span
+          style="background-color: #000000; color: white"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >Nome do cliente:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          value="{{ contas[0].cliente?.nome }}"
+          disabled
+        />
+      </div>
+      <div class="input-group mb-3">
+        <span
+          style="background-color: #000000; color: white"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >E-mail do cliente:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          value="{{ contas[0].cliente?.email }}"
+          disabled
+        />
+      </div>
+      <div class="input-group mb-3">
+        <span
+          style="background-color: #000000; color: white"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >CPF do cliente:&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          value="{{ contas[0].cliente?.cpf! | cpf }}"
+          disabled
+        />
+      </div>
+    </div>
+    <br />
+    <h3>Lista de contas:</h3>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">ID Conta</th>
+          <th scope="col">Agência</th>
+          <th scope="col">Número</th>
+          <th scope="col">Saldo</th>
+          <th scope="col" style="text-align: center">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let conta of contas">
+          <th scope="row">{{ conta.id }}</th>
+          <td>{{ conta.agencia }}</td>
+          <td>{{ conta.numero }}</td>
+          <td>{{ conta.saldo | currency: "BRL" }}</td>
+          <td>
+            <div class="acoes">
+              <button
+                type="button"
+                class="btn btn-dark"
+                [routerLink]="['/caixa/deposito', conta.id]"
+              >
+                Deposito
+              </button>
+              <button
+                type="button"
+                class="btn btn-dark"
+                [routerLink]="['/caixa/saque', conta.id]"
+              >
+                Sacar
+              </button>
+              <button
+                type="button"
+                class="btn btn-dark"
+                [routerLink]="['/caixa/transferencia', conta.id]"
+              >
+                Transferência
+              </button>
+              <button
+                class="btn btn-dark dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                + Ações
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['/contas/editar', conta.id]"
+                    >Editar</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['/contas/extrato', conta.id]"
+                    >Extrato</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="confirmar(conta.id)"
+                    >Remover</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="acoesMobile">
+              <div class="dropdown">
+                <button
+                  class="btn btn-dark dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Ações
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      [routerLink]="['/caixa/deposito', conta.id]"
+                      >Depositar</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      [routerLink]="['/caixa/saque', conta.id]"
+                      >Sacar</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      [routerLink]="['/caixa/transferencia', conta.id]"
+                      >Transferência</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      [routerLink]="['/contas/editar', conta.id]"
+                      >Editar</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      [routerLink]="['/contas/extrato', conta.id]"
+                      >Extrato</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" (click)="confirmar(conta.id)"
+                      >Remover</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

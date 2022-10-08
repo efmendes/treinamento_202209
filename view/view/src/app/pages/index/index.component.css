@@ -1,0 +1,107 @@
+.cabecalhoLista {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  display: flex;
+  /* align-items: center; */
+  background-color: #000000;
+  justify-content: center;
+}
+.cabecalhoLista div {
+  border-radius: 5px;
+}
+.cabecalhoLista div a:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.nameLista {
+  display: flex;
+  text-align: center;
+}
+
+.nameMenu {
+  font-size: 24px;
+  display: inline-flex;
+  color: rgb(248, 248, 248);
+  padding-top: 5px;
+}
+* {
+  list-style-type: none;
+}
+
+.container1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin: 2rem auto;
+  background-color: #21083b;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.container2 {
+  padding: 10px;
+}
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+.containerTeste {
+  /* margin: 0 auto; */
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.infoCliente {
+  display: flex;
+  justify-items: center;
+  flex-wrap: wrap;
+}
+
+h4 {
+  font-size: 1.8rem;
+}
+
+.testedo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.containerSections {
+  width: 100%;
+  display: flex;
+  border-radius: 10px;
+  justify-content: space-around;
+}
+
+.sectionsIndex {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.25) 0px -12px 30px, rgba(0, 0, 0, 0.25) 0px 4px 6px,
+    rgba(0, 0, 0, 0.25) 0px 12px 13px, rgba(0, 0, 0, 0.25) 0px -3px 5px;
+
+  display: flex;
+  background-color: #21083b;
+  border-radius: 15px;
+  flex-direction: column;
+}
+
+.botaodeCria {
+  border-radius: 10px;
+  background-color: #000000;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px;  
+}
+
+.botaodeCria:hover {
+  background-color: #00000000;
+  box-shadow: rgba(129, 10, 209, 0.39) 0px 3px 5px;
+}
+
+.botaodeCria:active {
+  background-color: #fffafa;
+}

@@ -1,0 +1,221 @@
+<div class="container1">
+  <section class="cabecalhoLista">
+    <div class="nameListaTodasContas">
+      <img
+        src="../../../../assets/icons/iconsUtils/IconEditarConta.png"
+        width="40px"
+        height="35px"
+        class="icon"
+        style="margin-left: 1rem; margin-right: 0.3rem"
+        *ngIf="hasIdEdit"
+      />
+      <img
+        *ngIf="!hasIdEdit"
+        src="../../../../assets/icons/iconsUtils/IconCriarConta.png"
+        width="40px"
+        height="35px"
+        class="icon"
+        style="margin-left: 1rem; margin-right: 0.3rem"
+      />
+      <h2 *ngIf="hasIdEdit" class="nameConta">Edição Conta</h2>
+      <h2 *ngIf="!hasIdEdit" class="nameConta">Cadastro Conta</h2>
+    </div>
+    <div class="testando">
+      <a class="btn-dark" onclick="history.back()"
+        ><img
+          src="../../../../../assets/icons/iconsUtils/voltar2.png"
+          width="40px"
+          height="35px"
+      /></a>
+    </div>
+  </section>
+  <br />
+  <div class="containerTeste">
+    <form [formGroup]="formConta">
+      <div class="mb-3">
+        <!-- <div class="mb-3">
+          <label for="cpf" class="form-label">Digite o cpf do cliente</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cpf"
+            formControlName="cpf"
+            placeholder="Digite o cpf"
+          />
+        </div> -->
+        <div class="input-group mb-3">
+          <span
+            style="background-color: #000000; color: white; width: 10rem"
+            class="input-group-text"
+            id="inputGroup-sizing-default"
+            >CPF do Cliente:
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+            placeholder="Digite o CPF"
+            formControlName="cpf"
+            style="width: 20rem"
+          />
+        </div>
+
+        <button
+          *ngIf="!hasIdEdit"
+          type="submit"
+          class="btn btn-dark m-3"
+          (click)="buscarClienteCpf()"
+        >
+          Buscar
+        </button>
+        <button
+          *ngIf="!hasIdEdit"
+          type="submit"
+          class="btn btn-dark"
+          (click)="limpar()"
+        >
+          Limpar
+        </button>
+      </div>
+    </form>
+    <div *ngIf="hasCliente">
+      <form [formGroup]="formCliente">
+        <div class="input-group mb-3">
+          <span
+            style="background-color: #000000; color: white; width: 10rem"
+            class="input-group-text"
+            id="inputGroup-sizing-default"
+            >Nome do Cliente:
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+            formControlName="nome"
+            style="width: 20rem"
+          />
+        </div>
+
+        <!-- <div class="mb-3">
+          <label for="email" class="form-label">Email do cliente</label>
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            formControlName="email"
+          />
+        </div> -->
+        <div class="input-group mb-3">
+          <span
+            style="background-color: #000000; color: white; width: 10rem"
+            class="input-group-text"
+            id="inputGroup-sizing-default"
+            >E-mail do Cliente:
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+            formControlName="email"
+            style="width: 20rem"
+          />
+        </div>
+        <button
+          *ngIf="!hasIdEdit"
+          type="submit"
+          class="btn btn-dark"
+          (click)="exibirCriarConta()"
+        >
+          Criar Conta
+        </button>
+      </form>
+    </div>
+    <div *ngIf="hasConta" class="mt-3">
+      <h4>Informações conta:</h4>
+      <form [formGroup]="formCriarConta">
+        <!-- <div class="mb-3">
+          <label for="agencia" class="form-label">Agência</label>
+          <input
+            type="text"
+            class="form-control"
+            id="agencia"
+            formControlName="agencia"
+          />
+        </div> -->
+        <div class="input-group mb-3">
+          <span
+            style="background-color: #000000; color: white; width: 10rem"
+            class="input-group-text"
+            id="inputGroup-sizing-default"
+            >Agência:
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+            placeholder="Digite os 4 números da agência"
+            formControlName="agencia"
+            style="width: 20rem"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <span
+            style="background-color: #000000; color: white; width: 10rem"
+            class="input-group-text"
+            id="inputGroup-sizing-default"
+            >Numero da conta:
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+            placeholder="Digite os 6 números da conta"
+            formControlName="numeroConta"
+            style="width: 20rem"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <span
+            style="background-color: #000000; color: white; width: 10rem"
+            class="input-group-text"
+            id="inputGroup-sizing-default"
+            >Saldo:
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+            placeholder="Digite o saldo"
+            formControlName="saldo"
+            style="width: 20rem"
+          />
+        </div>
+
+        <button
+          *ngIf="urlEditar"
+          type="submit"
+          class="btn btn-primary"
+          style="background-color: #000000"
+          (click)="enviar()"
+        >
+          Enviar Conta
+        </button>
+        <button
+          *ngIf="!urlEditar"
+          type="submit"
+          class="btn btn-dark"
+          style="background-color: #000000"
+          (click)="editarConta(resultado)"
+        >
+          Editar Conta
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

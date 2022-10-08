@@ -1,0 +1,81 @@
+* {
+  list-style-type: none;
+}
+
+.container1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin: 2rem auto;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+.container2 {
+  padding: 10px;
+}
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.infoCliente {
+  display: flex;
+  justify-items: center;
+  flex-wrap: wrap;
+}
+
+h4 {
+  font-size: 1.8rem;
+}
+
+.cabecalhoLista {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  display: flex;
+  /* align-items: center; */
+  background-color: #0d6efd;
+  justify-content: space-between;
+}
+.cabecalhoLista div {
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-right: 15px;
+}
+.cabecalhoLista div a:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 5px 14px 28px,
+    rgba(0, 0, 0, 0.22) 5px 10px 10px;
+  cursor: pointer;
+}
+
+.nameExtratos {
+  display: flex;
+}
+
+.nameExtrato {
+  font-size: 24px;
+  display: inline-flex;
+  color: white;
+  padding-top: 5px;
+}
+
+.botaoCria {
+  display: inline-block;
+  width: 20%;
+  margin: 1rem 0 1rem 1rem;
+  box-sizing: border-box;
+}
+
+.testando a:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 991px) {
+  .acoesMobile {
+    display: block;
+  }
+
+  .acoes {
+    display: none;
+  }
+}

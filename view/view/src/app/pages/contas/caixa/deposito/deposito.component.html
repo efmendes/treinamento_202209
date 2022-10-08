@@ -1,0 +1,127 @@
+<div class="container1">
+  <section class="cabecalhoLista">
+    <div class="nameListaTodasContas">
+      <img
+        src="../../../../assets/icons/iconsUtils/Icondeposito.png"
+        width="40px"
+        height="35px"
+        class="icon"
+        style="margin-left: 1rem; margin-right: 0.3rem"
+      />
+      <h3 class="nameConta">Depósito</h3>
+    </div>
+    <div class="testando">
+      <a class="btn-dark" onclick="history.back()"
+        ><img
+          src="../../../../../assets/icons/iconsUtils/voltar2.png"
+          width="40px"
+          height="35px"
+      /></a>
+    </div>
+  </section>
+  <br />
+  <div class="containerTeste">
+    <br />
+    <form
+      style="width: 35%"
+      class="testedo"
+      [formGroup]="formConta"
+      (ngSubmit)="deposito()"
+    >
+      <!-- <div class="agencia">
+                <label class="form-label">Agência:</label>
+                <input
+                  type="string"
+                  class="form-control"
+                  placeholder="Digite os 4 números da agência"
+                  formControlName="agencia"
+                />
+              </div> -->
+      <div class="input-group mb-3">
+        <span
+          style="background-color: #000000; color: white; width: 10rem"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >Agência da conta:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite os 4 números da agência"
+          formControlName="agencia"
+          style="width: 10rem"
+        />
+      </div>
+      <br />
+      <!-- <div class="numeroConta">
+                <label class="form-label">Número da Conta:</label>
+                <input
+                  type="string"
+                  class="form-control"
+                  placeholder="Digite os 6 números da conta"
+                  formControlName="numeroConta"
+                />
+              </div> -->
+      <div class="input-group mb-3" style="display: flex; flex-direction: row">
+        <span
+          style="background-color: #000000; color: white; width: 10rem"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >Numero da conta:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite os 6 números da conta"
+          formControlName="numeroConta"
+          style="width: 10rem"
+        />
+      </div>
+      <br />
+      <!-- <div class="valor">
+                <label class="form-label">Valor <i class="fas fa-coins"></i></label>
+                <input
+                  formValuetype="number"
+                  class="form-control"
+                  placeholder="Digite o valor aqui."
+                  formControlName="valor"
+                />
+              </div> -->
+      <div class="input-group mb-3" style="display: flex">
+        <span
+          style="background-color: #000000; color: white; width: 10rem"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >Valor do Depósito:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite o valor aqui."
+          formControlName="valor"
+          style="width: 10rem"
+        />
+      </div>
+      <br />
+      <button
+        [disabled]="!formConta.valid"
+        type="submit"
+        class="btn btn-success"
+        style="
+          font-size: 1.3rem;
+          display: flex;
+          align-self: center;
+          margin-bottom: 1rem;
+        "
+      >
+        Depositar
+      </button>
+    </form>
+  </div>
+</div>

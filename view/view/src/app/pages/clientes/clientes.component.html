@@ -1,0 +1,87 @@
+<!-- <button type="button" class="btn btn-primary" routerLink="cadastrar">
+  Novo
+</button> -->
+<div class="container1">
+  <section class="cabecalhoLista">
+    <div class="nameListaTodosClientes">
+      <img
+        src="../../../../assets/icons/iconsUtils/iconClientes.png"
+        width="40px"
+        height="40px"
+        class="icon"
+        style="margin-left: 1rem; margin-right: 0.3rem"
+      />
+      <h3 class="nameCliente">Todos os clientes</h3>
+    </div>
+    <div class="testando">
+      <a style="margin-right: 0.8rem" class="btn-dark" routerLink="/"
+        ><img src="../../../assets/icons/home.png" width="40px" height="35px"
+      /></a>
+      <a class="btn-dark" routerLink="cadastrar"
+        ><img
+          src="../../../../assets/icons/iconsUtils/add-user2.png"
+          width="40px"
+          height="35px"
+      /></a>
+    </div>
+  </section>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Cpf</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Observações</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <th scope="row">{{ cliente.id }}</th>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.cpf | cpf }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>{{ cliente.observacoes }}</td>
+        <td>
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Ações
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li>
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/contas/cadastrar', cliente.id]"
+                  >Criar Conta</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" [routerLink]="['editar', cliente.id]"
+                  >Editar</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="confirmar(cliente.id)"
+                  >Remover</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" [routerLink]="['/contas', cliente.cpf]"
+                  >Listar Contas</a
+                >
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,105 @@
+<div class="container1">
+  <section class="cabecalhoLista">
+    <div class="cabecalhoEditCadastro">
+      <img
+        src="../../../../assets/icons/iconsUtils/editCliente1.png"
+        width="40px"
+        height="35px"
+        class="icon"
+        style="margin-left: 1rem; margin-right: 0.3rem"
+      />
+      <h2 *ngIf="hasIdEdit" class="nameCliente">Edição Cliente</h2>
+      <h2 *ngIf="!hasIdEdit" class="nameCliente">Cadastro Cliente</h2>
+    </div>
+    <div class="testando">
+      <a class="btn-dark" onclick="history.back()"
+        ><img
+          src="../../../../../assets/icons/iconsUtils/voltar2.png"
+          width="40px"
+          height="35px"
+      /></a>
+    </div>
+  </section>
+  <br />
+  <div class="containerTeste">
+    <form [formGroup]="formCliente" (ngSubmit)="enviar()">
+      <div class="input-group mb-3">
+        <span
+          style="background-color: #000000; color: white; width: 10rem"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >Nome do cliente:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite nome do cliente"
+          formControlName="nome"
+          style="width: 20rem"
+        />
+      </div>
+      <div class="input-group mb-3">
+        <span
+          style="background-color: #000000; color: white; width: 10rem"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >E-mail do cliente:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite e-mail do cliente"
+          formControlName="email"
+          style="width: 20rem"
+        />
+      </div>
+      <div class="input-group mb-3">
+        <span
+          style="background-color: #000000; color: white; width: 10rem"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >CPF do cliente:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite CPF do cliente"
+          formControlName="cpf"
+          style="width: 20rem"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="observacoes" class="form-label">Observações</label>
+        <textarea
+          class="form-control"
+          id="observacoes"
+          rows="3"
+          formControlName="observacoes"
+        ></textarea>
+      </div>
+      <button
+        [disabled]="!formCliente.valid"
+        type="submit"
+        class="btn btn-success"
+        *ngIf="!hasIdEdit"
+      >
+        Enviar
+      </button>
+      <button
+        [disabled]="!formCliente.valid"
+        type="submit"
+        class="btn btn-primary"
+        style="background-color: #000000"
+        *ngIf="hasIdEdit"
+      >
+        Editar
+      </button>
+    </form>
+  </div>
+</div>

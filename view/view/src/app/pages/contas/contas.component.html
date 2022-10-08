@@ -1,0 +1,98 @@
+<div class="container1">
+  <section class="cabecalhoLista">
+    <div class="nameListaTodasContas">
+      <img
+        src="../../../../assets/icons/iconsUtils/lista contas1.png"
+        width="40px"
+        height="35px"
+        class="icon"
+        style="margin-left: 1rem; margin-right: 0.3rem"
+      />
+      <h3 class="nameConta">Lista de todas as contas</h3>
+    </div>
+    <div class="testando">
+      <a style="margin-right: 0.8rem" class="btn-dark" routerLink="/"
+        ><img src="../../../assets/icons/home.png" width="40px" height="35px"
+      /></a>
+      <a class="btn-dark" routerLink="cadastrar"
+        ><img
+          src="../../../assets/icons/iconsUtils/add.png"
+          width="40px"
+          height="35px"
+      /></a>
+    </div>
+  </section>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID Conta</th>
+        <th scope="col">Nome do cliente</th>
+        <th scope="col">E-mail do cliente</th>
+        <th scope="col">Agência</th>
+        <th scope="col">Número</th>
+        <th scope="col">Saldo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let conta of contas">
+        <th scope="row">{{ conta.id }}</th>
+        <td>{{ conta.cliente?.nome }}</td>
+        <td>{{ conta.cliente?.email }}</td>
+        <td>{{ conta.agencia }}</td>
+        <td>{{ conta.numero }}</td>
+        <td>{{ conta.saldo | currency: "BRL" }}</td>
+        <td>
+          <div class="dropdown">
+            <button
+              class="btn btn-dark dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Ações
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li>
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/caixa/deposito', conta.id]"
+                  >Depositar</a
+                >
+              </li>
+              <!--<li>
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/caixa/saque', conta.id]"
+                  >Sacar</a
+                >
+              </li> -->
+              <li>
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/caixa/transferencia', conta.id]"
+                  >Transferência</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" [routerLink]="['editar', conta.id]"
+                  >Editar</a
+                >
+              </li>
+              <!--<li>
+                <a class="dropdown-item" [routerLink]="['extrato', conta.id]"
+                  >Extrato</a
+                >
+              </li> -->
+              <li>
+                <a class="dropdown-item" (click)="confirmar(conta.id)"
+                  >Remover</a
+                >
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.indracompany</groupId>
+    <artifactId>treinamento</artifactId>
+    <version>1.0</version>
+  </parent>
+  <artifactId>treinamento-view</artifactId>
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>ant-magic</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <delete dir="dist/" />
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>1.6</version>
+
+        <executions>
+
+          <execution>
+            <id>install node and npm</id>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+            <configuration>
+              <nodeVersion>v12.18.2</nodeVersion>
+              <npmVersion>6.14.5</npmVersion>
+              <workingDirectory>${basedir}/../treinamento-view/</workingDirectory>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>angular-cli install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>install -g @angular/cli@9.1.11</arguments>
+              <workingDirectory>${basedir}/../treinamento-view/</workingDirectory>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>npm install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>install</arguments>
+              <workingDirectory>${basedir}/../treinamento-view/</workingDirectory>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>ng build</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <arguments>run build-jboss</arguments>
+              <workingDirectory>${basedir}/../treinamento-view/</workingDirectory>
+            </configuration>
+          </execution>
+
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>

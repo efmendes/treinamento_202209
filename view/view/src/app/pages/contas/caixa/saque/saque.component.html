@@ -1,0 +1,101 @@
+<div class="container1">
+  <section class="cabecalhoLista">
+    <div class="nameListaTodasContas">
+      <img
+        src="../../../../assets/icons/iconsUtils/iconSaque.png"
+        width="40px"
+        height="35px"
+        class="icon"
+        style="margin-left: 1rem; margin-right: 0.3rem"
+      />
+      <h3 class="nameSaque">Saque</h3>
+    </div>
+    <div class="testando">
+      <a class="btn-primary" onclick="history.back()"
+        ><img
+          src="../../../../../assets/icons/iconsUtils/voltar2.png"
+          width="40px"
+          height="35px"
+      /></a>
+    </div>
+  </section>
+  <br />
+  <div class="containerTeste">
+    <br />
+    <br />
+    <form
+      style="width: 35%"
+      class="testedo"
+      [formGroup]="formSaque"
+      (ngSubmit)="saque()"
+    >
+      <div class="input-group mb-3">
+        <span
+          style="background-color: #0d6efd; color: white; width: 10rem"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >Agência da conta:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite os 4 números da agência"
+          formControlName="agencia"
+          style="width: 10rem"
+        />
+      </div>
+      <br />
+      <div class="input-group mb-3" style="display: flex; flex-direction: row">
+        <span
+          style="background-color: #0d6efd; color: white; width: 10rem"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >Numero da conta:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite os 6 números da conta"
+          formControlName="numeroConta"
+          style="width: 10rem"
+        />
+      </div>
+      <br />
+      <div class="input-group mb-3" style="display: flex">
+        <span
+          style="background-color: #0d6efd; color: white; width: 10rem"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >Valor do Saque:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite o valor aqui."
+          formControlName="valor"
+          style="width: 10rem"
+        />
+      </div>
+      <br />
+      <button
+        [disabled]="!formSaque.valid"
+        type="submit"
+        class="btn btn-success"
+        style="
+          font-size: 1.3rem;
+          display: flex;
+          align-self: center;
+          margin-bottom: 1rem;
+        "
+      >
+        Sacar
+      </button>
+    </form>
+  </div>
+</div>

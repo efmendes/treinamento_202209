@@ -1,0 +1,127 @@
+<div class="container1">
+  <section class="cabecalhoLista">
+    <div class="nameListaTodasContas">
+      <img
+        src="../../../../assets/icons/iconsUtils/transferenciaIcon.png"
+        width="40px"
+        height="35px"
+        class="icon"
+        style="margin-left: 1rem; margin-right: 0.3rem"
+      />
+      <h3 class="nameConta">Transferência</h3>
+    </div>
+    <div class="testando">
+      <a class="btn-dark" onclick="history.back()"
+        ><img
+          src="../../../../../assets/icons/iconsUtils/voltar2.png"
+          width="40px"
+          height="35px"
+      /></a>
+    </div>
+  </section>
+  <form [formGroup]="formTransfe" (ngSubmit)="transferir()" class="testedo">
+    <div class="contaInfos">
+      <div class="input-group mb-3">
+        <span
+          style="background-color: #000000; color: white"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >Agência de Origem:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite os 4 números da agência"
+          formControlName="agenciaOrigem"
+        />
+      </div>
+      <div class="input-group mb-3">
+        <span
+          style="background-color: #000000; color: white; width: 10rem"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >Conta de Origem:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite os 6 números da conta"
+          formControlName="numeroContaOrigem"
+          style="width: 10rem"
+        />
+      </div>
+    </div>
+    <div class="contaInfos">
+      <div class="input-group mb-3">
+        <span
+          style="background-color: #000000; color: white; width: 10rem"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >Agência de destino:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite os 4 números da agência"
+          formControlName="agenciaDestino"
+          style="width: 10rem"
+        />
+      </div>
+      <div class="input-group mb-3">
+        <span
+          style="background-color: #000000; color: white; width: 10rem"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >Conta de destino:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite os 6 números da conta"
+          formControlName="numeroContaDestino"
+          style="width: 10rem"
+        />
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <div class="infoValor">
+        <span
+          style="background-color: #000000; color: white; width: 11rem"
+          class="input-group-text"
+          id="inputGroup-sizing-default"
+          >Valor da transferência:
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Digite o valor aqui."
+          formControlName="valor"
+          style="width: 10rem"
+        />
+      </div>
+    </div>
+    <button
+      [disabled]="!formTransfe.valid"
+      type="submit"
+      class="btn btn-success mx-1"
+      style="
+        font-size: 1.3rem;
+        display: flex;
+        align-self: center;
+        margin-bottom: 1rem;
+      "
+    >
+      Transferir
+    </button>
+  </form>
+</div>
