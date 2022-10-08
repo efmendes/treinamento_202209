@@ -52,7 +52,7 @@ public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, Cont
 	
 	@PutMapping(value = "/sacar", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Void> sacar (@RequestBody SaqueDTO dto){
-		contaBancariaService.sacar(dto);
+		contaBancariaService.sacar(dto, false);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
