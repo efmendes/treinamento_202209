@@ -1,0 +1,77 @@
+<h2 class="pb-2 border-bottom">Visualizar extrato</h2>
+<h5 class="pb-2">Agência: {{ agencia }} - Número da conta: {{ numero }}</h5>
+
+<form [formGroup]="newExtrato" (ngSubmit)="onSubmit()">
+  <div class="row g-3 mb-4" style="align-items: end">
+    <div class="col">
+      <label for="dataInicio" class="form-label">Desde</label>
+      <div>
+        <input
+          type="date"
+          class="form-control"
+          id="dataInicial"
+          formControlName="dataInicial"
+        />
+      </div>
+    </div>
+    <div class="col">
+      <label for="dataFinal" class="form-label">Até</label>
+      <div>
+        <input
+          type="date"
+          class="form-control"
+          id="dataFinal"
+          formControlName="dataFinal"
+        />
+      </div>
+    </div>
+    <div class="col">
+      <app-button
+        type="submit"
+        [disabled]="
+          !newExtrato.valid ||
+          (newExtrato.value.dataFinal || 1) <
+            (newExtrato.value.dataInicial || 0)
+        "
+        >Buscar extrato</app-button
+      >
+    </div>
+  </div>
+</form>
+<div *ngIf="hasSubmitted">
+  <div class="table-wrapper">
+    <table
+      *ngIf="!isLoading && operacoes?.length"
+      class="table table-striped table-sm"
+    >
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Data</th>
+          <th scope="col">Agência</th>
+          <th scope="col">Número</th>
+          <th scope="col">Tipo de operação</th>
+          <th scope="col">Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let operacao of operacoes">
+          <td>{{ operacao.id }}</td>
+          <td>{{ transformDate(operacao.date.toString()) }}</td>
+          <td>{{ operacao.agencia }}</td>
+          <td>{{ operacao.numero }}</td>
+          <td>{{ operacao.operationType }}</td>
+          <td>{{ operacao.value }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-loading *ngIf="isLoading; else elseBlock"></app-loading>
+
+  <ng-template #elseBlock
+    ><h5 *ngIf="!operacoes?.length" class="pb-2">
+      Não temos registros para este intervalo de datas.
+    </h5>
+  </ng-template>
+</div>
