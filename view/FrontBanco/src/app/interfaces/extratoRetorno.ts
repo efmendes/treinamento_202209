@@ -1,6 +1,6 @@
 export interface IExtratoRetorno {
     dataHora: string;
-    tpOperacao: string;
+    tipoOperacao: string;
     valor: string;
     observacao: string;
   }

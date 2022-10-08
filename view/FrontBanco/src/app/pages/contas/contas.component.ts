@@ -14,12 +14,17 @@ export class ContasComponent implements OnInit {
 
   constructor(private contaService: ContasService, private dialogRef: MatDialog) { }
   contas: IConta[] = [];
+  loading = false;
+  paginaAtual = 1;
+
   ngOnInit(): void {
     this.buscarTodasContas();
   }
 
   buscarTodasContas() {
+    this.loading = true;
     this.contaService.listarTodasContas().subscribe((contas: IConta[]) => {
+      this.loading = false;
       this.contas = contas;
     });
   }

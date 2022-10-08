@@ -47,7 +47,7 @@ export class ContasService {
   }
 
   getExtrato(extrato: IExtratoRequest): Observable<IExtratoRetorno[]> {
-    return this.http.get<IExtratoRetorno[]>(`${this.api}/${this.endpoint}extratoData/${extrato.dataInicio}%2000%3A00%3A00/${extrato.dataFim}%2023%3A00%3A00/${extrato.agencia}/${extrato.numeroConta}`);
+    return this.http.get<IExtratoRetorno[]>(`${this.api}/${this.endpoint}extrato-data/${extrato.dataInicio}%2000%3A00%3A00/${extrato.dataFim}%2023%3A00%3A00/${extrato.agencia}/${extrato.numeroConta}`);
   }
 
 }

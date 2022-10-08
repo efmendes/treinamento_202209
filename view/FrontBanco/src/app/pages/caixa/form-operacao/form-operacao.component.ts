@@ -91,7 +91,7 @@ export class FormOperacaoComponent implements OnInit {
           this.router.navigate(['/contas']);
         },
         (error) => {
-          console.error(error);
+          Swal.fire('Erro na operação, verifique se há saldo suficiente!', 'Falha', 'error');
         }
       );
     }
@@ -105,7 +105,7 @@ export class FormOperacaoComponent implements OnInit {
           this.router.navigate(['/contas']);
         },
         (error) => {
-          console.error(error);
+          Swal.fire('Erro na operação, verifique se existe saldo ou os dados estão digitada corretamente', 'Falha', 'error');
         }
       );
   }

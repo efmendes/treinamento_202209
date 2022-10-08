@@ -1,7 +1,4 @@
 <div
-  style="background-color: rgb({{ tipo === 'deposito' ? 0 : 80 }},{{
-    tipo === 'deposito' ? 100 : 0
-  }},{{ tipo === 'deposito' ? 50 : 0 }}); border-radius: 10px"
   class="col-md-6 offset-md-3 h-80 d-inline-block"
 >
   <form  [hidden]="!trocaOperacao" [formGroup]="formSaqueDeposito" (ngSubmit)="depositarSacar()">
@@ -40,14 +37,12 @@
     </div>
     <div class="form-group d-flex justify-content-center">
       <button
-        style="background-color: rgb({{ tipo === 'deposito' ? 0 : 255 }},{{
-          tipo === 'deposito' ? 180 : 0
-        }},{{ tipo === 'deposito' ? 0 : 0 }}); border: none"
+      style="background-color: rgb(0, 0, 0); border: none"
         [disabled]="!formSaqueDeposito.valid"
         type="submit"
         class="btn mt-3 mb-3 w-50"
       >
-        <strong style="color: #ffffff">{{
+        <strong style ="color: #ffffff">{{
           tipo === "deposito" ? "Depositar" : "Sacar"
         }}</strong>
       </button>
@@ -55,7 +50,7 @@
   </form>
 </div>
 <div
-  style="background-color: rgb(79, 79, 79); border-radius: 10px; margin-top: -50px"
+  
   class="col-md-6 offset-md-3 h-80 d-inline-block"
 >
   <form [hidden]="trocaOperacao" [formGroup]="formTransferencia" (ngSubmit)="transferir()">

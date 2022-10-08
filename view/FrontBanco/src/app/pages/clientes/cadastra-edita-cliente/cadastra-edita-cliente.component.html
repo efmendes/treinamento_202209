@@ -45,22 +45,6 @@
             <label for="floatingTextarea">Observações</label>
           </div>
         </div>
-        <div class="row">
-          <div class="dropdown mb-3">
-            <button
-              class="btn btn-sm btn-outline-dark dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Ações
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" >Editar</a></li>
-              <li><a class="dropdown-item" >Excluir</a></li>
-            </ul>
-          </div>
-        </div>
           <a
             style="margin-right: 15px;"
             routerLink="/clientes"
@@ -68,7 +52,7 @@
           <button
             [disabled]="!formValue.valid"
             type="submit"
-            class="btn btn-dark">Cadastrar</button>
+            class="btn btn-dark">{{ formValue.get('id')?.value ? 'Editar': 'Cadastro' }}</button>
         </form>
       </div>
     </div>

@@ -82,12 +82,12 @@
           <th scope="col">Observação</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody style="color: white;">
         <tr
           *ngFor="let op of operacoes"
         >
           <td>{{ op.dataHora }}</td>
-          <td>{{ op.tpOperacao }}</td>
+          <td>{{ op.tipoOperacao }}</td>
           <td>{{ op.valor | currency: "BRL" }}</td>
           <td>{{ op.observacao }}</td>
         </tr>

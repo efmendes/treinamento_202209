@@ -1,9 +1,13 @@
+<div class="card mb-4 rounded-3 shadow-sm">
+
+<div class="card-body">
+
 <div class="row">
-    <div class="col-12">
-      <h2 class="pb-2 border-bottom">Contas</h2>
+  <div class="col-12">
+      <h2 class="pb-2" style="position: absolute; width: 85.5%;">Contas</h2>
+      <a class="btn btn-sm btn-dark mb-3" style="margin-bottom: 15px; float: right;" routerLink="/contas/cadastrar" routerLinkActive="active">Cadastrar</a>
     </div>
-    <div class="col-12">
-      <a class="btn btn-sm btn-dark mb-3" routerLink="/contas/cadastrar" routerLinkActive="active">Cadastrar</a>
+    <div class="col-12 border-top">
       <table class="table table-striped table-sm">
         <thead>
           <tr>
@@ -16,11 +20,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let conta of contas">
+          <tr *ngFor="let conta of contas | paginate: { itemsPerPage: 10, currentPage: paginaAtual }; let i = index">
             <td>{{ conta.id }}</td>
             <td>{{ conta.agencia }}</td>
             <td>{{ conta.numero }}</td>
-            <td>{{ conta.cliente?.nome }}</td>
+            <td>{{ conta.cliente ? conta.cliente.nome : "Não está associada a um cliente" }}</td>
             <td>{{ conta.saldo }}</td>
             <td>
               <div class="dropdown">
@@ -48,5 +52,17 @@
           </tr>
         </tbody>
       </table>
+      <pagination-controls (pageChange)="paginaAtual = $event"></pagination-controls>
+      <div *ngIf="loading" class="d-flex justify-content-center">
+        <div
+          class="spinner-border"
+          style="width: 3rem; height: 3rem"
+          role="status"
+        >
+          <span class="sr-only"></span>
+        </div>
+      </div>
     </div>
-  </div> 
+  </div>
+  </div>
+</div>

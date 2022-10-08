@@ -20,7 +20,8 @@ export class ExtratoComponent implements OnInit {
   numeroConta;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private contaService: ContasService
+    private contaService: ContasService,
+    
   ) {
     this.nome = data.nome;
     this.agencia = data.agencia;

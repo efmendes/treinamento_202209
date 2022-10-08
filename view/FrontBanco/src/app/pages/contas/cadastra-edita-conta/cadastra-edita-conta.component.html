@@ -61,7 +61,7 @@
           [disabled]="!formConta.valid"
           type="submit"
           class="btn btn-dark"
-          style="float:right; margin-right: 3px;">Enviar</button>
+          style="float:right; margin-right: 3px;">{{ formConta.get('id')?.value ? 'Editar' : 'Cadastrar'}}</button>
       </form>
     </div>
   </div>

@@ -13,12 +13,17 @@ export class ClientesComponent implements OnInit {
 
   constructor(private clienteService: ClientesService) { }
   clientes: ICliente[] = [];
+  loading = false;
+  paginaAtual = 1;
+
   ngOnInit(): void {
     this.buscarTodosClientes();
   }
 
   buscarTodosClientes() {
+    this.loading = true;
     this.clienteService.listarTodosClientes().subscribe((clientes: ICliente[]) => {
+      this.loading = false;
       this.clientes = clientes;
     });
   }
