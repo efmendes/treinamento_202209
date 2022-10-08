@@ -6,16 +6,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-
-import { FormClientComponent } from './pages/login/form-client/form-client.component';
 import { ContasComponent } from './pages/conta/contas/contas.component';
-import { HomeComponent } from './pages/home/home.component';
-import { CadastroComponent } from './pages/login/cadastro/cadastro.component';
-import { LoginComponent } from './pages/login/logins/login.component';
 import { FormContaComponent } from './pages/conta/form-conta/form-conta.component';
 import { FormSaqueDepositoComponent } from './pages/conta/form-saque-deposito/form-saque-deposito.component';
 import { FormTransferComponent } from './pages/conta/form-transfer/form-transfer.component';
 import { ExtratosComponent } from './pages/extrato/extratos/extratos.component';
+import { HomeComponent } from './pages/home/home.component';
+import { CadastroComponent } from './pages/login/cadastro/cadastro.component';
+import { FormClientComponent } from './pages/login/form-client/form-client.component';
+import { LoginComponent } from './pages/login/logins/login.component';
 
 
 @NgModule({
@@ -30,7 +29,8 @@ import { ExtratosComponent } from './pages/extrato/extratos/extratos.component';
     FormContaComponent,
     FormSaqueDepositoComponent,
     FormTransferComponent,
-    ExtratosComponent
+    ExtratosComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { AlertService } from './../../../services/alert.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICliente } from 'src/app/interfaces/cliente';
 import { Login } from 'src/app/interfaces/login';
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: NonNullableFormBuilder,
     private loginService: LoginService,
     private router: Router,
-    private location: Location) { }
+    private alert: AlertService) { }
 
   ngOnInit(): void {
   }
@@ -30,9 +31,14 @@ export class LoginComponent implements OnInit {
   onLogin(){
     const login = this.form.value as Login;
     this.loginService.authenticate(login).subscribe((login: Login) => {
-      this.loginService.setData(login);
-    });
-    this.router.navigate(['/']);
+      if(login){
+        this.loginService.setData(login);
+        this.alert.alertaLogado('Login efetuado com sucesso!')
+        this.router.navigate(['/']);
+      }}, (erro: Error) => {
+        this.alert.alertaErro('Falha na autenticação!')
+      });
+
   }
 
 }

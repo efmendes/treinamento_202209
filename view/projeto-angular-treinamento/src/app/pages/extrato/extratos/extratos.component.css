@@ -1,10 +1,37 @@
 input{
   width: 150px;
-  margin: 5px;
-  padding: 5px;
+
+  margin-bottom: 15px;
+
+  padding:0 5px;
+
+  background-color: transparent;
+
+  border:none;
+
+  border-bottom: 1px solid #e1e1e1;
+
+  outline: none;
+
+  color: black;
 }
 
 button{
   margin: 5px;
   padding: 5px;
+  margin-bottom: 15px;
+}
+.card{
+
+  background-color: #C9C9C9;
+  border-radius: 50px;
+
+}
+.submit{
+  font-family: 'Bebas Neue';
+  background-color: #E68D2D;
+}
+
+input::placeholder{
+  font-family: 'Bebas Neue';
 }

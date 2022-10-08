@@ -1,1 +1,26 @@
+h1{
+  display: flex;
+  align-items: flex-start;
+}
+.container{
+  margin-top: 40px;
+  color: white;
+}
 
+.texto{
+  margin-top: 40px;
+  font-size: 15pt;
+
+}
+
+.imagem{
+  margin: auto;
+  margin-right: 70px;
+
+}
+.col-margin{
+  margin-left: 50px;
+}
+.col{
+  margin-bottom: 30px;
+}

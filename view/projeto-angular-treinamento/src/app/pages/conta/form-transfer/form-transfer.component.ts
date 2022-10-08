@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ContasService } from 'src/app/services/contas.service';
 import { Transfer } from 'src/app/interfaces/transfer';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-form-transfer',
@@ -17,7 +18,9 @@ export class FormTransferComponent implements OnInit {
     private contaService: ContasService,
     private location: Location,
     private route: ActivatedRoute,
-    private formBuilder: NonNullableFormBuilder) {}
+    private formBuilder: NonNullableFormBuilder,
+    private alert: AlertService
+    ) {}
 
     idConta = 0;
     transferForm = this.formBuilder.group({
@@ -46,20 +49,16 @@ export class FormTransferComponent implements OnInit {
 
     transfer() {
       const transferencia = this.transferForm.value as Transfer;
-      this.contaService.transferencia(transferencia).subscribe();
 
-
+      this.contaService.transferencia(transferencia).subscribe(() => {
+        this.alert.alertaSucesso('Transferência efetuada com sucesso!')
+      }, (error: Error) => {
+        this.alert.alertaErro('Contas erradas ou saldo insuficiente!')
+      });
     }
 
 
     onBack(){
       this.location.back();
-    }
-
-    onSaque(){
-
-    }
-    onDeposito(){
-
     }
 }

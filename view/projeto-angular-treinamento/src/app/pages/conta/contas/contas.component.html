@@ -1,49 +1,51 @@
-<div class="row">
-  <div class="col-12">
-    <h2 class="pb-2 border-bottom">Contas</h2>
+<div class="card">
+  <div class="card-header" [align]="'center'">
+    Contas
   </div>
-  <div class="col-12">
-    <a class="btn btn-sm btn-dark mb-3" (click)="onSave()" >Cadastrar</a>
-    <table class="table table-striped table-sm">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Cliente</th>
-          <th scope="col">Agencia</th>
-          <th scope="col">Numero</th>
-          <th scope="col">Saldo</th>
-          <th scope="col">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let conta of contas">
-          <td>{{ conta.id }}</td>
-          <td>{{ conta.cliente.nome }}</td>
-          <td>{{ conta.agencia }}</td>
-          <td>{{ conta.numero }}</td>
-          <td>{{ conta.saldo }}</td>
-          <td>
-            <div class="dropdown">
-              <button
-                class="btn btn-sm btn-outline-dark dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Ações
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" routerLink="/contas/editar/{{conta.id}}" >Editar</a></li>
-                <li><a class="dropdown-item" (click)="onExcluir(conta.id)">Excluir</a></li>
-                <li><a class="dropdown-item" routerLink="/contas/operacoes/{{conta.id}}">Saque/Depósito</a></li>
-                <li><a class="dropdown-item" routerLink="/contas/transferencia/{{conta.id}}">Transferência</a></li>
-              </ul>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="card-body">
+  <div class="row">
+    <div class="col-12">
+      <a class="btn btn-sm btn-dark mb-3" (click)="onSave()" >Cadastrar</a>
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Agencia</th>
+            <th scope="col">Numero</th>
+            <th scope="col">Saldo</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let conta of contas">
+            <td>{{ conta.id }}</td>
+            <td>{{ conta.cliente.nome }}</td>
+            <td>{{ conta.agencia }}</td>
+            <td>{{ conta.numero }}</td>
+            <td>{{ conta.saldo }}</td>
+            <td>
+              <div class="dropdown">
+                <button
+                  class="btn btn-sm btn-outline-dark dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Ações
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" routerLink="/contas/editar/{{conta.id}}" >Editar</a></li>
+                  <li><a class="dropdown-item" (click)="onExcluir(conta.id)">Excluir</a></li>
+                  <li><a class="dropdown-item" routerLink="/contas/operacoes/{{conta.id}}">Saque/Depósito</a></li>
+                  <li><a class="dropdown-item" routerLink="/contas/transferencia/{{conta.id}}">Transferência</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
   </div>
 </div>
-
-

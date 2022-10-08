@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Login } from 'src/app/interfaces/login';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -23,7 +24,8 @@ export class CadastroComponent implements OnInit {
     private clienteService: ClientesService,
     private localStorage: LocalStorageService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private alert: AlertService) { }
 
   ngOnInit(): void {
     this.idCliente = Number(this.route.snapshot.paramMap.get('cpf'));
@@ -46,6 +48,9 @@ export class CadastroComponent implements OnInit {
       this.localStorage.set('username', login.username);
       this.localStorage.set('password', login.password);
       this.localStorage.set('cpf', String(login.cliente?.cpf));
+      this.alert.alertaSucesso('Login Cadastrado com sucesso!');
+    }, (erro: Error) => {
+      this.alert.alertaErro('Falha no cadastro do Login!')
     });
 
 

@@ -1,57 +1,58 @@
-<div class="card">
-  <div class="card-header" [align]="'center'">
-    Saque/Depósito
-  </div>
-  <div class="card-body">
-  <form [formGroup]="transferForm" (ngSubmit)="transfer()" class="form">
-    <div class="container text-center">
-      <div class="row">
-        <div class="col">
-          <div class="form-floating">
-            <input type="text" class="form-control" id="agencia" placeholder="agencia" formControlName="agenciaOrigem">
-            <label for="floatingInput">Agência Origem</label>
-          </div>
-        </div>
-        <div class="col">
-          <div class="form-floating">
-            <input type="text" class="form-control" id="agencia" placeholder="agencia" formControlName="agenciaDestino">
-            <label for="floatingInput">Agência Destino</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col">
-          <div class="form-floating">
-            <input type="text" class="form-control" id="numero" placeholder="numero" formControlName="numeroContaOrigem">
-            <label for="floatingInput">Numero Origem</label>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="form-floating">
-            <input type="text" class="form-control" id="numero" placeholder="numero" formControlName="numeroContaDestino">
-            <label for="floatingInput">Numero Destino</label>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-
-          <div class="form-floating check">
-            <input type="text" class="form-control" id="valor" placeholder="valor" formControlName="valor">
-            <label for="floatingInput">Valor</label>
-          </div>
-        </div>
-      </div>
+<div class="config">
+  <div class="card">
+    <div class="card-header" [align]="'center'">
+      Saque/Depósito
     </div>
+    <div class="card-body">
+    <form [formGroup]="transferForm" (ngSubmit)="transfer()" class="form">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="agencia" placeholder="agencia" formControlName="agenciaOrigem">
+              <label for="floatingInput">Agência Origem</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="agencia" placeholder="agencia" formControlName="agenciaDestino">
+              <label for="floatingInput">Agência Destino</label>
+            </div>
+          </div>
+        </div>
 
-    <div [align]="'center'">
-      <button type="submit" class="btn btn-primary" [disabled]="!transferForm.valid">Submit</button>
-      <button type="button" class="btn btn-danger" (click)="onBack()">Voltar</button>
+        <div class="row">
+          <div class="col">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="numero" placeholder="numero" formControlName="numeroContaOrigem">
+              <label for="floatingInput">Numero Origem</label>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="numero" placeholder="numero" formControlName="numeroContaDestino">
+              <label for="floatingInput">Numero Destino</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+
+            <div class="form-floating check">
+              <input type="text" class="form-control" id="valor" placeholder="valor" formControlName="valor">
+              <label for="floatingInput">Valor</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="botoes" [align]="'center'">
+        <button type="submit" class="btn btn-primary submit" [disabled]="!transferForm.valid">Submit</button>
+        <button type="button" class="btn btn-danger" (click)="onBack()">Voltar</button>
+      </div>
+    </form>
     </div>
-  </form>
   </div>
 </div>
-
 

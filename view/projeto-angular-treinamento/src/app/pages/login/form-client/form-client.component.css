@@ -3,7 +3,7 @@
   flex-direction:row;
   align-items: center;
   justify-content: center;
-  margin: 10px;
+  margin: 20px;
 
 }
 .form-floating{
@@ -17,4 +17,39 @@
   align-items: center;
   justify-content: center;
 
+}
+.card{
+
+  background-color: #C9C9C9;
+  border-radius: 50px;
+
+}
+.config{
+  display: flex;
+  flex-direction: column;
+
+  align-content: center!important;
+  align-items: center!important;
+
+}
+
+.submit{
+  font-family: 'Bebas Neue';
+  background-color: #E68D2D;
+}
+
+.form-floating input{
+  margin-top: 10px;
+
+  padding:0 5px;
+
+  background-color: transparent;
+
+  border:none;
+
+  border-bottom: 1px solid #e1e1e1;
+
+  outline: none;
+
+  color: black;
 }

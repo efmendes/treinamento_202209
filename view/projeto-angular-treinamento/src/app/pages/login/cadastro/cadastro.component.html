@@ -1,20 +1,22 @@
-<div class="card">
-  <div class="card-header" [align]="'center'">
-    Cadastrar
-  </div>
-  <div class="card-body">
-    <form [formGroup]="formLogin" class="form" (ngSubmit)="onCadastro()">
-      <div class="form-floating">
-        <input type="text" class="form-control" id="username" placeholder="Username" formControlName="username">
-        <label for="floatingInput">Username</label>
-      </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="pasword" placeholder="Password" formControlName="password">
-        <label for="floatingPassword">Password</label>
-      </div>
-      <div class="button-form" [align]="'center'">
-        <button type="submit" class="btn btn-primary" [disabled]="!formLogin.valid">Submit</button>
-      </div>
-    </form>
+<div class="config">
+  <div class="card">
+    <div class="card-header" [align]="'center'">
+      Cadastrar Novo Login
+    </div>
+    <div class="card-body">
+      <form [formGroup]="formLogin" class="form" (ngSubmit)="onCadastro()">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="username" placeholder="Username" formControlName="username">
+          <label for="floatingInput">Criar Usuário</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="pasword" placeholder="Password" formControlName="password">
+          <label for="floatingPassword">Criar Senha</label>
+        </div>
+        <div class="button-form" [align]="'center'">
+          <button type="submit" class="btn btn-primary submit" [disabled]="!formLogin.valid">Enviar</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

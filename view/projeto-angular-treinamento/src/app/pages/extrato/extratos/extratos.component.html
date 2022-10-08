@@ -11,17 +11,16 @@
           <input type="text" id="data" placeholder="Data" formControlName="date">
           <div class="row">
             <div class="col-6">
-              <button type='submit' class="btn btn-primary">Busca por data</button>
+              <button type='submit' class="btn btn-primary submit">Busca por data</button>
             </div>
-
           </div>
         </form>
       </div>
       <div class="col-6">
         <form [formGroup]="intervalo" (ngSubmit)="onIntervalo()" class="form">
-          <input type="text" id="intervalo" placeholder="Intervalo" formControlName="dataIni">
-          <input type="text" id="intervalo" placeholder="Intervalo" formControlName="dataFim">
-          <button type="submit" class="btn btn-primary">Busca por Intervalo</button>
+          <input type="text" id="intervalo" placeholder="Data Início" formControlName="dataIni">
+          <input type="text" id="intervalo" placeholder="Data Fim" formControlName="dataFim">
+          <button type="submit" class="btn btn-primary submit">Busca por Intervalo</button>
         </form>
       </div>
     </div>

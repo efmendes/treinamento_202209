@@ -7,6 +7,7 @@ import { ContasService } from 'src/app/services/contas.service';
 import { IConta } from 'src/app/interfaces/conta';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-contas',
@@ -27,7 +28,9 @@ export class ContasComponent implements OnInit {
     private router: Router,
     private location: Location,
     private route: ActivatedRoute,
-    private localStorage: LocalStorageService) { }
+    private localStorage: LocalStorageService,
+    private alert: AlertService
+    ) { }
 
   ngOnInit(): void {
     this.buscarTodosContas();
@@ -36,8 +39,11 @@ export class ContasComponent implements OnInit {
   buscarTodosContas() {
     this.cpf = this.localStorage.get('cpf');
     this.contaService.listarContasPorCpf(this.cpf).subscribe((contas: IConta[]) => {
-      this.contas = contas;
-    });
+      if(contas){
+        this.contas = contas;
+      }}, (erro: Error) => {
+        this.alert.alertaErro('Nenhuma conta encontrada ou você não está logado no sistema!');
+      });
   }
   onExcluir(id: number) {
     this.contaService.removerConta(id).subscribe();
@@ -45,11 +51,15 @@ export class ContasComponent implements OnInit {
 
   onSave(){
     const cpf: string = this.localStorage.get('cpf');
-    this.contaService.adcionarConta(cpf).subscribe((conta: IConta) =>
-    Swal.fire({title: 'Conta Bancária Criada',
-    text: `Conta: ${conta.numero} e Agência: ${conta.agencia}`,
-    icon: 'success'})
-    );
+    this.contaService.adcionarConta(cpf).subscribe((conta: IConta) =>{
+      if(conta){
+        Swal.fire({title: 'Conta Bancária Criada',
+        text: `Conta: ${conta.numero} e Agência: ${conta.agencia}`,
+        icon: 'success'})
+      }
+    }, (error: Error) =>{
+      this.alert.alertaErro('Error ao criar a conta, digite um cpf válido!')
+    });
   }
 
 }

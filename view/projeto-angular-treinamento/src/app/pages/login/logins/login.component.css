@@ -55,7 +55,7 @@ body {
 
 .card-header {
 
-  padding-bottom: 50px;
+  padding-bottom: 10px;
 
   opacity: 0.8;
 
@@ -81,6 +81,8 @@ body {
 }
 
 .card-content label {
+
+  padding-top: 20px;
 
   color: black;
 
@@ -116,7 +118,7 @@ body {
 
   outline: none;
 
-  color: #fff;
+  color: black;
 
 }
 
@@ -134,7 +136,7 @@ body {
 
   height: 40px;
 
-  background-color: #a13854;
+  background-color: #E68D2D;
 
   border:none;
 
@@ -151,7 +153,7 @@ body {
 
   text-align: center;
 
-  font-size: 12px;
+  font-size: 14px;
 
   opacity: 0.8;
 
@@ -159,5 +161,10 @@ body {
 
   text-decoration: none;
 
+  font-family: 'Bebas Neue';
 
+}
+
+input::placeholder{
+  font-family: 'Bebas Neue';
 }

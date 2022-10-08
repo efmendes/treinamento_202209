@@ -1,16 +1,47 @@
 .card{
-  max-width: 800px;
+  max-width: 300px;
   margin-left: auto;
   margin-right: auto;
+  background-color: #C9C9C9;
+  border-radius: 50px;
 }
 .form-floating{
   margin: 2px;
 
 }
 .form-control{
-  width: 600px;
+  width: 450px;
 
 }
 .button-form{
   margin: 20px;
+}
+.submit{
+  font-family: 'Bebas Neue';
+  background-color: #E68D2D;
+}
+
+.form-floating input{
+  margin-top: 10px;
+  max-width: 100%;
+  padding:0 5px;
+
+  background-color: transparent;
+
+  border:none;
+
+  border-bottom: 1px solid #e1e1e1;
+
+  outline: none;
+
+  color: black;
+}
+.config{
+
+  display: flex;
+  flex-direction: column;
+
+  align-content: center!important;
+  align-items: center!important;
+
 }

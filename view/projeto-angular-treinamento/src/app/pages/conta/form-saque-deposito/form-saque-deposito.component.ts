@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Operacoes } from 'src/app/interfaces/operacoes';
 import { IConta } from 'src/app/interfaces/conta';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-form-saque-deposito',
@@ -30,7 +31,8 @@ export class FormSaqueDepositoComponent implements OnInit {
     private location: Location,
     private router: Router,
     private route: ActivatedRoute,
-    private contaService: ContasService
+    private contaService: ContasService,
+    private alert: AlertService
     ) { }
 
   ngOnInit(): void {
@@ -52,9 +54,18 @@ export class FormSaqueDepositoComponent implements OnInit {
     let operaType: string = String(this.operacaoForm.value.operacao);
 
     if(operaType == 'saque'){
-      this.contaService.saque(operacao).subscribe();
+      this.contaService.saque(operacao).subscribe(() => {
+        this.alert.alertaSucesso('Saque efetuado com sucesso!')
+      }, (error: Error) => {
+        this.alert.alertaErro('Conta errada ou saldo insuficiente!')
+      });
+
     } else{
-      this.contaService.deposito(operacao).subscribe();
+      this.contaService.deposito(operacao).subscribe(() => {
+        this.alert.alertaSucesso('Deposito efetuado com sucesso!')
+      }, (error: Error) => {
+        this.alert.alertaErro('Erro ao efetuar depósito!')
+      });
     }
 
   }
