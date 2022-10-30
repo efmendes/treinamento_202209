@@ -46,7 +46,11 @@ export class ContasComponent implements OnInit {
       });
   }
   onExcluir(id: number) {
-    this.contaService.removerConta(id).subscribe();
+    this.contaService.removerConta(id).subscribe(() => {
+      this.alert.alertaSucesso('Excluido com sucesso!')
+    }, (error: Error) =>{
+      this.alert.alertaErro('Erro ao excluir conta!')
+    });
   }
 
   onSave(){
@@ -58,7 +62,7 @@ export class ContasComponent implements OnInit {
         icon: 'success'})
       }
     }, (error: Error) =>{
-      this.alert.alertaErro('Error ao criar a conta, digite um cpf válido!')
+      this.alert.alertaErro('Error ao criar a conta!')
     });
   }
 

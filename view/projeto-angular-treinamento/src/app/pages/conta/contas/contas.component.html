@@ -35,7 +35,6 @@
                   Ações
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" routerLink="/contas/editar/{{conta.id}}" >Editar</a></li>
                   <li><a class="dropdown-item" (click)="onExcluir(conta.id)">Excluir</a></li>
                   <li><a class="dropdown-item" routerLink="/contas/operacoes/{{conta.id}}">Saque/Depósito</a></li>
                   <li><a class="dropdown-item" routerLink="/contas/transferencia/{{conta.id}}">Transferência</a></li>

@@ -189,4 +189,14 @@ public class ContaBancariaService extends GenericCrudService<ContaBancaria, Long
         extrato.setConta(contaBancaria);
         extratoRepository.save(extrato);
     }
+
+    public void deletarConta(Long id){
+        ContaBancaria conta = this.contaBancariaRepository.findById(id)
+                .orElseThrow(() -> new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO));
+
+        conta.setCliente(null);
+        contaBancariaRepository.saveAndFlush(conta);
+        contaBancariaRepository.delete(conta);
+
+    }
 }

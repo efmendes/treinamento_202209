@@ -1,3 +1,4 @@
+import { LocalStorageService } from './../../services/local-storage.service';
 import { Router } from '@angular/router';
 import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,14 +15,16 @@ export class HeaderComponent implements OnInit {
 
   constructor(private loginService: LoginService,
     private router: Router,
-    private location: Location) {
+    private location: Location,
+    private localStorage: LocalStorageService) {
   }
 
   ngOnInit(): void {
+    this.isPresent();
   }
 
   isPresent(){
-    let userPresent = this.loginService.username;
+    let userPresent = this.localStorage.get('username');
     this.user = userPresent;
     return userPresent ? true: false;
   }

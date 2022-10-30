@@ -1,19 +1,24 @@
 .card{
-  max-width:400px;
+  height: 500px;
   background-color: #C9C9C9;
   border-radius: 50px;
 }
 
 .botoes{
   margin: 20px;
+  margin-top: 4em;
+}
+.card-body{
+  margin-top: 50px;
 }
 
 .config{
   display: flex;
-  flex-direction: column;
+  align-items: center;
 
-  align-content: center!important;
-  align-items: center!important;
+  justify-content: center;
+
+  height: 100vh;
 
 }
 .form-floating input{
@@ -26,6 +31,7 @@
   outline: none;
 
   color: black;
+  margin-bottom: 15px;
 }
 .submit{
   font-family: 'Bebas Neue';

@@ -1,5 +1,5 @@
 .card{
-  max-width: 300px;
+
   margin-left: auto;
   margin-right: auto;
   background-color: #C9C9C9;
@@ -39,9 +39,10 @@
 .config{
 
   display: flex;
-  flex-direction: column;
+  align-items: center;
 
-  align-content: center!important;
-  align-items: center!important;
+  justify-content: center;
+
+  height: 100vh;
 
 }

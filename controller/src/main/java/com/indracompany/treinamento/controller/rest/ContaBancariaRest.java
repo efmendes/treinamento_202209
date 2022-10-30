@@ -70,4 +70,10 @@ public class ContaBancariaRest extends GenericCrudRest<ContaBancaria, Long, Cont
 
         return ResponseEntity.status(HttpStatus.CREATED).body(contaBancariaService.createConta(cpf));
     }
+
+    @DeleteMapping("/del/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        this.contaBancariaService.deletarConta(id);
+        return ResponseEntity.ok().build();
+    }
 }

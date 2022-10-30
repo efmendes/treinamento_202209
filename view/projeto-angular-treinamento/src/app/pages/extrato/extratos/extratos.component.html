@@ -1,53 +1,59 @@
-<div class="card">
-  <div class="card-header" [align]="'center'">
-    Extratos
-  </div>
-  <div class="card-body">
-<div class="row">
-  <div class="col-12">
-    <div class="row">
-      <div class="col-6">
-        <form [formGroup]="data" (ngSubmit)="onData()" class="form">
-          <input type="text" id="data" placeholder="Data" formControlName="date">
-          <div class="row">
-            <div class="col-6">
-              <button type='submit' class="btn btn-primary submit">Busca por data</button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="col-6">
-        <form [formGroup]="intervalo" (ngSubmit)="onIntervalo()" class="form">
-          <input type="text" id="intervalo" placeholder="Data Início" formControlName="dataIni">
-          <input type="text" id="intervalo" placeholder="Data Fim" formControlName="dataFim">
-          <button type="submit" class="btn btn-primary submit">Busca por Intervalo</button>
-        </form>
-      </div>
+<div class="config">
+  <div class="card">
+    <div class="card-header" [align]="'center'">
+      Extratos
     </div>
+    <div class="card-body">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-6">
+          <form [formGroup]="data" (ngSubmit)="onData()" class="form">
+            <input type="text" id="data" placeholder="Data" formControlName="date">
+            <div class="row">
+              <div class="col-6">
+                <button type='submit' class="btn btn-primary submit">Busca por data</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-6">
+          <form [formGroup]="intervalo" (ngSubmit)="onIntervalo()" class="form">
+            <input type="text" id="intervalo" placeholder="Data Início" formControlName="dataIni">
+            <input type="text" id="intervalo" placeholder="Data Fim" formControlName="dataFim">
+            <div class="row">
+              <div class="col-6">
+                <button type="submit" class="btn btn-primary submit">Busca por Intervalo</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
 
 
-    <table class="table table-striped table-sm">
-      <thead>
-        <tr>
-          <th scope="col">Data</th>
-          <th scope="col">Hora</th>
-          <th scope="col">Agencia</th>
-          <th scope="col">Conta</th>
-          <th scope="col">Descrição</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let extrato of extratos">
-          <td>{{ extrato.date }}</td>
-          <td>{{ extrato.hour }}</td>
-          <td>{{ extrato.agencia }}</td>
-          <td>{{ extrato.conta }}</td>
-          <td>{{ extrato.description }}</td>
-        </tr>
-      </tbody>
-    </table>
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Data</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Agencia</th>
+            <th scope="col">Conta</th>
+            <th scope="col">Descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let extrato of extratos">
+            <td>{{ extrato.date }}</td>
+            <td>{{ extrato.hour }}</td>
+            <td>{{ extrato.agencia }}</td>
+            <td>{{ extrato.conta }}</td>
+            <td>{{ extrato.description }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
-</div>
-</div>
+  </div>
+  </div>
 
+</div>

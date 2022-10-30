@@ -1,6 +1,6 @@
 .card{
-  max-width: 300px;
-  height: 250px;
+  max-width: 450px;
+  height: 400px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -12,7 +12,13 @@
   border-radius: 50px;
 }
 .card-body{
-  margin-top: 1em;
+
+  display: flex;
+  flex-direction: row;
+
+  align-content: center!important;
+  align-items: center!important;
+
 }
 /* .form-floating{
   margin: 2px;
@@ -22,15 +28,14 @@
   width: 600px;
 
 } */
-.button-form{
-  margin: 20px;
-}
+
 .config{
   display: flex;
-  flex-direction: column;
+  align-items: center;
 
-  align-content: center!important;
-  align-items: center!important;
+  justify-content: center;
+
+  height: 100vh;
 
 }
 .form-floating input{
@@ -38,6 +43,7 @@
 
   /* padding:0 5px; */
   max-width: 100%;
+  margin: 20px;
 
   background-color: transparent;
 
@@ -50,10 +56,13 @@
   color: black;
 }
 .botoes{
-  margin-top: 2em;
+  margin-top: 50px;
 }
 
 .submit{
   font-family: 'Bebas Neue';
   background-color: #E68D2D;
+}
+.card-body{
+
 }

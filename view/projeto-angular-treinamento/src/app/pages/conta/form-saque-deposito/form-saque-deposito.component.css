@@ -1,14 +1,18 @@
 .card{
-  max-width:350px;
+  height: 400px;
   margin-left: auto;
   margin-right: auto;
   background-color: #C9C9C9;
   border-radius: 50px;
 
 }
+.card-body{
+  margin-top: 2em;
+}
 
 .button-form{
   margin: 20px;
+  margin-top: 50px;
 }
 
 .checkbox-inline{
@@ -40,10 +44,12 @@ input[type='radio']{
 }
 
 .config{
-  display: flex;
-  flex-direction: column;
 
-  align-content: center!important;
-  align-items: center!important;
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+
+  height: 100vh;
 
 }

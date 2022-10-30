@@ -1,3 +1,4 @@
+import { AlertService } from './../../../services/alert.service';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -16,7 +17,8 @@ export class FormContaComponent implements OnInit {
   constructor(
     private contaService: ContasService,
     private location: Location,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private alert: AlertService) {}
 
   idConta = 0;
 
@@ -48,7 +50,9 @@ export class FormContaComponent implements OnInit {
         contaValue.cliente = conta.cliente
         contaValue.id = conta.id
         contaValue.saldo = conta.saldo
-        this.contaService.atualizarConta(contaValue).subscribe();
+        this.contaService.atualizarConta(contaValue).subscribe(()=> {
+          this.alert.alertaSucesso('Editado com sucesso!')
+        });
       }
     )
 

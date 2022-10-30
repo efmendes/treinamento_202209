@@ -20,6 +20,7 @@ button{
   margin: 5px;
   padding: 5px;
   margin-bottom: 15px;
+  width: 200px;
 }
 .card{
 
@@ -35,3 +36,5 @@ button{
 input::placeholder{
   font-family: 'Bebas Neue';
 }
+
+

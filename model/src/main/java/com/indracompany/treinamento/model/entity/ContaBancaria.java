@@ -26,7 +26,7 @@ public class ContaBancaria extends GenericEntity<Long>{
     @Column
     private double saldo;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "fk_cliente_id")
     private Cliente cliente;
 

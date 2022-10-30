@@ -36,7 +36,7 @@ export class ContasService {
   }
 
   removerConta(id: number){
-    return this.http.delete<IConta>(`${this.api}/${this.endpoint}/${id}`, this.loginService.httpOptions);
+    return this.http.delete<IConta>(`${this.api}/${this.endpoint}/del/${id}`, this.loginService.httpOptions);
   }
 
 

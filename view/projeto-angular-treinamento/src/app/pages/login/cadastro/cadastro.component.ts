@@ -49,12 +49,13 @@ export class CadastroComponent implements OnInit {
       this.localStorage.set('password', login.password);
       this.localStorage.set('cpf', String(login.cliente?.cpf));
       this.alert.alertaSucesso('Login Cadastrado com sucesso!');
+      this.router.navigate(['login']);
     }, (erro: Error) => {
       this.alert.alertaErro('Falha no cadastro do Login!')
     });
 
 
-    this.router.navigate(['login']);
+
 
   }
 
