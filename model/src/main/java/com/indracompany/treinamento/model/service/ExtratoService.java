@@ -48,10 +48,10 @@ public class ExtratoService extends GenericCrudService<Extrato, Long, ExtratoRep
 
         List<Extrato> movimentacoesConta = extratoRepository.findByContaBancaria(contaBancaria);
 
-        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", Locale.forLanguageTag("pt-BR"));
+        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        LocalDateTime dataInicial = LocalDateTime.parse(dataInicio + " 00:00:00", formatoData);
-        LocalDateTime dataFinal = LocalDateTime.parse(dataFim + " 23:59:59", formatoData);
+        LocalDateTime dataInicial = LocalDateTime.parse(dataInicio + " 00:00", formatoData);
+        LocalDateTime dataFinal = LocalDateTime.parse(dataFim + " 23:59", formatoData);
 
         if (movimentacoesConta  == null) {
             throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO);

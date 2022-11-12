@@ -1,0 +1,51 @@
+* {
+    font-family:'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+#cancelar {
+    font-size: 20px;
+    margin-top: 12px;
+    margin-bottom: 24px;
+    color: whitesmoke;
+    background-color: rgb(62, 72, 80);
+}
+
+#cancelar:hover {
+    background-color: rgb(40, 50, 58);
+}
+
+thead {
+    background-color: rgb(40, 50, 58);
+    color: whitesmoke;
+    font-size: 20px;
+    font-weight: lighter;
+    border-bottom: 4px solid rgb(32, 170, 152);
+}
+
+td {
+    font-size: 18px;
+    text-align: center;
+}
+
+.nao-centralizar {
+    text-align: left;
+}
+
+th {
+    text-align: center;
+}
+
+.acoes {
+    font-size: 18px;
+    color: rgb(40, 50, 58);
+    background-color: rgb(32, 170, 152);
+}
+
+.acoes:hover {
+    background-color: rgb(40, 50, 58);
+    color: rgb(32, 170, 152);
+}

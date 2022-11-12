@@ -1,0 +1,38 @@
+<div class="titulo row">
+  <div class="col-12">
+    <h2 class="pb-2">Saque</h2>
+  </div>
+</div>
+<div>
+  <div class="dados row">
+    <div class="col">
+      <h4>Agência: <span>{{ agenciaNumero }}</span></h4>
+    </div>
+    <div class="col">
+      <h4>Conta: <span>{{ contaNumero }}</span></h4>
+    </div>
+    <div class="col">
+      <h4>Cliente: <span>{{ clienteNome }}</span></h4>
+    </div>
+  </div>
+</div>
+<form [formGroup]="saqueForm" (ngSubmit)="sacar()">
+  <div class="formulario row">
+    <div class="row">
+      <div class="mb-3">
+        <label for="valor" class="form-label">Informe o valor abaixo:</label>
+        <div class="col-sm-3">
+          <input type="number" id="valor" class="form-control" formControlName="valor">
+        </div>
+      </div>
+    </div>
+    <div>
+      <button id="ativar" type="submit" class="btn" [disabled]="saqueForm.invalid">
+        Sacar
+      </button>
+      <button id="cancelar" type="submit" class="btn" routerLink="/contas">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</form>

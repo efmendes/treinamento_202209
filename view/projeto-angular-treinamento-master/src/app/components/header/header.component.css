@@ -1,0 +1,34 @@
+.navbar {
+    background-color: rgb(40, 50, 58);
+}
+
+.navbar-brand {
+    font-size: 34px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-left: 80px;
+}
+
+.navbar-brand .bank {
+    color: rgb(32, 170, 152);
+}
+
+.navbar-brand .indra {
+    font-size: 16px;
+}
+
+.navbar-nav {
+    margin-left: 80px;
+    font-size: 24px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 40px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.nav-item a:hover {
+    color: rgb(32, 170, 152);
+}

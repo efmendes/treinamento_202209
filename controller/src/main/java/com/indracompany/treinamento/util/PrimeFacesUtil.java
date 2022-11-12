@@ -8,8 +8,6 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.component.dialog.Dialog;
 
-import com.indracompany.treinamento.util.FacesUtil;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

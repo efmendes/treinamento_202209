@@ -1,0 +1,42 @@
+<div class="titulo row">
+    <div class="col-12">
+      <h2 class="pb-2">Minhas Contas</h2>
+    </div>
+  </div>
+  <div class="dados row">
+    <div class="col">
+      <h4>ID: <span>{{ cliente.id }}</span></h4>
+    </div>
+    <div class="col">
+      <h4>Nome: <span>{{ cliente.nome }}</span></h4>
+    </div>
+    <div class="col">
+      <h4>CPF: <span>{{ cliente.cpf }}</span></h4>
+    </div>
+    <div>
+      <button id="ativar" type="submit" class="btn" routerLink="/cliente/cadastrar-conta/{{ cliente.id }}">
+        Nova Conta
+      </button>
+      <button id="cancelar" type="submit" class="btn" routerLink="/clientes">
+        Voltar
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Agência</th>
+          <th scope="col">Numero</th>
+          <th class="nao-centralizar" scope="col">Saldo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let conta of contas">
+          <td>{{ conta.agencia }}</td>
+          <td>{{ conta.numero }}</td>
+          <td class="nao-centralizar">{{ conta.saldo | currency: 'BRL' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

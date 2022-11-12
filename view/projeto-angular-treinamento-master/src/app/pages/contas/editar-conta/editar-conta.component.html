@@ -1,0 +1,40 @@
+<div class="titulo row">
+    <div class="col-12">
+      <h2 class="pb-2">Editar Conta</h2>
+    </div>
+  </div>
+  <div class="dados row">
+    <div class="col">
+        <h4>Cliente ID: <span>{{ cliente.id }}</span></h4>
+      </div>
+      <div class="col">
+        <h4>Nome: <span>{{ cliente.nome }}</span></h4>
+      </div>
+  </div>
+  <form [formGroup]="contaForm" (ngSubmit)="editarConta()">
+    <div class="formulario-top row">
+      <div class="col">
+        <div class="mb-3">
+          <label for="agencia" class="form-label">Agência</label>
+          <input type="text" class="form-control" id="agencia" formControlName="agencia">
+        </div>
+      </div>
+    </div>
+    <div class="formulario row">
+      <div class="col">
+        <div class="mb-3">
+          <label for="numero" class="form-label">Numero - Conta</label>
+          <input type="text" class="form-control" id="numero" formControlName="numero">
+        </div>
+      </div>
+      
+      <div>
+        <button id="ativar" type="submit" [disabled]="!contaForm.valid" class="btn">
+          Atualizar
+        </button>
+        <button id="cancelar" type="submit" class="btn" routerLink="/contas">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </form>

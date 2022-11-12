@@ -1,0 +1,78 @@
+* {
+    font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
+}
+
+h4 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.titulo {
+    padding-top: 10px;
+    color: whitesmoke;
+    background-color: rgb(40, 50, 58);
+    border-radius: 14px 14px 0px 0px;
+}
+
+.dados {
+    font-size: 20px;
+    padding-top: 6px;
+    color: whitesmoke;
+    background-color: rgb(40, 50, 58);
+    border-bottom: 2px solid rgb(32, 170, 152);
+    border-top: 2px solid rgb(32, 170, 152);
+}
+
+.nao-centralizar {
+    text-align: left;
+}
+
+button {
+    font-size: 20px;
+    color: rgb(40, 50, 58);
+    margin-top: 12px;
+    margin-bottom: 24px;
+    background-color: rgb(32, 184, 164);
+}
+
+#cancelar {
+    margin-left: 10px;
+    margin-top: 12px;
+    margin-bottom: 24px;
+    color: rgb(40, 50, 58);
+    background-color: rgb(196, 196, 196);
+}
+
+#cancelar:hover {
+    background-color: rgb(180, 180, 180);
+}
+
+button:disabled {
+    color: rgb(40, 50, 58);
+    background-color: rgb(32, 170, 152);
+}
+
+#ativar:hover {
+    color: rgb(40, 50, 58);
+    background-color: rgb(30, 168, 150);
+}
+
+table {
+    font-size: 20px;
+}
+
+thead {
+    background-color: rgb(40, 50, 58);
+    color: whitesmoke;
+    font-size: 18px;
+    border-bottom: 2px solid rgb(32, 170, 152);
+}
+
+td {
+    text-align: center;
+}
+
+th {
+    text-align: center;
+}

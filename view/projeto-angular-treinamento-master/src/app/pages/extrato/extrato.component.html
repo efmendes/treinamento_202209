@@ -1,0 +1,60 @@
+<div class="titulo row">
+  <div class="col-12">
+    <h2 class="pb-2">Consultar - Extrato</h2>
+  </div>
+</div>
+<div>
+  <div class="dados row">
+    <div class="col">
+      <h4>Agência: <span>{{ agenciaNumero }}</span></h4>
+    </div>
+    <div class="col">
+      <h4>Conta: <span>{{ contaNumero }}</span></h4>
+    </div>
+    <div class="col">
+      <h4>Cliente: <span>{{ clienteNome }}</span></h4>
+    </div>
+  </div>
+</div>
+<form [formGroup]="extratoForm" (ngSubmit)="consultarExtrato()">
+  <div class="formulario row">
+    <div class="col">
+      <div class="mb-3">
+        <label for="dataInicio" class="form-label">Data Inicial</label>
+        <input type="date" class="form-control" id="dataInicio" formControlName="dataInicio">
+      </div>
+    </div>
+    <div class="col">
+      <div class="mb-3">
+        <label for="dataFim" class="form-label">Data Final</label>
+        <input type="date" class="form-control" id="dataFim" formControlName="dataFim">
+      </div>
+    </div>
+    <div>
+      <button id="ativar" type="submit" [disabled]="!extratoForm.valid" class="btn">
+        Consultar
+      </button>
+      <button id="cancelar" type="submit" class="btn" routerLink="/contas">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</form>
+<div class="row">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Data/Hora</th>
+        <th scope="col">Operação</th>
+        <th class="nao-centralizar" scope="col">Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let extrato of extrato">
+        <td>{{ extrato.dataOperacao }}</td>
+        <td>{{ extrato.tipoOperacao }}</td>
+        <td class="nao-centralizar">{{ extrato.valor | currency: 'BRL' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

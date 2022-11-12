@@ -1,0 +1,43 @@
+<div class="titulo row">
+  <div class="col-12">
+    <h2 class="pb-2">{{ idCliente ? 'Editar' : 'Cadastrar' }} - Cliente</h2>
+  </div>
+</div>
+<form [formGroup]="clienteForm" (ngSubmit)="cadastrar()">
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome" formControlName="nome">
+      </div>
+    </div>
+    <div class="col">
+      <div class="mb-3">
+        <label for="cpf" class="form-label">CPF</label>
+        <input type="text" class="form-control" id="cpf" formControlName="cpf">
+      </div>
+    </div>
+  </div>
+  <div class="formulario row">
+    <div class="col">
+      <div class="mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" class="form-control" id="email" formControlName="email">
+      </div>
+    </div>
+    <div class="col">
+      <div class="mb-3">
+        <label for="observacoes" class="form-label">Observações</label>
+        <textarea class="form-control" rows="3" formControlName="observacoes"></textarea>
+      </div>
+    </div>
+    <div>
+      <button id="ativar" type="submit" [disabled]="!clienteForm.valid" class="btn">
+        {{idCliente ? 'Salvar' : 'Cadastrar' }}
+      </button>
+      <button id="cancelar" type="submit" class="btn" routerLink="/clientes">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</form>

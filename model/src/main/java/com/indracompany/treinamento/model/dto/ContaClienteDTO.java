@@ -8,5 +8,6 @@ public class ContaClienteDTO {
 	private String nomeCliente;
 	private String agencia;
 	private String numero;
+	private double saldo;
 
 }
